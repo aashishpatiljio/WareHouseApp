@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>OrderMethod Register</title>
+<!-- CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<h3 style="color:green">OrderMethod Register Page!!!</h3>
+	<form action="save" method="POST">
+		<pre>
+	Order Mode   : <input type="radio" name="mode" value="Sale"/>Sale <input type="radio" name="mode" value="Purchase"/>Purchase
+	
+	Order Code   : <input type="text" name="code"/>
+	
+	Order Method : <select name="method">
+						<option>--select--</option>
+						<option value="FIFO">FIFO</option>
+						<option value="LIFO">LIFO</option>
+						<option value="FCFO">FCFO</option>
+						<option value="FEFO">FEFO</option>
+				   </select>
+		
+        Order Accept : 
+    			<input type="checkbox" name="accept" value="Multi-Model"/>Multi-Model
+    			<input type="checkbox" name="accept" value="Accept Return"/>Accept Return
+    		
+        Description  : <textarea name="descr"></textarea>
+    
+              <input type="submit" value="Create Order Method"/>
+
+</pre>
+	</form>
+	
+	<span th:text="${msg}"></span>
+</body>
+</html>
