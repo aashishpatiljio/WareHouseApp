@@ -49,7 +49,7 @@ public class UomController {
 		return "UomRegister";
 	}
 	@GetMapping("/all")
-	public String getAllUoms(Model model) {
+	public String showAllUoms(Model model) {
 		List<Uom> list = service.getAllUoms();
 		model.addAttribute("list", list);
 		return "UomData";

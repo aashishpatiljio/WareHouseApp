@@ -19,15 +19,17 @@ public class UomServiceImpl implements IUomService {
 	@Override
 	public Integer saveUom(Uom uom) {
 		/*
-		 * save(obj) method returns same object with id effected
-		 * after save.
+		 * save(obj) method returns same object with id effected after save.
 		 */
 		return repo.save(uom).getId();
 	}
 
+	/**
+	 * This method fetch the entire table data in List format
+	 */
 	@Override
 	public List<Uom> getAllUoms() {
- 		return repo.findAll();
+		return repo.findAll();
 	}
 
 }
