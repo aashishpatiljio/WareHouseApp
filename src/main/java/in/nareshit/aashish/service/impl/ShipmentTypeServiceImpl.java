@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import in.nareshit.aashish.exception.ShipmentTypeNotFoundException;
 import in.nareshit.aashish.model.ShipmentType;
 import in.nareshit.aashish.repo.ShipmentTypeRepository;
 import in.nareshit.aashish.service.IShipmentTypeService;
@@ -32,5 +33,26 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 	public List<ShipmentType> getAllShipmentTypes() {
 		return repo.findAll();
 	}
+	/**
+	 * 
+	 */
+	@Override
+	public void deleteShipmentType(Integer id) {
+		repo.deleteById(id);
+	}
+
+	@Override
+	public ShipmentType getOneShipmentType(Integer id) {
+		ShipmentType shipType = repo.findById(id).orElseThrow(
+				()-> new ShipmentTypeNotFoundException("ShipmentType '"+id+"' Not Exist")
+				);
+		return shipType;
+	}
+
+	@Override
+	public void updateShipmentType(ShipmentType shipmentType) {
+		repo.save(shipmentType);		
+	}
+
 
 }

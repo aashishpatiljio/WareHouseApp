@@ -18,7 +18,7 @@
 	<h3 style="color: green">SHIPMENT-TYPE DATA PAGE!!!</h3>
 	<br>
 	<br>
-	<table border="1">
+	<table border="2">
 		<tr>
 			<th>ID</th>
 			<th>MODE</th>
@@ -26,6 +26,7 @@
 			<th>ENABLE_SHIPMENT</th>
 			<th>GRADE</th>
 			<th>DESCRIPTION</th>
+			<th>Operations</th>
 		</tr>
 		<tr th:each="ob:${list}">
 			<td th:text="${ob.id}"></td>
@@ -34,8 +35,13 @@
 			<td th:text="${ob.enableShipment}"></td>
 			<td th:text="${ob.shipmentGrade}"></td>
 			<td th:text="${ob.description}"></td>
+			<td>
+				<a th:href="@{/shipmenttype/delete?id={data}(data=${ob.id})}">Delete</a> &nbsp&nbsp
+				<a th:href="@{/shipmenttype/edit?id={data}(data=${ob.id})}">Edit</a>
+			</td>
 		</tr>
 	</table>
+	<span th:text="${message}"></span>
 
 </body>
 </html>

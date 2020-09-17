@@ -18,5 +18,20 @@ public interface IShipmentTypeService {
 	 * @return List<T> after findAll() method operation
 	 */
 	public List<ShipmentType> getAllShipmentTypes();
+	/**
+	 * 
+	 * @param id
+	 */
+	public void deleteShipmentType(Integer id);
+	/**
+	 * 
+	 * @return
+	 */
+	public ShipmentType getOneShipmentType(Integer id);
+	/**
+	 * 
+	 * @param shipType
+	 */
+	public void updateShipmentType(ShipmentType shipmentType);
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import in.nareshit.aashish.model.ShipmentType;
 import in.nareshit.aashish.service.IShipmentTypeService;
@@ -47,14 +48,71 @@ public class ShipmentTypeController {
 		model.addAttribute("message", message);
 		return "ShipmentTypeRegister";		
 	}
-	
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/all")
 	public String showAllShipmentTypes(Model model) {
 		List<ShipmentType> list = service.getAllShipmentTypes();
 		model.addAttribute("list", list);
 		return "ShipmentTypeData";
 	}
-	
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/delete")
+	public String deleteShipmentType(
+			@RequestParam Integer id,
+			Model model
+			) {
+		//call service layer method
+		service.deleteShipmentType(id);
+		//creating a message to send to UI after deletion of record
+		String message = new StringBuffer().append("ShipmentType '")
+				      .append(id).append("' Deleted").toString();
+		//sending data to UI
+		model.addAttribute("message", message);
+		model.addAttribute("list", service.getAllShipmentTypes());
+		return "ShipmentTypeData";
+	}
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/edit")
+	public String showEdit(
+			@RequestParam Integer id,
+			Model model
+			) {
+		//call service layer method
+		ShipmentType shipType = service.getOneShipmentType(id);
+		//send data to UI
+		model.addAttribute("shipment", shipType);
+		return "ShipmentTypeEdit";		
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	@PostMapping("/update")
+	public String updateShipmentType(
+			@ModelAttribute ShipmentType shipmentType,
+			Model model
+			) {
+		//call service layer method
+		service.updateShipmentType(shipmentType);
+		//send details to UI
+		model.addAttribute("message", "ShipmentType '"+shipmentType.getId()+"' Updated");
+		model.addAttribute("list", service.getAllShipmentTypes());
+		return "ShipmentTypeData";
+	}
 		
 
 }
