@@ -17,5 +17,21 @@ public interface IUomService {
 	 * @return List<T> after findAll() method operation
 	 */
 	public List<Uom> getAllUoms();
+	/**
+	 * This method takes one @param id (PK) and
+	 * performs DELETE operations at DB.
+	 */
+	public void deleteUom(Integer id);
+	/**
+	 * This method is used to read @param id as an
+	 * input and @return Uom object else
+	 * UomNotFoundException
+	 */
+	public Uom getOneUom(Integer id);
+	/**
+	 * This method is used to update Uom based on id (PK)
+	 * @param uom is taken as Model attribute
+	 */
+	public void updateUom(Uom uom);
 
 }

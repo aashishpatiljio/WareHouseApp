@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import in.nareshit.aashish.exception.UomNotFoundException;
 import in.nareshit.aashish.model.Uom;
 import in.nareshit.aashish.model.Uom;
 import in.nareshit.aashish.repo.UomRepository;
@@ -30,6 +31,28 @@ public class UomServiceImpl implements IUomService {
 	@Override
 	public List<Uom> getAllUoms() {
 		return repo.findAll();
+	}
+	/**
+	 * This method delete the row from the database table
+	 * on the basis of id (PK) provided
+	 */
+	@Override
+	public void deleteUom(Integer id) {
+		repo.deleteById(id);		
+	}
+
+	@Override
+	public Uom getOneUom(Integer id) {
+		Uom u = repo.findById(id).orElseThrow(
+				()-> new UomNotFoundException("Uom '"+id+"' Not Exist")
+				);
+		return u;
+	}
+
+	@Override
+	public void updateUom(Uom uom) {
+		repo.save(uom);
+		
 	}
 
 }

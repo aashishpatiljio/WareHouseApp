@@ -19,19 +19,25 @@
 	<h3 style="color: green">UOM DATA PAGE!!!</h3>
 	<br>
 	<br>
-	<table border="1">
+	<table border="2">
 		<tr>
 			<th>ID</th>
 			<th>TYPE</th>
 			<th>MODEL</th>
-			<th>DESCRIPTION</th> 
+			<th>DESCRIPTION</th>
+			<th>OPERATIONS</th> 
 		</tr>
 		<tr th:each="ob:${list}">
 			<td th:text="${ob.id}"></td>
 			<td th:text="${ob.uomType}"></td>
 			<td th:text="${ob.uomModel}"></td>
 			<td th:text="${ob.description}"></td>
+			<td>
+				<a th:href="@{/uom/delete?id={data}(data=${ob.id})}">DELETE</a> &nbsp
+				<a th:href="@{/uom/edit?id={data}(data=${ob.id})}">Edit</a>
+			</td>
 		</tr>
 	</table>
+	<span th:text="${message}"></span>
 </body>
 </html>

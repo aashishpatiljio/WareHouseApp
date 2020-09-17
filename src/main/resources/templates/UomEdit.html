@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+<head>
+<meta charset="ISO-8859-1">
+<title>Uom Edit Page</title>
+<!-- CSS only -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h3>WELOCME TO UOM EDIT PAGE</h3>
+<form th:action="@{/uom/update}" method="POST" th:object="${uom}">
+		<pre>
+	ID          : <input type="text" th:field="*{id}" readonly="readonly" />	
+	Uom Type    : <select th:field="*{uomType}">
+				     <option value="">--select--</option>
+				     <option value="PACKING">PACKING</option>
+				     <option value="NO PACKING">NO PACKING</option>
+				     <option value="NA">-NA-</option>	
+	             </select>
+	
+	Uom Model   : <input type="text" th:field="*{uomModel}" />
+	
+	Description : <textarea th:field="*{description}"></textarea>
+	
+	         <input type="submit" value="Update UOM">  
+</pre>
+	</form>
+
+</body>
+</html>
