@@ -49,9 +49,11 @@ public class ShipmentTypeController {
 		return "ShipmentTypeRegister";		
 	}
 	/**
-	 * 
-	 * @param model
-	 * @return
+	 * 3. This method gets data from database using service layer
+	 *    and send to UI using Model memory. It is called when
+	 *    Path: /all with type GET is requested. 
+	 * @param model is used to send data from controller to UI
+	 * @return the page i.e. ShipmentTypeData
 	 */
 	@GetMapping("/all")
 	public String showAllShipmentTypes(Model model) {
@@ -60,10 +62,15 @@ public class ShipmentTypeController {
 		return "ShipmentTypeData";
 	}
 	/**
-	 * 
-	 * @param id
-	 * @param model
-	 * @return
+	 * 4. This method read @param id from dynamic path from UI using 
+	 *    @RequestParam and makes a call to service layer method to
+	 *    delete the data. Create one new message and send it to the same
+	 *    UI page using the @param model
+	 *    Path: /delete?id=val   (GET type)
+	 *     	  
+	 * @param id value is given by UI page
+	 * @param model is used to send data to UI
+	 * @return the same page i.e. ShipmentTypeData
 	 */
 	@GetMapping("/delete")
 	public String deleteShipmentType(
@@ -81,10 +88,15 @@ public class ShipmentTypeController {
 		return "ShipmentTypeData";
 	}
 	/**
-	 * 
-	 * @param id
-	 * @param model
-	 * @return
+	 * 5. This method we have taken here to show Edit page
+	 * 	  onclick of EDIT hyperlink.
+	 *    ex- Req: /uom/edit?id=10   ,  Type: GET
+	 *    Read object from database using PK(Id) and send it
+	 *    to Edit form(UI) using @param model.
+	 * @param id is used to read id value dynamically onclick of
+	 * Edit button
+	 * @param model is used to send data from controller to UI
+	 * @return to the ShipmentTypeEdit page.
 	 */
 	@GetMapping("/edit")
 	public String showEdit(
@@ -98,8 +110,11 @@ public class ShipmentTypeController {
 		return "ShipmentTypeEdit";		
 	}
 	/**
-	 * 
-	 * @return
+	 * 6. On click of update button, read form data as 
+	 *    ModelAttribute shipmentType , send it to database
+	 *    using Service layer. Redirect to all.
+	 *    [Response.sendRedirect("/all")
+	 * @return ShipmentTypeData.
 	 */
 	@PostMapping("/update")
 	public String updateShipmentType(

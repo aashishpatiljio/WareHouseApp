@@ -18,7 +18,8 @@
 <h3>WELOCME TO UOM EDIT PAGE</h3>
 <form th:action="@{/uom/update}" method="POST" th:object="${uom}">
 		<pre>
-	ID          : <input type="text" th:field="*{id}" readonly="readonly" />	
+	ID          : <input type="text" th:field="*{id}" readonly="readonly" />
+		
 	Uom Type    : <select th:field="*{uomType}">
 				     <option value="">--select--</option>
 				     <option value="PACKING">PACKING</option>

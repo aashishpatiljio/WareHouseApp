@@ -69,7 +69,7 @@ public class UomController {
 	 *    UI page using the @param model
 	 *    Path: /delete?id=val   (GET type)
 	 *     	  
-	 * @param id is given by UI page
+	 * @param id value is given by UI page
 	 * @param model is used to send data to UI
 	 * @return the same page i.e. UomData
 	 */

@@ -33,5 +33,5 @@ public class OrderMethod {
 	@Column(name = "order_accept_col")
 	private List<String> accept;
 	@Column(name = "order_descr_col")
-	private String descr;
+	private String description;
 }
