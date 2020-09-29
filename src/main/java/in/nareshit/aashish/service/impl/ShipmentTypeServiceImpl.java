@@ -38,7 +38,13 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 	 */
 	@Override
 	public void deleteShipmentType(Integer id) {
-		repo.deleteById(id);
+		//repo.deleteById(id);  //or
+		//or, ShipmentType shipType = getOneShipmentType(id);
+		//or
+		ShipmentType shipType = repo.findById(id).orElseThrow(
+				()-> new ShipmentTypeNotFoundException("ShipmentType '"+id+"' Not Exist")
+				);
+		repo.delete(shipType);
 	}
 
 	@Override

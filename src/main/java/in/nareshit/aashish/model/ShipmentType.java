@@ -21,17 +21,13 @@ public class ShipmentType {
 	@Id
 	@GeneratedValue
 	@Column(name = "shipment_id_col")
-	private Integer id;
-	
+	private Integer id;	
 	@Column(name = "shipment_mode_col")
 	private String shipmentMode;
 	@Column(name = "shipment_code_col")
 	private String shipmentCode;
-	@ElementCollection
-	@CollectionTable(name = "shipment_enableship_tab", 
-	           joinColumns = @JoinColumn(name = "shipment_id_col"))
-	@Column(name = "shipment_enableship_col")
-	private List<String> enableShipment;
+	@Column(name = "shipment_enableshp_col")
+	private String enableShipment;
 	@Column(name = "shipment_grade_col")
 	private String shipmentGrade;
 	@Column(name = "shipment_description_col")
