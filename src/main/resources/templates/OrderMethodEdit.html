@@ -18,14 +18,14 @@
 <h3>WELCOME TO OrderMethod EDIT PAGE</h3>
 <form th:action="@{/ordermethod/update}" method="POST" th:object="${ordermethod}">
 		<pre>
-	Order Id	 : <input type="text" th:field="*{id}" readonly="readonly"/>
+	Order Id     : <input type="text" th:field="*{id}" readonly="readonly"/>
 	
 	Order Mode   : <input type="radio" th:field="*{mode}" value="Sale"/>Sale <input type="radio" th:field="*{mode}" value="Purchase"/>Purchase
 	
 	Order Code   : <input type="text" th:field="*{code}"/>
 	
 	Order Method : <select th:field="*{method}">
-						<option>--select--</option>
+						<option value="">--select--</option>
 						<option value="FIFO">FIFO</option>
 						<option value="LIFO">LIFO</option>
 						<option value="FCFO">FCFO</option>
@@ -38,7 +38,7 @@
     		
         Description  : <textarea th:field="*{description}"></textarea>
     
-              <input type="submit" value="Update Order Method"/>
+              <input type="submit" value="Update OrderMethod"/>
 
 </pre>
 	</form>
