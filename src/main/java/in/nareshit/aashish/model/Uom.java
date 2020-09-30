@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -13,7 +14,8 @@ import lombok.Data;
 @Table(name = "uom_tab")
 public class Uom {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "uom")
+	@SequenceGenerator(name = "uom", sequenceName = "uom_seq")
 	@Column(name = "uom_id_col")
 	private Integer id;
 	
