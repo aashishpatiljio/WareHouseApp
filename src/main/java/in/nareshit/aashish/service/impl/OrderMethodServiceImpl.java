@@ -32,7 +32,13 @@ public class OrderMethodServiceImpl implements IOrderMethodService {
 
 	@Override
 	public void deleteOrderMethod(Integer id) {
-		repo.deleteById(id);		
+		//repo.deleteById(id);  //or
+		//or, OrderMethod orderMethod = getOneOrderMethod(id);
+		//or
+		OrderMethod orderMethod = repo.findById(id).orElseThrow(
+				()-> new OrderMethodNotFoundException("OrderMethod '"+id+"' Not Exist")
+				);	
+		repo.delete(orderMethod);
 	}
 
 	@Override

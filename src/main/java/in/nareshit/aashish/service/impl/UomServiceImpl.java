@@ -38,7 +38,13 @@ public class UomServiceImpl implements IUomService {
 	 */
 	@Override
 	public void deleteUom(Integer id) {
-		repo.deleteById(id);		
+		//repo.deleteById(id);  //or
+		//or, Uom u = getOneUom(id);
+		//or
+		Uom u = repo.findById(id).orElseThrow(
+				()-> new UomNotFoundException("Uom '"+id+"' Not Exist")
+				);
+		repo.delete(u);
 	}
 
 	@Override

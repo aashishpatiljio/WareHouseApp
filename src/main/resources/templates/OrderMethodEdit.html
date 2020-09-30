@@ -20,11 +20,11 @@
 		<pre>
 	Order Id     : <input type="text" th:field="*{id}" readonly="readonly"/>
 	
-	Order Mode   : <input type="radio" th:field="*{mode}" value="Sale"/>Sale <input type="radio" th:field="*{mode}" value="Purchase"/>Purchase
+	Order Mode   : <input type="radio" th:field="*{orderMode}" value="Sale"/>Sale <input type="radio" th:field="*{orderMode}" value="Purchase"/>Purchase
 	
-	Order Code   : <input type="text" th:field="*{code}"/>
+	Order Code   : <input type="text" th:field="*{orderCode}"/>
 	
-	Order Method : <select th:field="*{method}">
+	Order Type   : <select th:field="*{orderType}">
 						<option value="">--select--</option>
 						<option value="FIFO">FIFO</option>
 						<option value="LIFO">LIFO</option>
@@ -33,8 +33,8 @@
 				   </select>
 		
         Order Accept : 
-    			<input type="checkbox" th:field="*{accept}" value="Multi-Model"/>Multi-Model
-    			<input type="checkbox" th:field="*{accept}" value="Accept Return"/>Accept Return
+    			<input type="checkbox" th:field="*{orderAccept}" value="Multi-Model"/>Multi-Model
+    			<input type="checkbox" th:field="*{orderAccept}" value="Accept Return"/>Accept Return
     		
         Description  : <textarea th:field="*{description}"></textarea>
     

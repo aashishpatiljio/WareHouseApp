@@ -15,9 +15,9 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<h3>ORDER METHOD DATA PAGE</h3>
+	<h3 style="color: green">ORDER METHOD DATA PAGE</h3>
 	<br>
-	<br>
+
 	<table border="2">
 		<tr>
 			<th>ID</th>
@@ -30,10 +30,10 @@
 		</tr>
 		<tr th:each="ob:${list}">
 			<td th:text="${ob.id}"></td>
-			<td th:text="${ob.mode}"></td>
-			<td th:text="${ob.code}"></td>
-			<td th:text="${ob.method}"></td>
-			<td th:text="${ob.accept}"></td>
+			<td th:text="${ob.orderMode}"></td>
+			<td th:text="${ob.orderCode}"></td>
+			<td th:text="${ob.orderType}"></td>
+			<td th:text="${ob.orderAccept}"></td>
 			<td th:text="${ob.description}"></td>	
 			<td>
 				<a th:href="@{/ordermethod/delete?id={data}(data=${ob.id})}">DELETE</a> &nbsp &nbsp

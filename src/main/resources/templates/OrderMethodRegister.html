@@ -15,11 +15,11 @@
 	<h3 style="color:green">OrderMethod Register Page!!!</h3>
 	<form action="save" method="POST">
 		<pre>
-	Order Mode   : <input type="radio" name="mode" value="Sale"/>Sale <input type="radio" name="mode" value="Purchase"/>Purchase
+	Order Mode   : <input type="radio" name="orderMode" value="Sale"/>Sale <input type="radio" name="orderMode" value="Purchase"/>Purchase
 	
-	Order Code   : <input type="text" name="code"/>
+	Order Code   : <input type="text" name="orderCode"/>
 	
-	Order Method : <select name="method">
+	Order Type   : <select name="orderType">
 						<option>--select--</option>
 						<option value="FIFO">FIFO</option>
 						<option value="LIFO">LIFO</option>
@@ -28,8 +28,8 @@
 				   </select>
 		
         Order Accept : 
-    			<input type="checkbox" name="accept" value="Multi-Model"/>Multi-Model
-    			<input type="checkbox" name="accept" value="Accept Return"/>Accept Return
+    			<input type="checkbox" name="orderAccept" value="Multi-Model"/>Multi-Model
+    			<input type="checkbox" name="orderAccept" value="Accept Return"/>Accept Return
     		
         Description  : <textarea name="description"></textarea>
     

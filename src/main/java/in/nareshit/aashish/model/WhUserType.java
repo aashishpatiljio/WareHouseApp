@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -13,7 +14,8 @@ import lombok.Data;
 @Table(name = "wh_user_type_tab")
 public class WhUserType {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "whusertype")
+	@SequenceGenerator(name = "whusertype",sequenceName = "whusertype_seq")
 	@Column(name = "wh_id_col")
 	private Integer id;
 	

@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -19,19 +20,20 @@ import lombok.Data;
 public class OrderMethod {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(generator = "ordermethod")
+	@SequenceGenerator(name = "ordermethod",sequenceName = "ordermethod_seq")
 	@Column(name = "order_id_col")
 	private Integer id;
 	@Column(name = "order_mode_col")
-	private String mode;
+	private String orderMode;
 	@Column(name = "order_code_col")
-	private String code;
-	@Column(name = "order_method_col")
-	private String method;
+	private String orderCode;
+	@Column(name = "order_type_col")
+	private String orderType;
 	@ElementCollection
 	@CollectionTable(name = "order_accept_tab", joinColumns = @JoinColumn(name="order_id_col"))
 	@Column(name = "order_accept_col")
-	private List<String> accept;
-	@Column(name = "order_descr_col")
+	private List<String> orderAccept;
+	@Column(name = "order_description_col")
 	private String description;
 }
