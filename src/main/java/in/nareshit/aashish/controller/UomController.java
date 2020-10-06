@@ -26,7 +26,9 @@ public class UomController {
 	 *    on enter  /register URL  (GET)
 	 */
 	@GetMapping("/register")
-	public String showReg() {
+	public String showReg(Model model) {
+		//Form backing object//must return before return statement
+		model.addAttribute("uom", new Uom());
 		return "UomRegister";
 	}
 	/**
@@ -47,6 +49,8 @@ public class UomController {
 				.append(id).append("' Saved").toString();
 		//sending data to UI
 		model.addAttribute("message", message);
+		//Form backing object
+		model.addAttribute("uom", new Uom());
 		return "UomRegister";
 	}
 	/**
