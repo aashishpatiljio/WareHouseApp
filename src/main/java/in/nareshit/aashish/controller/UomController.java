@@ -27,7 +27,7 @@ public class UomController {
 	 */
 	@GetMapping("/register")
 	public String showReg(Model model) {
-		//Form backing object//must return before return statement
+		//Form backing object//must written before return statement
 		model.addAttribute("uom", new Uom());
 		return "UomRegister";
 	}

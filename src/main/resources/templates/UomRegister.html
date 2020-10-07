@@ -2,79 +2,204 @@
 <html xmlns:th="https://www.thymeleaf.org/">
 
 <head>
-    <meta charset="ISO-8859-1">
-    <title>Uom Register</title>
-    <!-- CSS only -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<meta charset="ISO-8859-1">
+<title>Uom Register</title>
+<!-- CSS only -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <!-- JS and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<!-- JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </head>
 
 <body>
-    <div class="container">
-        <div class="card">
-            <div class="card-header text-center bg-primary text-white">
-                <h3>UOM REGISTER PAGE</h3>
-            </div>
-            <div class="card-body">
-                <form th:action="@{/uom/save}" method="POST" th:object="${uom}">
+	<div class="container">
+		<div class="card">
+			<div class="card-header text-center bg-primary text-white">
+				<h3>WELCOME TO UOM REGISTER PAGE</h3>
+			</div>
+			<div class="card-body">
+				<form id="uomRegForm" th:action="@{/uom/save}" method="POST"
+					th:object="${uom}">
 
-                    <div class="row">
-                        <div class="col-2">
-                            <label>UOM TYPE</label>
-                        </div>
-                        <div class="col-5">
-                            <select th:field="*{uomType}" class="form-control">
-                                <option value="">--select--</option>
-                                <option value="PACKING">PACKING</option>
-                                <option value="NO PACKING">NO PACKING</option>
-                                <option value="NA">-NA-</option>
-                            </select>
-                        </div>
-                        <div class="col-5">
-                            <span id="uomTypeError"></span>
-                        </div>
-                    </div>
+					<!-- row-1 -->
+					<div class="row">
+						<div class="col-2">
+							<label>UOM TYPE</label>
+						</div>
+						<div class="col-5">
+							<select th:field="*{uomType}" class="form-control">
+								<option value="">--select--</option>
+								<option value="PACKING">PACKING</option>
+								<option value="NO PACKING">NO PACKING</option>
+								<option value="NA">-NA-</option>
+							</select>
+						</div>
+						<div class="col-5">
+							<span id="uomTypeError"></span>
+						</div>
+					</div>
 
-                    <div class="row">
-                        <div class="col-2">
-                            <label>UOM MODEL</label>
-                        </div>
-                        <div class="col-5">
-                            <input type="text" th:field="*{uomModel}" class="form-control" />
-                        </div>
-                        <div class="col-5">
-                            <span id="uomModelError"></span>
-                        </div>
-                    </div>
+					<!-- row-2 -->
+					<div class="row">
+						<div class="col-2">
+							<label>UOM MODEL</label>
+						</div>
+						<div class="col-5">
+							<input type="text" th:field="*{uomModel}" class="form-control" />
+						</div>
+						<div class="col-5">
+							<span id="uomModelError"></span>
+						</div>
+					</div>
 
-                    <div class="row">
-                        <div class="col-2">
-                            <label>DESCRIPTION</label>
-                        </div>
-                        <div class="col-5">
-                            <textarea th:field="*{description}" class="form-control">
+					<!-- row-3 -->
+					<div class="row">
+						<div class="col-2">
+							<label>DESCRIPTION</label>
+						</div>
+						<div class="col-5">
+							<textarea th:field="*{description}" class="form-control">
 
                             </textarea>
-                        </div>
-                        <div class="col-5">
-                            <span id="descriptionError"></span>
-                        </div>
-                    </div>
+						</div>
+						<div class="col-5">
+							<span id="descriptionError"></span>
+						</div>
+					</div>
 
-                    <input type="submit" value="ADD UOM" class="btn btn-success" >
+					<input type="submit" value="ADD UOM" class="btn btn-success">
 
-                </form>
-            </div> <!-- card-body end -->
+				</form>
+			</div>
+			<!-- card-body end -->
 
-            <div class="card-footer text-center bg-info text-white" th:if="${message != null}">
-                <span th:text="${message}" ></span>
-            </div>
+			<div class="card-footer text-center bg-info text-white" th:if="${message != null}">
+				<span th:text="${message}"></span>
+			</div>
 
-        </div> <!-- card-end -->
-    </div> <!-- container-end -->
+		</div>
+		<!-- card-end -->
+	</div>
+	<!-- container-end -->
+
+	<!-- script starts from here -->
+
+	<script>
+        $(document).ready(function () {
+            //1. hide error sections
+            $("#uomTypeError").hide();
+            $("#uomModelError").hide();
+            $("#descriptionError").hide();
+
+            //2. define error variables
+            var uomTypeError = false;
+            var uomModelError = false;
+            var descriptionError = false;
+
+            //3. validate function
+            function validate_uomType() {
+                //a. read the input value
+                var val = $("#uomType").val();
+                //b. check condition
+                if (val == '') {
+                    $("#uomTypeError").show();
+                    $("#uomTypeError").html("SELECT <b>UOM TYPE</b>");
+                    $("#uomTypeError").css("color", "red");
+                    uomTypeError = false;
+                } else {
+                    $("#uomTypeError").hide();
+                    uomTypeError = true;
+                }
+                return uomTypeError;
+            }
+
+            function validate_uomModel() {
+                //a. read the input value
+                var val = $("#uomModel").val();
+                //regex
+                var exp = /^[A-Z\-\s]{4,8}$/;
+
+                //b. check condition
+                if (val == '') {
+                    $("#uomModelError").show();
+                    $("#uomModelError").html("Model <b>cannot be empty</b>");
+                    $("#uomModelError").css("color", "red");
+                    uomModelError = false;
+                } else if (!exp.test(val)) {
+                    $("#uomModelError").show();
+                    $("#uomModelError").html("Model <b>is not valid</b>");
+                    $("#uomModelError").css("color", "red");
+                    uomModelError = false;
+                } else {
+                    $("#uomModelError").hide();
+                    uomModelError = true;
+                }
+                return uomModelError;
+            }
+
+            function validate_description() {
+                //a. read the input value
+                var val = $("#description").val();
+                //regex
+                var exp = /^[A-Za-z0-9\-\.\,\s]{10,100}$/;
+
+                //b. check condition
+                if (val == '') {
+                    $("#descriptionError").show();
+                    $("#descriptionError").html("Description <b>cannot be empty</b>");
+                    $("#descriptionError").css("color", "red");
+
+                    descriptionError = false;
+
+                } else if (!exp.test(val)) {
+                    $("#descriptionError").show();
+                    $("#descriptionError").html("Description <b>must be 10-100 chars only</b>");
+                    $("#descriptionError").css("color", "red");
+
+                    descriptionError = false;
+
+                } else {
+                    $("#descriptionError").hide();
+
+                    descriptionError = true;
+                }
+
+                return descriptionError;
+            }
+
+            //4. link input with actions events
+            $("#uomType").change(function () {
+                validate_uomType();
+            });
+
+            $("#uomModel").keyup(function () {
+                validate_uomModel();
+            });
+
+            $("#description").keyup(function () {
+                validate_description();
+            });
+
+
+            //5. submit button
+            $("#uomRegForm").submit(function () {
+                //call all validate functions
+                validate_uomType();
+                validate_uomModel();
+                validate_description();
+
+                //check all error variables
+                //if all true then return true and submit form, else false
+                if (uomTypeError && uomModelError && descriptionError) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
