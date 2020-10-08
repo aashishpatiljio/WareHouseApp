@@ -26,7 +26,9 @@ public class ShipmentTypeController {
 	 *    on enter  /register URL  (GET)
 	 */
 	@GetMapping("/register")
-	public String showRegister() {
+	public String showRegister(Model model) {
+		//form backing object
+		model.addAttribute("shipmentType", new ShipmentType());
 		return "ShipmentTypeRegister";		
 	}
 	/**
@@ -42,10 +44,12 @@ public class ShipmentTypeController {
 			) {
 		//calling service layer method
 		Integer id = service.saveShipmentType(shipmentType);
-		String message = new StringBuffer().append("ShipmentType '")
+		String message = new StringBuffer().append("ShipmentType with '")
 				.append(id).append("' Saved").toString();
 		//send data to UI
 		model.addAttribute("message", message);
+		//form backing object
+		model.addAttribute("shipmentType", new ShipmentType());
 		return "ShipmentTypeRegister";		
 	}
 	/**
@@ -80,7 +84,7 @@ public class ShipmentTypeController {
 		//call service layer method
 		service.deleteShipmentType(id);
 		//creating a message to send to UI after deletion of record
-		String message = new StringBuffer().append("ShipmentType '")
+		String message = new StringBuffer().append("ShipmentType with '")
 				      .append(id).append("' Deleted").toString();
 		//sending data to UI
 		model.addAttribute("message", message);
@@ -124,7 +128,7 @@ public class ShipmentTypeController {
 		//call service layer method
 		service.updateShipmentType(shipmentType);
 		//send details to UI
-		model.addAttribute("message", "ShipmentType '"+shipmentType.getId()+"' Updated");
+		model.addAttribute("message", "ShipmentType with '"+shipmentType.getId()+"' Updated");
 		model.addAttribute("list", service.getAllShipmentTypes());
 		return "ShipmentTypeData";
 	}
