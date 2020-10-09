@@ -20,7 +20,7 @@
             </div> <!-- card header ends-->
 
             <div class="card-body">
-                <form th:action="@{/shipmenttype/save}" method="POST" th:object="${shipmentType}">
+                <form th:action="@{/shipmenttype/save}" method="POST" th:object="${shipmentType}" id="shipmentTypeRegForm">
 
                     <!-- row-1 -->
                     <div class="row">
@@ -104,6 +104,161 @@
             </div> <!-- card footer ends -->
         </div> <!-- card ends -->
     </div> <!-- container ends -->
+    
+    <!-- script starts from here -->
+    <script>
+        $(document).ready(function () {
+            //1. hide the error section
+            $("#shipmentModeError").hide();
+            $("#shipmentCodeError").hide();
+            $("#enableShipmentError").hide();
+            $("#shipmentGradeError").hide();
+            $("#descriptionError").hide();
+
+            //2. define error variables
+            var shipmentModeError = false;
+            var shipmentCodeError = false;
+            var enableShipmentError = false;
+            var shipmentGradeError = false;
+            var descriptionError = false;
+
+            //3. validate functions
+            function validate_shipmentMode() {
+                //a. read the value
+                var val = $("#shipmentMode").val();
+                //b. check the conditions
+                if (val == '') {
+                    $("#shipmentModeError").show();
+                    $("#shipmentModeError").html("Select <b>one of the ShipmentMode</b>");
+                    $("#shipmentModeError").css("color", "red");
+                    shipmentModeError = false;
+                } else {
+                    $("#shipmentModeError").hide();
+                    shipmentModeError = true;
+                }
+                return shipmentModeError;
+            }
+
+            function validate_shipmentCode() {
+                //a. read the value
+                var val = $("#shipmentCode").val();
+                //regular expression
+                var exp = /^[A-Z\-\s]{4,12}$/;
+
+                //b. check the conditions
+                if (val == '') {
+                    $("#shipmentCodeError").show();
+                    $("#shipmentCodeError").html("Shipment Code <b>cannot be empty</b>");
+                    $("#shipmentCodeError").css("color", "red");
+
+                    shipmentCodeError = false;
+                } else if (!exp.test(val)) {
+                    $("#shipmentCodeError").show();
+                    $("#shipmentCodeError").html("Shipment Code <b>must be 4-12 UpperCase chars only</b>");
+                    $("#shipmentCodeError").css("color", "red");
+
+                    shipmentCodeError = false;
+
+                } else {
+                    $("#shipmentCodeError").hide();
+                    shipmentCodeError = true;
+                }
+                return shipmentCodeError;
+            }
+
+            function validate_enableShipment() {
+                //a. reading the length
+                var len = $("[name='enableShipment']:checked").length;
+                //check conditions
+                if (len == 0) {
+                    $("#enableShipmentError").show();
+                    $("#enableShipmentError").html("Choose <b>Enable Shipment</b>");
+                    $("#enableShipmentError").css("color", "red");
+                    enableShipmentError = false;
+                } else {
+                    $("#enableShipmentError").hide();
+                    enableShipmentError = true;
+                }
+                return enableShipmentError;
+            }
+
+            function validate_shipmentGrade() {
+                //a. reading the length
+                var len = $("[name = 'shipmentGrade']:checked").length;
+                //b. check the condition
+                if (len == 0) {
+                    $("#shipmentGradeError").show();
+                    $("#shipmentGradeError").html("Choose <b>Shipment Grade</b>");
+                    $("#shipmentGradeError").css("color", "red");
+                    shipmentGradeError = false;
+                } else {
+                    $("#shipmentGradeError").hide();
+                    shipmentGradeError = true;
+                }
+                return shipmentGradeError;
+            }
+
+            function validate_description() {
+                //a. read the value
+                var val = $("#description").val();
+                //regular expression
+                var exp = /^[a-zA-Z0-9\-\_\.\,\s]{10,200}$/;
+
+                //b. check the condition
+                if (val == '') {
+                    $("#descriptionError").show();
+                    $("#descriptionError").html("Description <b>cannot be empty</b>");
+                    $("#descriptionError").css("color", "red");
+                    descriptionError = false;
+                } else if (!exp.test(val)) {
+                    $("#descriptionError").show();
+                    $("#descriptionError").html("Description <b>must be 10-200 chars only</b>");
+                    $("#descriptionError").css("color", "red");
+                    descriptionError = false;
+                } else {
+                    $("#descriptionError").hide();
+                    descriptionError = true;
+                }
+                return descriptionError;
+            }
+
+            //4. link validate functions with action events
+            $("#shipmentMode").change(function () {
+                validate_shipmentMode();
+            });
+            $("#shipmentCode").keyup(function () {
+                $(this).val($(this).val().toUpperCase()); //to convert chars to UpperCase
+                validate_shipmentCode();
+            });
+            $("[name = 'enableShipment']").change(function () {
+                validate_enableShipment();
+            });
+            $("[name = 'shipmentGrade']").change(function () {
+                validate_shipmentGrade();
+            });
+            $("#description").keyup(function () {
+                validate_description();
+            });
+
+            //5. On Submit Form
+            $("#shipmentTypeRegForm").submit(function () {
+                validate_shipmentMode();
+                validate_shipmentCode();
+                validate_enableShipment();
+                validate_shipmentGrade();
+                validate_description();
+
+                if (shipmentModeError && shipmentCodeError &&
+                    enableShipmentError && shipmentGradeError && descriptionError)
+                	
+                    return true;
+
+                else
+                    return false;
+
+            });
+        });
+    </script>
 </body>
 
 </html>
