@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.aashish.model.Uom;
 import in.nareshit.aashish.service.IUomService;
+import in.nareshit.aashish.view.UomExcelView;
 
 @Controller
 @RequestMapping("/uom")
@@ -131,6 +133,18 @@ public class UomController {
 		model.addAttribute("message", "Uom '"+uom.getId()+"' Updated" );
 		model.addAttribute("list", service.getAllUoms());
 		return "UomData";
+	}
+	
+	@GetMapping("/excel")
+	public ModelAndView exportToExcel() {
+		ModelAndView m = new ModelAndView();		
+		m.setView(new UomExcelView());
+		
+		//fetch data from database
+		List list = service.getAllUoms();
+		//send data to View class
+		m.addObject("list", list);
+		return m;
 	}
 
 }
