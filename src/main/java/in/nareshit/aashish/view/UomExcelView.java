@@ -32,6 +32,16 @@ public class UomExcelView extends AbstractXlsxView {
 		setHeader(sheet); //method call		
 		setBody(sheet, list); //method call	
 	}
+	
+	private void setHeader(Sheet sheet) {
+		// create row
+		Row row = sheet.createRow(0);
+		// creating the cells and assigning the values to the cell
+		row.createCell(0).setCellValue("ID");
+		row.createCell(1).setCellValue("TYPE");
+		row.createCell(2).setCellValue("MODEL");
+		row.createCell(3).setCellValue("DESCRIPTION");
+	}
 
 	private void setBody(Sheet sheet, List<Uom> list) {
 		int rowNum = 1;
@@ -46,15 +56,5 @@ public class UomExcelView extends AbstractXlsxView {
 		}
 		
 	} 
-
-	private void setHeader(Sheet sheet) {
-		// create row
-		Row row = sheet.createRow(0);
-		// creating the cells and assigning the values to the cell
-		row.createCell(0).setCellValue("ID");
-		row.createCell(1).setCellValue("TYPE");
-		row.createCell(2).setCellValue("MODEL");
-		row.createCell(3).setCellValue("DESCRIPTION");
-	}
 
 }

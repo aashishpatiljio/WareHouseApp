@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import in.nareshit.aashish.model.Uom;
 import in.nareshit.aashish.service.IUomService;
 import in.nareshit.aashish.view.UomExcelView;
+import in.nareshit.aashish.view.UomPdfView;
 
 @Controller
 @RequestMapping("/uom")
@@ -134,7 +135,12 @@ public class UomController {
 		model.addAttribute("list", service.getAllUoms());
 		return "UomData";
 	}
-	
+	/**
+	 * 7. On click of Excel Export button, then control comes to
+	 * 	  this method.
+	 * @return ModelAndView object which in result export the data
+	 * to Excel and download it in browser.
+	 */
 	@GetMapping("/excel")
 	public ModelAndView exportToExcel() {
 		ModelAndView m = new ModelAndView();		
@@ -145,6 +151,17 @@ public class UomController {
 		//send data to View class
 		m.addObject("list", list);
 		return m;
+	}
+	@GetMapping("/pdf")
+	public ModelAndView exportToPdf() {
+		ModelAndView m = new ModelAndView();
+		m.setView(new UomPdfView());
+		
+		//fetch data from the data base
+		List<Uom> list = service.getAllUoms();
+		//send data to View class
+		m.addObject("list", list);
+		return m;		
 	}
 
 }

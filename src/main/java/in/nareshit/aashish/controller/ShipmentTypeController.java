@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.aashish.model.ShipmentType;
 import in.nareshit.aashish.service.IShipmentTypeService;
+import in.nareshit.aashish.view.ShipmentTypeExcelView;
 
 @Controller
 @RequestMapping("/shipmenttype")
@@ -132,6 +134,21 @@ public class ShipmentTypeController {
 		model.addAttribute("list", service.getAllShipmentTypes());
 		return "ShipmentTypeData";
 	}
-		
+	/**
+	 * 7. On click of Excel Export button, control comes to this method and
+	 *    @return ModelAndView object which is responsible for downloading the
+	 *    Excel file
+	 */
+	@GetMapping("/excel")
+	public ModelAndView exportToExcel() {
+		ModelAndView m = new ModelAndView();
+		//set View class object to the ModelAndView obj
+		m.setView(new ShipmentTypeExcelView());
+		//fetching the data from the database
+		List<ShipmentType> list = service.getAllShipmentTypes();
+		//send the data to the View class
+		m.addObject("list", list);
+		return m;
+	}
 
 }
