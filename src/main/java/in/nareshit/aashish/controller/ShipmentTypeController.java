@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import in.nareshit.aashish.model.ShipmentType;
 import in.nareshit.aashish.service.IShipmentTypeService;
 import in.nareshit.aashish.view.ShipmentTypeExcelView;
+import in.nareshit.aashish.view.ShipmentTypePdfView;
 
 @Controller
 @RequestMapping("/shipmenttype")
@@ -142,12 +143,46 @@ public class ShipmentTypeController {
 	@GetMapping("/excel")
 	public ModelAndView exportToExcel() {
 		ModelAndView m = new ModelAndView();
-		//set View class object to the ModelAndView obj
-		m.setView(new ShipmentTypeExcelView());
-		//fetching the data from the database
-		List<ShipmentType> list = service.getAllShipmentTypes();
-		//send the data to the View class
-		m.addObject("list", list);
+		
+		
+		//fetching the data from the database by service call
+		List<ShipmentType> list = service.getAllShipmentTypes();		
+		
+		if(list==null || list.isEmpty()) {  //if data not exist
+			m.addObject("message", "NO DATA FOR EXCEL EXPORT");
+			m.setViewName("ShipmentTypeData");
+			
+		}else {  //if data exist then export
+			//set View class object to the ModelAndView obj
+			m.setView(new ShipmentTypeExcelView());
+			//send the data to the View class
+			m.addObject("list", list);
+		}
+		return m;
+	}
+	/**
+	 * 8. On click of PDF EXPORT button, the controller comes to this method
+	 *    and it @return ModelAndView object which is responsible for 
+	 *    downloading the Pdf 
+	 */
+	@GetMapping("/pdf")
+	public ModelAndView exportToPdf() {
+		
+        ModelAndView m = new ModelAndView();
+		
+		//fetching the data from the database by service call
+		List<ShipmentType> list = service.getAllShipmentTypes();		
+		
+		if(list==null || list.isEmpty()) {  //if data not exist
+			m.addObject("message", "NO DATA FOR PDF EXPORT");
+			m.setViewName("ShipmentTypeData");
+			
+		}else {  //if data exist then export
+			//set View class object to the ModelAndView obj
+			m.setView(new ShipmentTypePdfView());
+			//send the data to the View class
+			m.addObject("list", list);
+		}
 		return m;
 	}
 
