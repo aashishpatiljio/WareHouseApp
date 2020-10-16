@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import lombok.Data;
 
 @Data
@@ -15,9 +17,10 @@ import lombok.Data;
 public class Uom {
 	@Id
 	@GeneratedValue(generator = "uom")
-	@SequenceGenerator(name = "uom", sequenceName = "uom_seq")
+	//@SequenceGenerator(name = "uom", sequenceName = "uom_seq")
+	@GenericGenerator(name = "uom", strategy = "in.nareshit.aashish.generator.UomIdGenerator")
 	@Column(name = "uom_id_col")
-	private Integer id;
+	private String id;
 	
 	@Column(name = "uom_type_col")
 	private String uomType;

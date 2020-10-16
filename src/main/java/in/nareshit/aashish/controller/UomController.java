@@ -47,7 +47,7 @@ public class UomController {
 			Model model				//send data controller to UI
 			) {
 		//calling service layer method
-		Integer id = service.saveUom(uom);
+		String id = service.saveUom(uom);
 		String message = new StringBuffer().append("Uom '")
 				.append(id).append("' Saved").toString();
 		//sending data to UI

@@ -10,7 +10,7 @@ public interface IUomService {
 	 * @param uom indicates ModelAttribute
 	 * @return Integer as PK after the save operation
 	 */
-	public Integer saveUom(Uom uom);
+	public String saveUom(Uom uom);
 	/**
 	 * This method fetch the table data from database
 	 * and save in the List format

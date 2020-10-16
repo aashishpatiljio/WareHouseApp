@@ -18,7 +18,7 @@ public class UomServiceImpl implements IUomService {
 	private UomRepository repo;
 
 	@Override
-	public Integer saveUom(Uom uom) {
+	public String saveUom(Uom uom) {
 		/*
 		 * save(obj) method returns same object with id effected after save.
 		 */
