@@ -15,7 +15,7 @@ import lombok.Data;
 @Table(name = "docs_tab")
 public class Document {
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	@Column(name = "doc_id")
 	private Integer docId;
 	@Column(name = "doc_name")
