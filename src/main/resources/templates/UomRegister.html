@@ -133,8 +133,23 @@
                     $("#uomModelError").css("color", "red");
                     uomModelError = false;
                 } else {
-                    $("#uomModelError").hide();
-                    uomModelError = true;
+                	//AJAX CALL start
+                	$.ajax({
+                		url : 'validate',
+                		data: {'model':val},
+                		success:function(resTxt){
+                			if(resTxt==''){
+                                $("#uomModelError").hide();
+                                uomModelError = true;
+                			}else{
+                				$("#uomModelError").show();
+                                $("#uomModelError").html(resTxt);
+                                $("#uomModelError").css("color", "red");
+                                uomModelError = false;
+                				
+                			}
+                		}
+                	});  //AJAX CALL ends                 	               	
                 }
                 return uomModelError;
             }

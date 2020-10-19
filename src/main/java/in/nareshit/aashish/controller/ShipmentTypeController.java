@@ -161,7 +161,7 @@ public class ShipmentTypeController {
 		return m;
 	}
 	/**
-	 * 8. On click of PDF EXPORT button, the controller comes to this method
+	 * 8. On click of PDF EXPORT button, the control comes to this method
 	 *    and it @return ModelAndView object which is responsible for 
 	 *    downloading the Pdf 
 	 */

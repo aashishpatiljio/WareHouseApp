@@ -18,7 +18,7 @@ public class UomServiceImpl implements IUomService {
 	private UomRepository repo;
 
 	@Override
-	public String saveUom(Uom uom) {
+	public Integer saveUom(Uom uom) {
 		/*
 		 * save(obj) method returns same object with id effected after save.
 		 */
@@ -46,7 +46,10 @@ public class UomServiceImpl implements IUomService {
 				);
 		repo.delete(u);
 	}
-
+	
+	/**
+	 * 
+	 */
 	@Override
 	public Uom getOneUom(Integer id) {
 		Uom u = repo.findById(id).orElseThrow(
@@ -54,11 +57,34 @@ public class UomServiceImpl implements IUomService {
 				);
 		return u;
 	}
-
+	/**
+	 * 
+	 */
 	@Override
 	public void updateUom(Uom uom) {
-		repo.save(uom);
+		repo.save(uom);		
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public boolean isUomModelExist(String uomModel) {
+		boolean flag = false;
 		
+		Integer count = repo.getUomModelCount(uomModel);
+		if(count==0) {
+			flag = false; // column value not exist
+		}else {
+			flag = true; // column value exist in db
+		}
+		return flag;
+		/*
+		 * In real-time the above if-else logic is written in a short
+		 * format like below-
+		 * 
+		 * return repo.getUomModelCount(uomModel)==0 ? false : true; or
+		 * return repo.getUomModelCount(uomModel)>0 ? true : false;
+		 */
 	}
 
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.aashish.model.Uom;
@@ -47,7 +48,7 @@ public class UomController {
 			Model model				//send data controller to UI
 			) {
 		//calling service layer method
-		String id = service.saveUom(uom);
+		Integer id = service.saveUom(uom);
 		String message = new StringBuffer().append("Uom '")
 				.append(id).append("' Saved").toString();
 		//sending data to UI
@@ -152,6 +153,10 @@ public class UomController {
 		m.addObject("list", list);
 		return m;
 	}
+	/**
+	 * 8.
+	 * @return
+	 */
 	@GetMapping("/pdf")
 	public ModelAndView exportToPdf() {
 		ModelAndView m = new ModelAndView();
@@ -162,6 +167,27 @@ public class UomController {
 		//send data to View class
 		m.addObject("list", list);
 		return m;		
+	}
+	/**
+	 * 9. AJAX VALIDATION
+	 * @return
+	 * 
+	 * If we don't write @ResponseBody then it will expect
+	 * return type as a page name but this time we want to 
+	 * return the data/message
+	 */
+	@GetMapping("/validate")
+	public @ResponseBody String validateModel(
+			@RequestParam String model
+			) {
+		
+		String message = "";
+		
+		if(service.isUomModelExist(model)) {
+			message = new StringBuffer().append("Uom Model '").append(model)
+					.append("' already exist").toString();
+		}
+		return message;
 	}
 
 }

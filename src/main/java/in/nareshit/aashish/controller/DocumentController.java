@@ -52,10 +52,9 @@ public class DocumentController {
 			Document doc = new Document();
 			doc.setDocId(fid);
 			doc.setDocName(fob.getOriginalFilename());
-			doc.setDocData(fob.getBytes());
+			doc.setDocData(fob.getBytes());  //getBytes() throws IOException
 			// call service layer method to save the data
 			service.saveDocument(doc);
-			// if block ends
 		} catch (IOException e) {
 			e.printStackTrace();
 		} // catch block ends

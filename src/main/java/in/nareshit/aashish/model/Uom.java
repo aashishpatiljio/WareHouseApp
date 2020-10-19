@@ -17,10 +17,10 @@ import lombok.Data;
 public class Uom {
 	@Id
 	@GeneratedValue(generator = "uom")
-	//@SequenceGenerator(name = "uom", sequenceName = "uom_seq")
-	@GenericGenerator(name = "uom", strategy = "in.nareshit.aashish.generator.UomIdGenerator")
+	@SequenceGenerator(name = "uom", sequenceName = "uom_seq")
+	//@GenericGenerator(name = "uom", strategy = "in.nareshit.aashish.generator.UomIdGenerator")
 	@Column(name = "uom_id_col")
-	private String id;
+	private Integer id;
 	
 	@Column(name = "uom_type_col")
 	private String uomType;
