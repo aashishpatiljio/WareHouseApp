@@ -177,10 +177,8 @@ public class UomController {
 	 * return the data/message
 	 */
 	@GetMapping("/validate")
-	public @ResponseBody String validateModel(
-			@RequestParam String model
-			) {
-		
+	public @ResponseBody String validateModel(@RequestParam String model) 
+	{		
 		String message = "";
 		
 		if(service.isUomModelExist(model)) {

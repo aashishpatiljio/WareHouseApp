@@ -69,14 +69,14 @@ public class UomServiceImpl implements IUomService {
 	 */
 	@Override
 	public boolean isUomModelExist(String uomModel) {
-		boolean flag = false;
+		boolean flag = false;  //initialize default value
 		
 		Integer count = repo.getUomModelCount(uomModel);
 		if(count==0) {
 			flag = false; // column value not exist
 		}else {
 			flag = true; // column value exist in db
-		}
+		} 
 		return flag;
 		/*
 		 * In real-time the above if-else logic is written in a short

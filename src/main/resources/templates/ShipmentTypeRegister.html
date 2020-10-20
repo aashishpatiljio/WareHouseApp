@@ -160,8 +160,23 @@
                     shipmentCodeError = false;
 
                 } else {
-                    $("#shipmentCodeError").hide();
-                    shipmentCodeError = true;
+                	//AJAX call start
+                	$.ajax({
+                		url : 'validate',
+                		data : {'code':val},
+                		success:function(resTxt){
+                			if(resTxt==''){
+                				$("#shipmentCodeError").hide();
+                                shipmentCodeError = true;                				
+                			}else{
+                				 $("#shipmentCodeError").show();
+                                 $("#shipmentCodeError").html(resTxt);
+                                 $("#shipmentCodeError").css("color", "red");                				
+                			}
+                		}  //success:function ends
+                	});
+                	//AJAX call ends
+                    
                 }
                 return shipmentCodeError;
             }

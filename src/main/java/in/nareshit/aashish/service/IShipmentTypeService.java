@@ -33,5 +33,11 @@ public interface IShipmentTypeService {
 	 * @param shipType
 	 */
 	public void updateShipmentType(ShipmentType shipmentType);
+	/**
+	 *  
+	 * @param shipmentCode
+	 * @return
+	 */
+	public boolean isShipmentCodeExist(String shipmentCode);
 
 }

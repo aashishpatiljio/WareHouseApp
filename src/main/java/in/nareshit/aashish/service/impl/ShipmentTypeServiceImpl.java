@@ -46,7 +46,9 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 				);
 		repo.delete(shipType);
 	}
-
+	/**
+	 * 
+	 */
 	@Override
 	public ShipmentType getOneShipmentType(Integer id) {
 		ShipmentType shipType = repo.findById(id).orElseThrow(
@@ -54,10 +56,25 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 				);
 		return shipType;
 	}
-
+	/**
+	 * 
+	 */
 	@Override
 	public void updateShipmentType(ShipmentType shipmentType) {
 		repo.save(shipmentType);		
+	}
+	
+	@Override
+	public boolean isShipmentCodeExist(String shipmentCode) {
+		boolean flag = false;
+		
+		Integer count = repo.getShipmentCodeCount(shipmentCode);
+		if (count==0) {
+			flag = false;	// column value not exist		
+		}else {
+			flag = true;	// column value exist in db
+		}
+		return flag;
 	}
 
 

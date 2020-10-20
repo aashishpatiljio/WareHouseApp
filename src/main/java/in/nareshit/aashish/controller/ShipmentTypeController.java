@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.aashish.model.ShipmentType;
@@ -184,6 +185,25 @@ public class ShipmentTypeController {
 			m.addObject("list", list);
 		}
 		return m;
+	}
+	/**
+	 *  9. AJAX VALIDATION
+	 * @param shipmentCode
+	 * @return
+	 * 
+	 * If we don't write @ResponseBody then it will expect
+	 * return type as a page name but this time we want to 
+	 * return the data/message to show it on browser.
+	 */
+	@GetMapping("/validate")
+	public @ResponseBody String validateShipmentCode(@RequestParam String code) {
+		String message = "";
+		
+		if(service.isShipmentCodeExist(code)) {
+			message = new StringBuffer().append("Shipment Code '").append(code)
+					.append("' already exist").toString();
+		}
+		return message;
 	}
 
 }
