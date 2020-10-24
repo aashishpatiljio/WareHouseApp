@@ -2,6 +2,8 @@ package in.nareshit.aashish.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.aashish.model.Uom;
 import in.nareshit.aashish.service.IUomService;
+import in.nareshit.aashish.util.UomUtil;
 import in.nareshit.aashish.view.UomExcelView;
 import in.nareshit.aashish.view.UomPdfView;
 
@@ -24,6 +27,12 @@ public class UomController {
 	
 	@Autowired
 	private IUomService service;
+	
+	@Autowired
+	private UomUtil util;
+	
+	@Autowired
+	private ServletContext sc;
 	
 	/**
 	 * 1. show register page 
@@ -186,6 +195,14 @@ public class UomController {
 					.append("' already exist").toString();
 		}
 		return message;
+	}
+	@GetMapping("/charts")
+	public String showCharts() {
+		//call to a service layer method
+		List<Object[]> data = service.getUomTypeAndCount();
+		String path = sc.getRealPath("/");
+		util.generatePieChart(path, data);		
+		return "UomCharts";
 	}
 
 }

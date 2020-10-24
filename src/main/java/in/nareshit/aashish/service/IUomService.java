@@ -44,5 +44,10 @@ public interface IUomService {
 	 * @return
 	 */
 	public boolean isUomModelExist(String uomModel);
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Object[]> getUomTypeAndCount(); 
 
 }
