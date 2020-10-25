@@ -186,8 +186,10 @@ public class UomController {
 	 * return the data/message
 	 */
 	@GetMapping("/validate")
-	public @ResponseBody String validateModel(@RequestParam String model) 
-	{		
+	public @ResponseBody String validateModel(
+			
+			@RequestParam String model) {	
+		
 		String message = "";
 		
 		if(service.isUomModelExist(model)) {
@@ -196,12 +198,20 @@ public class UomController {
 		}
 		return message;
 	}
+	/**
+	 * 10. GENERATION OF PIE AND BAR CHARTS
+	 * 	  This method is for the purpose of generartion of
+	 * 	  pie chart and bar chart.
+	 * @return
+	 */
 	@GetMapping("/charts")
 	public String showCharts() {
 		//call to a service layer method
 		List<Object[]> data = service.getUomTypeAndCount();
+		//getting the actual runtime path
 		String path = sc.getRealPath("/");
-		util.generatePieChart(path, data);		
+		util.generatePieChart(path, data);//call to Util layer method
+		util.generateBarChart(path, data);
 		return "UomCharts";
 	}
 
