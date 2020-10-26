@@ -2,6 +2,8 @@ package in.nareshit.aashish.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.aashish.model.ShipmentType;
 import in.nareshit.aashish.service.IShipmentTypeService;
+import in.nareshit.aashish.util.ShipmentTypeUtil;
 import in.nareshit.aashish.view.ShipmentTypeExcelView;
 import in.nareshit.aashish.view.ShipmentTypePdfView;
 
@@ -24,6 +27,12 @@ public class ShipmentTypeController {
 	
 	@Autowired
 	private IShipmentTypeService service;
+	
+	@Autowired
+	private ShipmentTypeUtil util;
+	
+	@Autowired
+	private ServletContext context;
 	
 	/**
 	 * 1. show register page 
@@ -204,6 +213,23 @@ public class ShipmentTypeController {
 					.append("' already exist").toString();
 		}
 		return message;
+	}
+	/**
+	 * 10. JFREE CHARTS GENERATION
+	 * 
+	 * The purpose of this method is to generate the Pie Charts
+	 * and Bar chart on request.
+	 * @return the page where Charts will be shown.
+	 */
+	@GetMapping("/charts")
+	public String generateCharts() {
+		//call to service layer method to get data
+		List<Object[]> data = service.getShipmentModeAndCount();
+		//call to utility class method
+		String path = context.getRealPath("/");
+		util.generatePieChart(path, data);
+		util.generateBarChart(path, data);
+		return "ShipmentTypeCharts";		
 	}
 
 }

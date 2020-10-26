@@ -63,7 +63,9 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 	public void updateShipmentType(ShipmentType shipmentType) {
 		repo.save(shipmentType);		
 	}
-	
+	/**
+	 * 
+	 */
 	@Override
 	public boolean isShipmentCodeExist(String shipmentCode) {
 		boolean flag = false;
@@ -75,6 +77,13 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 			flag = true;	// column value exist in db
 		}
 		return flag;
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public List<Object[]> getShipmentModeAndCount() {
+		return repo.getShipmentModeAndCount();		
 	}
 
 

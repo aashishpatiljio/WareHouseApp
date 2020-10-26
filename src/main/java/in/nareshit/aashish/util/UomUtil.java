@@ -8,8 +8,11 @@ import java.util.List;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.CategorySeriesLabelGenerator;
 import org.jfree.chart.labels.PieSectionLabelGenerator;
+import org.jfree.chart.labels.StandardCategorySeriesLabelGenerator;
 import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
+import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -51,11 +54,11 @@ public class UomUtil {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
 		for(Object[] ob:data) {
-			//val,ket,label to display
+			//val,key,label to display
 			dataset.setValue(
 					Double.valueOf(ob[1].toString()), //value
 					String.valueOf(ob[0]), //key
-					"");  //label
+					String.valueOf(ob[0]));  //label
 		} //foreach loop ends
 		
 		// b. create JfreeChart object using datasets and other details.

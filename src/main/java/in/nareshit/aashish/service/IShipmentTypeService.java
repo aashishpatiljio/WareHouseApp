@@ -39,5 +39,10 @@ public interface IShipmentTypeService {
 	 * @return
 	 */
 	public boolean isShipmentCodeExist(String shipmentCode);
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Object[]> getShipmentModeAndCount();
 
 }
