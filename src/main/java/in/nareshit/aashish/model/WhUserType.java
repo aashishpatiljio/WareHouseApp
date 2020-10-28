@@ -34,5 +34,5 @@ public class WhUserType {
 	@Column(name = "wh_if_other_col")
 	private String ifOther;
 	@Column(name = "wh_id_number_col")
-	private String IdNumber;
+	private String idNumber;
 }

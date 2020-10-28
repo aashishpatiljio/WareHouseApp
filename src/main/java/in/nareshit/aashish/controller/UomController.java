@@ -39,7 +39,7 @@ public class UomController {
 	 *    on enter  /register URL  (GET)
 	 */
 	@GetMapping("/register")
-	public String showReg(Model model) {
+	public String showRegister(Model model) {
 		//Form backing object//must written before return statement
 		model.addAttribute("uom", new Uom());
 		return "UomRegister";
@@ -75,6 +75,7 @@ public class UomController {
 	 */
 	@GetMapping("/all")
 	public String showAllUoms(Model model) {
+		//call to Service layer method
 		List<Uom> list = service.getAllUoms();
 		model.addAttribute("list", list);
 		return "UomData";		
@@ -141,7 +142,7 @@ public class UomController {
 		//calling of service layer method
 		service.updateUom(uom);
 		//send details to UI
-		model.addAttribute("message", "Uom '"+uom.getId()+"' Updated" );
+		model.addAttribute("message", "Uom with '"+uom.getId()+"' Updated" );
 		model.addAttribute("list", service.getAllUoms());
 		return "UomData";
 	}

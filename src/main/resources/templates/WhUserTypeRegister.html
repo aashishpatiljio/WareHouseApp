@@ -1,10 +1,185 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <title>Document</title>
 </head>
+
 <body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-center text-white">
+                <h3>WELCOME TO WhUserType PAGE</h3>
+            </div> <!-- card header ends -->
+
+            <div class="card-body">
+                <form action="#" method="POST">
+
+                    <!-- row-1 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Type</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="radio" name="userType" id="userType1" value="Vendor" />Vendor
+                            <input type="radio" name="userType" id="userType2" value="Customer" />Customer
+                        </div>
+                        <div class="col-5">
+                            <span id="userTypeError"></span>
+                        </div>
+                    </div> <!-- row-1 ends -->
+
+                    <!-- row-2 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Code</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="userCode" id="userCode" class="form-control" />
+                        </div>
+                        <div class="col-5">
+                            <span id="userCodeError"></span>
+                        </div>
+                    </div> <!-- row-2 ends -->
+
+                    <!-- row-3 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User For</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="userFor" id="userFor" class="form-control" readonly />
+                        </div>
+                    </div> <!-- row-3 ends -->
+
+                    <!-- row-4 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Email</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="userEmail" id="userEmail" class="form-control" />
+                        </div>
+                        <div class="col-5">
+                            <span id="userEmailError"></span>
+                        </div>
+                    </div> <!-- row-4 ends -->
+
+                    <!-- row-5 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Contact</label>
+                        </div>
+                        <div class="col-5">
+                            <textarea name="userContact" id="userContact" class="form-control"></textarea>
+                        </div>
+                        <div class="col-5">
+                            <span id="userContactError"></span>
+                        </div>
+                    </div> <!-- row-5 ends -->
+
+                    <!-- row-6 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Id Type</label>
+                        </div>
+                        <div class="col-5">
+                            <select name="userIdType" id="userIdType" class="form-control">
+                                <option value="">--select--</option>
+                                <option value="PAN-CARD">PAN-CARD</option>
+                                <option value="AADHAR-CARD">AADHAR-CARD</option>
+                                <option value="VOTER-ID">VOTER-ID</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </div>
+                        <div class="col-5">
+                            <span id="userIdTypeError"></span>
+                        </div>
+                    </div> <!-- row-6 ends -->
+
+                    <!-- row-7 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>*If Other</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="ifOther" id="ifOther" class="form-control" readonly />
+                        </div>
+                        <div class="col-5">
+                            <span id="ifOtherError"></span>
+                        </div>
+                    </div> <!-- row-7 ends -->
+
+                    <!-- row-8 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>ID Number</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" name="idNumber" id="idNumber" class="form-control" />
+                        </div>
+                        <div class="col-5">
+                            <span id="idNumberError"></span>
+                        </div>
+                    </div> <!-- row-8 ends -->
+
+                    <input type="submit" value="Add Shipment" class="btn btn-success" />
+
+                </form>
+            </div> <!-- card body ends -->
+        </div> <!-- card ends -->
+    </div> <!-- container ends -->
+
+    <!--jQuery Script-->
+    <script>
+        $(document).ready(function () {
+
+            //radio button based autofill validation
+            function autofill() {
+                //read the value
+                var val = $('[name="userType"]:checked').val();
+                //check condition
+                if (val == 'Vendor') {
+                    $("#userFor").val('Purchase');
+                } else {
+                    $("#userFor").val('Sale');
+                }
+            }
+
+            //link autofill function with action event
+            $('[name="userType"]').change(function () {
+                autofill(); //call to autofill function
+            });
+
+            //function for If Other readonly validation concept
+            function handleIfOther() {
+                var val = $("#userIdType").val();
+                //check the condition
+                if (val == 'OTHER') {
+                    $("#ifOther").removeAttr('readonly');
+                } else {
+                    $("#ifOther").attr('readonly', 'true');
+                    $("#ifOther").val("");
+                }
+            }
+            //linkhandleIfOther function with action event
+            //If Other readonly concept
+            $("#userIdType").change(function () {
+                $("#idNumber").val(""); //clear id number
+                handleIfOther();
+
+            });
+
+
+        });
+    </script>
 
 </body>
+
 </html>
