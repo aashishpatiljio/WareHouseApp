@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.util.Random;
 
 import org.hibernate.HibernateException;
-import org.hibernate.boot.model.IdentifierGeneratorDefinition;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.id.IdentifierGenerationException;
 import org.hibernate.id.IdentifierGenerator;
 
 public class UomIdGenerator implements IdentifierGenerator {

@@ -1,10 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
+    <meta charset="ISO-8859-1">
+    <title>WHUSER</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
 </head>
+
 <body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header text-center bg-primary text-white">
+                <h3>WH USER TYPE EDIT PAGE</h3>
+            </div>
+            <!-- card header ends -->
+
+            <div class="card-body">
+                <form th:action="@{/whusertype/update}" method="POST" th:object="${whUser}">
+
+                    <!-- row-1 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Id</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" th:field="*{id}" readonly class="form-control" />
+                        </div>
+                    </div>
+                    <!-- row-1 ends -->
+
+                    <!-- row-2 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Type</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="radio" th:field="*{userType}" value="Vendor" />Vendor
+                            <input type="radio" th:field="*{userType}" value="Customer" />Customer
+                        </div>
+                    </div>
+                    <!-- row-2 ends -->
+
+                    <!-- row-3 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Code</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" th:field="*{userCode}" class="form-control" />
+                        </div>
+                    </div>
+                    <!-- row-3 ends -->
+
+                    <!-- row-4 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User For</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" th:field="*{userFor}" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <!-- row-4 ends -->
+
+                    <!-- row-5 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Email</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" th:field="*{userEmail}" class="form-control" />
+                        </div>
+                    </div>
+                    <!-- row-5 ends -->
+
+                    <!-- row-6 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Contact</label>
+                        </div>
+                        <div class="col-5">
+                            <textarea th:field="*{userContact}" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <!-- row-6 ends -->
+
+                    <!-- row-7 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>User Id Type</label>
+                        </div>
+                        <div class="col-5">
+                            <select th:field="*{userIdType}" class="form-control">
+                                <option value="">--select--</option>
+                                <option value="PAN-CARD">PAN-CARD</option>
+                                <option value="AADHAR-CARD">AADHAR-CARD</option>
+                                <option value="VOTER-ID">VOTER-ID</option>
+                                <option value="OTHER">OTHER</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- row-7 ends -->
+
+                    <!-- row-8 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>*If Other</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" th:field="*{ifOther}" class="form-control" readonly />
+                        </div>
+                    </div>
+                    <!-- row-8 ends -->
+
+                    <!-- row-9 -->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>ID Number</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" th:field="*{idNumber}" class="form-control" />
+                        </div>
+                    </div>
+                    <!-- row-9 ends -->
+
+                    <input type="submit" value="UPDATE WH USER" class="btn btn-success" />
+                </form>
+            </div>
+            <!-- card body ends -->
+        </div>
+        <!-- card-ends -->
+    </div>
+    <!-- container ends-->
 
 </body>
+
 </html>

@@ -114,7 +114,7 @@ public class WhUserTypeController {
 		//call to the Service layer method
 		WhUserType whUser = service.getOneWhUserType(id);
 		//sending data to UI
-		model.addAttribute("whUserType", whUser);
+		model.addAttribute("whUser", whUser);
 		return "WhUserTypeEdit";
 	}
 	/**
@@ -133,7 +133,7 @@ public class WhUserTypeController {
 		service.updateWhUserType(whUserType);
 		//create message to send to UI after updation of record
 		String message = new StringBuffer().append("WhUserType with '")
-				.append(whUserType.getId()).append("Updated").toString();
+				.append(whUserType.getId()).append("'Updated").toString();
 		
 		//now sending this message content to the UI using Model memory
 		model.addAttribute("message", message);
