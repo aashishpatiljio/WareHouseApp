@@ -20,7 +20,7 @@
             </div> <!-- card header ends -->
 
             <div class="card-body">
-                <form th:action="@{/whusertype/save}" method="POST" th:object="${whUserType}">
+                <form id="whUserRegForm" th:action="@{/whusertype/save}" method="POST" th:object="${whUserType}">
 
                     <!-- row-1 -->
                     <div class="row">
@@ -144,7 +144,149 @@
 
     <!--jQuery Script-->
     <script>
-        
+        $(document).ready(function () {
+
+
+            //function for If Other auto readonly validation concept
+            function handleIfOther() {
+                var val = $("#userIdType").val();
+                //check the condition
+                if (val == 'OTHER') {
+                    $("#ifOther").removeAttr('readonly');
+                } else {
+                    $("#ifOther").attr('readonly', 'true');
+                    $("#ifOther").val("");
+                }
+            }
+            //link handleIfOther function with action event
+            //If Other readonly concept
+            $("#userIdType").change(function () {
+                $("#idNumber").val(""); //clear id number
+                handleIfOther();
+
+            });
+
+            //--- validation logic
+            //1. hide the error section
+            $("#userTypeError").hide();
+            $("#userCodeError").hide();
+            $("#userEmailError").hide();
+
+            //2. define error variables
+            var userTypeError = false;
+            var userCodeError = false;
+            var userEmailError = false;
+
+            //3. validate funtions
+
+            //AutoFill concept jQuery logics
+            //radio button based autofill validation
+
+            function autoFill_userFor() {
+                //read the value
+                var val = $('[name="userType"]:checked').val();
+                //check condition
+                if (val == 'Vendor') {
+                    $("#userFor").val('Purchase');
+                } else {
+                    $("#userFor").val('Sale');
+                }
+            }
+
+            function validate_userType() {
+                //a. read the value
+                var len = $('[name="userType"]:checked').length;
+
+                //b. check the conditions
+                if (len == 0) {
+                    $("#userTypeError").show();
+                    $("#userTypeError").html("Please select the one <b>User Type</b>");
+                    $("#userTypeError").css('color', 'red');
+                    userTypeError = false;
+                } else {
+                    autoFill_userFor();   //function call
+                    $("#userTypeError").hide();
+                    userTypeError = true;
+                }
+                return userTypeError;
+            }
+            function validate_userCode() {
+                //a. read the value
+                var val = $("#userCode").val();
+                // regular expression
+                var exp = /^[A-Z\s\-]{4,8}$/;
+
+                //b. check the conditions
+                if (val == '') {
+                    $("#userCodeError").show();
+                    $("#userCodeError").html("User Code <b>cannot be empty</b>");
+                    $("#userCodeError").css('color', 'red');
+                    userCodeError = false;
+                } else if (!exp.test(val)) {
+                    $("#userCodeError").show();
+                    $("#userCodeError").html("Code <b>must be 4-8 characters only</b>");
+                    $("#userCodeError").css('color', 'red');
+                    userCodeError = false;
+                } else {
+                    $("#userCodeError").hide();
+                    userCodeError = true;
+                }
+                return userCodeError;
+            }
+
+            function validate_userEmail(){
+                //a. read the value
+                var val = $("#userEmail").val();
+                
+                //regular expression
+                // + symbol is used for taking atleast one character compulsorily
+                // Email ID: ________ @ _____.____
+                var exp = /^[A-Za-z0-9\-\.]+\@[a-z]+\.[a-z\.]{3,10}$/;
+
+                //b. check the conditions
+                if(val==''){
+                    $("#userEmailError").show();
+                    $("#userEmailError").html("Email <b>cannot be empty</b>");
+                    $("#userEmailError").css('color','red');
+                    userEmailError = false;
+                }else if(!exp.test(val)){
+                    $("#userEmailError").show();
+                    $("#userEmailError").html("Email <b>pattern not valid</b>");
+                    $("#userEmailError").css('color','red');
+                    userEmailError = false;
+                }else{
+                    $("#userEmailError").hide();
+                    userEmailError = true;
+                }
+                return userEmailError;
+            }
+
+            //link the validation functions to the action events
+            $('[name="userType"]').click(function () {
+                validate_userType();
+            });
+            $("#userCode").keyup(function(){
+                validate_userCode();
+            });
+            $("#userEmail").keyup(function(){
+                validate_userEmail();
+            });
+
+
+            //On Submit link validation functions
+            $("#whUserRegForm").submit(function () {
+                validate_userType();  //call function
+                validate_userCode();  //call function
+                validate_userEmail();   //call function
+
+                if (userTypeError && userCodeError && userEmailError) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+        });
     </script>
 
 </body>
