@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import in.nareshit.aashish.model.WhUserType;
 import in.nareshit.aashish.service.IWhUserTypeService;
@@ -147,6 +147,14 @@ public class WhUserTypeController {
 		//sending the above fetched data to teh UI using the Model memory
 		model.addAttribute("list", list);
 		return "WhUserTypeData";
+	}
+	@GetMapping("/checkMail")
+	public @ResponseBody String validateEmailExist(@RequestParam String mail) {
+		String msg = "";
+		if(service.isWhUserMailIdExist(mail)) {
+			msg = mail + ", <b>already exist</b>";
+		}
+		return msg; 
 	}
 	
 }

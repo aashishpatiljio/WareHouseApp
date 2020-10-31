@@ -143,7 +143,7 @@
     </div> <!-- container ends -->
 
     <!--jQuery Script-->
-    <script>
+   <script>
         $(document).ready(function () {
 
 
@@ -234,29 +234,43 @@
                 return userCodeError;
             }
 
-            function validate_userEmail(){
+            function validate_userEmail() {
                 //a. read the value
                 var val = $("#userEmail").val();
-                
+
                 //regular expression
                 // + symbol is used for taking atleast one character compulsorily
                 // Email ID: ________ @ _____.____
                 var exp = /^[A-Za-z0-9\-\.]+\@[a-z]+\.[a-z\.]{3,10}$/;
 
                 //b. check the conditions
-                if(val==''){
+                if (val == '') {
                     $("#userEmailError").show();
                     $("#userEmailError").html("Email <b>cannot be empty</b>");
-                    $("#userEmailError").css('color','red');
+                    $("#userEmailError").css('color', 'red');
                     userEmailError = false;
-                }else if(!exp.test(val)){
+                } else if (!exp.test(val)) {
                     $("#userEmailError").show();
                     $("#userEmailError").html("Email <b>pattern not valid</b>");
-                    $("#userEmailError").css('color','red');
+                    $("#userEmailError").css('color', 'red');
                     userEmailError = false;
-                }else{
-                    $("#userEmailError").hide();
-                    userEmailError = true;
+                } else {
+                    //ajax call
+                    $.ajax({
+                        url: 'checkMail',
+                        data: { 'mail': val },
+                        success: function (resText) {
+                            if (resText == '') {
+                                $("#userEmailError").hide();
+                                userEmailError = true;
+                            } else {
+                                $("#userEmailError").show();
+                                $("#userEmailError").html(resText);
+                                $("#userEmailError").css('color', 'red');
+                                userEmailError = false;
+                            }
+                        }
+                    });
                 }
                 return userEmailError;
             }
@@ -265,10 +279,10 @@
             $('[name="userType"]').click(function () {
                 validate_userType();
             });
-            $("#userCode").keyup(function(){
+            $("#userCode").keyup(function () {
                 validate_userCode();
             });
-            $("#userEmail").keyup(function(){
+            $("#userEmail").keyup(function () {
                 validate_userEmail();
             });
 

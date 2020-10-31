@@ -33,4 +33,10 @@ public interface IWhUserTypeService {
 	 * @param whUserType
 	 */
 	public void updateWhUserType(WhUserType whUserType);
+	/**
+	 * 
+	 * @param mail
+	 * @return
+	 */
+	public boolean isWhUserMailIdExist(String mail);
 }

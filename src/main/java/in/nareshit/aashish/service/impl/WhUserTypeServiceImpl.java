@@ -57,5 +57,20 @@ public class WhUserTypeServiceImpl implements IWhUserTypeService {
 	public void updateWhUserType(WhUserType whUserType) {
 		repo.save(whUserType);
 	}
+	/**
+	 * 
+	 */
+	@Override
+	public boolean isWhUserMailIdExist(String mail) {
+		boolean flag = false;
+		
+		Integer count = repo.getWhUserEmailCount(mail);
+		if(count==0) {
+			flag = false;  //column not exist
+		}else {
+			flag = true;  //column exist
+		}
+		return flag;
+	}
 
 }
