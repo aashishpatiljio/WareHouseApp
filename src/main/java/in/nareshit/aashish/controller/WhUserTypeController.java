@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import in.nareshit.aashish.model.WhUserType;
 import in.nareshit.aashish.service.IWhUserTypeService;
+import in.nareshit.aashish.util.EmailUtil;
 
 @Controller
 @RequestMapping("/whusertype")
@@ -21,6 +22,8 @@ public class WhUserTypeController {
 
 	@Autowired
 	private IWhUserTypeService service;
+	@Autowired
+	private EmailUtil util;
 
 	/**
 	 * 1. show register page on enter /register URL (GET)
@@ -47,6 +50,10 @@ public class WhUserTypeController {
 		String message = new StringBuffer().append("WhUserType with '")
 				.append(id).append("' Saved").toString();
 		
+		//on save successful then below logic executed to send an email--
+		if(id!=null && id>0) {
+			util.sendEmai(whUserType.getUserEmail(), "Welcome WhUSer", "HELLO: "+whUserType.getUserCode());
+		}
 		//sending message data to UI
 		model.addAttribute("message", message);
 		//Form backing object

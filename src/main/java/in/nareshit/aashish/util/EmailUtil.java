@@ -61,4 +61,14 @@ public class EmailUtil {
 		}
 		return flag;
 	}
+	
+	// overloaded methods
+	public boolean sendEmai(
+			String to,
+			String subject,
+			String text
+			) {
+		
+		return sendEmail(to, subject, text, null, null, null); 
+	}
 }
