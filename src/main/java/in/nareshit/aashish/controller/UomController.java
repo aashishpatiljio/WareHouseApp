@@ -179,17 +179,23 @@ public class UomController {
 		return m;		
 	}
 	/**
-	 * 9. AJAX VALIDATION
-	 * @return
-	 * 
-	 * If we don't write @ResponseBody then it will expect
-	 * return type as a page name but this time we want to 
-	 * return the data/message
+	 * 9. AJAX VALIDATION Done in UI pages that's why this method is called 
+	 *    by AJAX.
+	 * 	  This method checks the input value given to UI form is present in
+	 *    DataBase or not, if yes then it returns the message(non-empty message)
+	 *    to the UI page form, then form will not be submitted successfully,
+	 *    if not then this method will return the empty message that means there 
+	 *    is no validation error in the form and form will be submitted successfully.
+	 *    
+	 * 	  If we don't write @ResponseBody then it will expect return 
+	 *    type as a page name but this time we  want to  return the 
+	 *    data/message that we have generated in the below method to 
+	 *    the UI page.
+	 * @param model, holds the value it receives from UI page via AJAX call.
+	 * @return the message i.e. message.
 	 */
 	@GetMapping("/validate")
-	public @ResponseBody String validateModel(
-			
-			@RequestParam String model) {	
+	public @ResponseBody String validateModel(@RequestParam String model) {	
 		
 		String message = "";
 		

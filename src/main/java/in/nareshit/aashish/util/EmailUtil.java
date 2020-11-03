@@ -63,7 +63,7 @@ public class EmailUtil {
 	}
 	
 	// overloaded methods
-	public boolean sendEmai(
+	public boolean sendEmail(
 			String to,
 			String subject,
 			String text

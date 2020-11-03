@@ -52,7 +52,7 @@ public class WhUserTypeController {
 		
 		//on save successful then below logic executed to send an email--
 		if(id!=null && id>0) {
-			util.sendEmai(whUserType.getUserEmail(), "Welcome WhUSer", "HELLO: "+whUserType.getUserCode());
+			util.sendEmail(whUserType.getUserEmail(), "Welcome WhUSer", "HELLO: "+whUserType.getUserCode());
 		}
 		//sending message data to UI
 		model.addAttribute("message", message);
@@ -155,6 +155,22 @@ public class WhUserTypeController {
 		model.addAttribute("list", list);
 		return "WhUserTypeData";
 	}
+	/**
+	 * 7. AJAX VALIDATION Done in UI pages that's why this method is called 
+	 *    by AJAX.
+	 * 	  This method checks the input value given to UI form is present in
+	 *    DataBase or not, if yes then it returns the message(non-empty message)
+	 *    to the UI page form, then form will not be submitted successfully,
+	 *    if not then this method will return the empty message that means there 
+	 *    is no validation error in the form and form will be submitted successfully.
+	 *    
+	 * 	  If we don't write @ResponseBody then it will expect return 
+	 *    type as a page name but this time we  want to  return the 
+	 *    data/message that we have generated in the below method to 
+	 *    the UI page.
+	 * @param mail holds the value it receives from UI page via AJAX call.
+	 * @return the message i.e. msg.
+	 */
 	@GetMapping("/checkMail")
 	public @ResponseBody String validateEmailExist(@RequestParam String mail) {
 		String msg = "";
