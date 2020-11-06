@@ -31,7 +31,7 @@
                         <th>ID TYPE</th>
                         <th>IF OTHER</th>
                         <th>ID NUMBER</th>
-                        <th>OPERATIONS</th>
+                        <th colspan="2">OPERATIONS</th>
                     </tr>
 
                     <tr th:each="ob:${list}">
@@ -46,6 +46,8 @@
                         <td th:text="${ob.idNumber}"></td>
                         <td>
                             <a class="btn btn-danger" th:href="@{/whusertype/delete?id={data}(data=${ob.id})}">DELETE</a>
+                        </td>
+                        <td>
                             <a class="btn btn-info" th:href="@{/whusertype/edit?id={data}(data=${ob.id})}">EDIT</a>
                         </td>
                     </tr>

@@ -105,12 +105,12 @@
                     </div> <!-- row-6 ends -->
 
                     <!-- row-7 -->
-                    <div class="row">
+                    <div class="row" id="ifOtherView">
                         <div class="col-2">
                             <label>*If Other</label>
                         </div>
                         <div class="col-5">
-                            <input type="text" th:field="*{ifOther}" class="form-control" readonly />
+                            <input type="text" th:field="*{ifOther}" class="form-control"/>
                         </div>
                         <div class="col-5">
                             <span id="ifOtherError"></span>
@@ -143,39 +143,31 @@
     </div> <!-- container ends -->
 
     <!--jQuery Script-->
-   <script>
+    <script>
         $(document).ready(function () {
 
-
-            //function for If Other auto readonly validation concept
-            function handleIfOther() {
-                var val = $("#userIdType").val();
-                //check the condition
-                if (val == 'OTHER') {
-                    $("#ifOther").removeAttr('readonly');
-                } else {
-                    $("#ifOther").attr('readonly', 'true');
-                    $("#ifOther").val("");
-                }
-            }
-            //link handleIfOther function with action event
-            //If Other readonly concept
-            $("#userIdType").change(function () {
-                $("#idNumber").val(""); //clear id number
-                handleIfOther();
-
-            });
-
             //--- validation logic
+
             //1. hide the error section
             $("#userTypeError").hide();
             $("#userCodeError").hide();
             $("#userEmailError").hide();
+            $("#userContactError").hide();
+            $("#userIdTypeError").hide();
+            $("#idNumberError").hide();
+            $("#ifOtherError").hide();
+
+            //hide the one of the div section
+            $("#ifOtherView").hide();
 
             //2. define error variables
             var userTypeError = false;
             var userCodeError = false;
             var userEmailError = false;
+            var userContactError = false;
+            var userIdTypeError = false;
+            var idNumberError = false;
+            var ifOtherError = false;
 
             //3. validate funtions
 
@@ -275,6 +267,94 @@
                 return userEmailError;
             }
 
+            function validate_userContact() {
+                //a. read the value
+                var val = $("#userContact").val();
+                //regular expression
+                var exp = /^[a-zA-Z0-9\-\_\.\,\s]{10,100}$/;
+
+                //b. check the conditions
+                if (val == '') {
+                    $("#userContactError").show();
+                    $("#userContactError").html("Contact details <b>cannot be empty</b>");
+                    $("#userContactError").css('color', 'red');
+                    userContactError = false;
+                } else if (!exp.test(val)) {
+                    $("#userContactError").show();
+                    $("#userContactError").html("Contact details <b>must be 10-100 chars only</b>");
+                    $("#userContactError").css('color', 'red');
+                    userContactError = false;
+                } else {
+                    $("#userContactError").hide();
+                    userContactError = true;
+                }
+                return userContactError;
+            }
+
+            //function for If Other auto readonly validation concept
+            function validate_userIdType() {
+
+                //a. read the value
+                var val = $("#userIdType").val();
+                //b. check the conditions
+                if (val == '') {
+                    $("#userIdTypeError").show();
+                    $("#userIdTypeError").html("Select <b>User ID Type</b>");
+                    $("#userIdTypeError").css('color', 'red');
+                    userIdTypeError = false;
+                } else {
+                    $("#userIdTypeError").hide();
+                    userIdTypeError = true;
+                }
+                handleIfOtherType(); //call below function
+                return userIdTypeError;
+            }
+
+            function handleIfOtherType() {
+                //a. read the value
+                var val = $("#userIdType").val();
+                //check the conditions
+                if (val == 'OTHER') {                    
+                    $("#ifOtherView").show();
+                } else {
+                    $("#ifOtherView").hide();
+                }
+            }
+
+            function validate_ifOther() {
+                //a. read the value
+                var val = $("#ifOther").val();
+                var valDropDown = $("#userIdType").val();
+
+                //b. check the conditions
+                if (val == '' && valDropDown == 'OTHER') { 
+                    $("#ifOtherError").show();
+                    $("#ifOtherError").html("Other Type <b>cannot be empty</b>");
+                    $("#ifOtherError").css('color', 'red');
+                    ifOtherError = false;
+                } else {
+                    $("#ifOtherError").hide();
+                    ifOtherError = true;
+                }
+                return ifOtherError;
+            }
+
+            function validate_idNumber() {
+                //a. read the value
+                var val = $("#idNumber").val();
+
+                //b. check the conditions
+                if (val == '') {
+                    $("#idNumberError").show();
+                    $("#idNumberError").html("Id <b>cannot be empty</b>");
+                    $("#idNumberError").css('color', 'red');
+                    idNumberError = false;
+                } else {
+                    $("#idNumberError").hide();
+                    idNumberError = true;
+                }
+                return idNumberError;
+            }
             //link the validation functions to the action events
             $('[name="userType"]').click(function () {
                 validate_userType();
@@ -285,20 +365,38 @@
             $("#userEmail").keyup(function () {
                 validate_userEmail();
             });
-
-
-            //On Submit link validation functions
-            $("#whUserRegForm").submit(function () {
-                validate_userType();  //call function
-                validate_userCode();  //call function
-                validate_userEmail();   //call function
-
-                if (userTypeError && userCodeError && userEmailError) {
-                    return true;
-                } else {
-                    return false;
-                }
+            $("#userContact").keyup(function () {
+                validate_userContact();
             });
+            $("#userIdType").change(function () {
+                $("#idNumber").val(""); //clear id number
+                validate_userIdType();
+            });
+            $("#ifOther").keyup(function(){
+                validate_ifOther();
+            });
+            $("#idNumber").keyup(function () {
+                validate_idNumber();
+            });
+
+            //On Submit, link validation functions
+            $("#whUserRegForm").submit(function () {
+                validate_userType();     //call function
+                validate_userCode();     //call function
+                validate_userEmail();    //call function
+                validate_userContact();  //call function
+                validate_userIdType();   //call function
+                validate_idNumber();     //call function
+                validate_ifOther();      //call function
+
+                if (userTypeError && userCodeError && userEmailError && userContactError
+                    && userIdTypeError && idNumberError && ifOtherError) {
+
+                return true;
+            } else {
+                return false;
+            }
+        });
 
         });
     </script>
