@@ -15,5 +15,13 @@ public interface UomRepository extends JpaRepository<Uom, Integer> {
 
 	@Query("SELECT uomType, COUNT(uomType) from Uom GROUP BY uomType")
 	List<Object[]> getUomTypeAndCount();
+	
+	/**
+	 * This method we have taken here for integration of module.
+	 * This method fetches the data according to the query given.
+	 * @return
+	 */
+	@Query("SELECT id,uomModel FROM Uom")
+	List<Object[]> getUomIdAndModel();
 
 }

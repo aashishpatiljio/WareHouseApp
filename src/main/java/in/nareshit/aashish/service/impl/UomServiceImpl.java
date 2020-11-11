@@ -1,6 +1,8 @@
 package in.nareshit.aashish.service.impl;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -86,9 +88,26 @@ public class UomServiceImpl implements IUomService {
 		 * return repo.getUomModelCount(uomModel)>0 ? true : false;
 		 */
 	}
+	/**
+	 * 
+	 */
 	@Override
 	public List<Object[]> getUomTypeAndCount() {
 		return repo.getUomTypeAndCount();
+	}
+	/**
+	 * This method fetch UOM ID and UOM Model in Map format
+	 */
+	@Override
+	public Map<Integer, String> getUomIdAndModel() {
+		List<Object[]> list = repo.getUomIdAndModel();
+		
+		Map<Integer, String> map = new LinkedHashMap<>();
+		//to convert List<Object[]> into Map format
+		for(Object[] ob:list) {
+			map.put(Integer.valueOf(ob[0].toString()), ob[1].toString());
+		}
+		return map;
 	}
 
 }

@@ -1,6 +1,7 @@
 package in.nareshit.aashish.service;
 
 import java.util.List;
+import java.util.Map;
 
 import in.nareshit.aashish.model.Uom;
 
@@ -49,5 +50,10 @@ public interface IUomService {
 	 * @return
 	 */
 	public List<Object[]> getUomTypeAndCount(); 
+	/**
+	 * This method is declared for integration of module purpose.
+	 * @return
+	 */
+	public Map<Integer, String> getUomIdAndModel();
 
 }
