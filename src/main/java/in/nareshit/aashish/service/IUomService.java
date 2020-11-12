@@ -52,6 +52,9 @@ public interface IUomService {
 	public List<Object[]> getUomTypeAndCount(); 
 	/**
 	 * This method is declared for integration of module purpose.
+	 * Here we are trying to fetch id and model from database and
+	 * store in the Object[] format and then convert it into
+	 * Map<Integer,String> format
 	 * @return
 	 */
 	public Map<Integer, String> getUomIdAndModel();

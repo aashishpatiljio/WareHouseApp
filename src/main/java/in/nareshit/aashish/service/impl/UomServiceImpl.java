@@ -3,6 +3,7 @@ package in.nareshit.aashish.service.impl;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -101,12 +102,19 @@ public class UomServiceImpl implements IUomService {
 	@Override
 	public Map<Integer, String> getUomIdAndModel() {
 		List<Object[]> list = repo.getUomIdAndModel();
-		
+		/*
+		//LinkedHashMap preserves the insertion order
 		Map<Integer, String> map = new LinkedHashMap<>();
-		//to convert List<Object[]> into Map format
+		//to convert List<Object[]> list into Map format
 		for(Object[] ob:list) {
 			map.put(Integer.valueOf(ob[0].toString()), ob[1].toString());
 		}
+		*/
+		//alternative logic for above one
+		Map<Integer, String> map =
+				list.stream()
+				.collect(
+						Collectors.toMap(ob->Integer.valueOf(ob.toString()), ob->ob.toString()));
 		return map;
 	}
 
