@@ -27,7 +27,9 @@ public class OrderMethodController {
 	 * @return OrderMethodRegister page
 	 */
 	@GetMapping("/register")
-	public String showRegister() {
+	public String showRegister(Model model) {
+		//Form backing object//must written before return statement
+		model.addAttribute("order", new OrderMethod());
 		return "OrderMethodRegister";
 	}
 	/**
@@ -46,10 +48,12 @@ public class OrderMethodController {
 			Model model
 			) {
 		Integer id = service.saveOrderMethod(orderMethod);
-		String message = new StringBuffer().append("OrderMethod '")
+		String message = new StringBuffer().append("OrderMethod with id '")
 				.append(id).append("' Saved").toString();
 		
 		model.addAttribute("msg", message);
+		//form backing object
+		model.addAttribute("order", new OrderMethod());
 		return "OrderMethodRegister";
 	}
 	/**
@@ -88,7 +92,7 @@ public class OrderMethodController {
 		//call service layer method
 		service.deleteOrderMethod(id);
 		//creating a message to send it on to UI
-		String message = new StringBuffer().append("OrderMethod '")
+		String message = new StringBuffer().append("OrderMethod with id '")
 				.append(id).append("' Deleted").toString();
 		//sending message to UI
 		model.addAttribute("message", message);

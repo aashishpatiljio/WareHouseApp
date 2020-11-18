@@ -3,36 +3,52 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>OrderMethod Data</title>
+<!-- CSS only -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<!-- JS and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-	<h3>ORDER METHOD DATA PAGE</h3>
-	<br>
+	<div class="container">
+		<div class="card">
+			<div class="card-header bg-primary text-white text-center">
+				<h3>ORDER METHOD DATA PAGE</h3>
+			</div>
+			<!-- card header ends -->
 
-	<table border="2">
-		<tr>
-			<th>ID</th>
-			<th>MODE</th>
-			<th>CODE</th>
-			<th>METHOD</th>
-			<th>ACCEPT</th>
-			<th>DESCRIPTION</th>
-			<th>OPERATIONS</th>
-		</tr>
-		<tr th:each="ob:${list}">
-			<td th:text="${ob.id}"></td>
-			<td th:text="${ob.orderMode}"></td>
-			<td th:text="${ob.orderCode}"></td>
-			<td th:text="${ob.orderType}"></td>
-			<td th:text="${ob.orderAccept}"></td>
-			<td th:text="${ob.description}"></td>	
-			<td>
-				<a th:href="@{/ordermethod/delete?id={data}(data=${ob.id})}">DELETE</a> &nbsp &nbsp
-				<a th:href="@{/ordermethod/edit?id={data}(data=${ob.id})}">EDIT</a>
-			</td>
-		</tr>
-	</table>
-	<span th:text="${message}"></span>
+			<div class="card-body">
+				<table class="table table-hover">
+					<tr class="bg-success text-white">
+						<th>ID</th>
+						<th>MODE</th>
+						<th>CODE</th>
+						<th>METHOD</th>
+						<th>ACCEPT</th>
+						<th>DESCRIPTION</th>
+						<th>OPERATIONS</th>
+					</tr>
+					<tr th:each="ob:${list}">
+						<td th:text="${ob.id}"></td>
+						<td th:text="${ob.orderMode}"></td>
+						<td th:text="${ob.orderCode}"></td>
+						<td th:text="${ob.orderType}"></td>
+						<td th:text="${ob.orderAccept}"></td>
+						<td th:text="${ob.description}"></td>
+						<td>
+							<a class="btn btn-danger" th:href="@{/ordermethod/delete?id={data}(data=${ob.id})}">DELETE</a>
+							<a class="btn btn-info" th:href="@{/ordermethod/edit?id={data}(data=${ob.id})}">EDIT</a>
+						</td>
+					</tr>
+				</table>
+			</div>  <!-- card body ends-->
+			
+			<div class="card-footer bg-info text-white text-center" th:if="${message != null}">
+                <span th:text="${message}"></span>
+            </div>  <!-- card-footer ends -->
+		</div>
+	</div>
 
 </body>
 </html>

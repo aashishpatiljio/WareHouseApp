@@ -110,7 +110,7 @@ public class UomServiceImpl implements IUomService {
 			map.put(Integer.valueOf(ob[0].toString()), ob[1].toString());
 		}
 		*/
-		//alternative logic for above one
+		//alternative logic for above commented code
 		Map<Integer, String> map =
 				list.stream()
 				.collect(
