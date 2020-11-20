@@ -9,6 +9,7 @@ import in.nareshit.aashish.model.Uom;
 
 public interface UomRepository extends JpaRepository<Uom, Integer> {
 
+	//this method is for Ajax call
 	//(:uomModel--> named parameter is used)
 	@Query("SELECT COUNT(uomModel) FROM Uom WHERE uomModel=:uomModel")
 	Integer getUomModelCount(String uomModel);
@@ -17,9 +18,10 @@ public interface UomRepository extends JpaRepository<Uom, Integer> {
 	List<Object[]> getUomTypeAndCount();
 	
 	/**
-	 * This method we have taken here for integration of module.
+	 * This method we have taken here for integration of Uom module in Part
+	 * module.
 	 * This method fetches the data according to the query given.
-	 * @return
+	 * @return List<Object[]>
 	 */
 	@Query("SELECT id,uomModel FROM Uom")
 	List<Object[]> getUomIdAndModel();

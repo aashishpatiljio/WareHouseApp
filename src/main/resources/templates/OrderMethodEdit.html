@@ -1,43 +1,100 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org/">
+
 <head>
-<meta charset="ISO-8859-1">
-<title>OrderMethod Edit Page</title>
-<!-- CSS only -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="ISO-8859-1">
+    <title>OrderMethod Edit Page</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<!-- JS and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
-<body>
-<h3>WELCOME TO OrderMethod EDIT PAGE</h3>
-<form th:action="@{/ordermethod/update}" method="POST" th:object="${ordermethod}">
-		<pre>
-	Order Id     : <input type="text" th:field="*{id}" readonly="readonly"/>
-	
-	Order Mode   : <input type="radio" th:field="*{orderMode}" value="Sale"/>Sale <input type="radio" th:field="*{orderMode}" value="Purchase"/>Purchase
-	
-	Order Code   : <input type="text" th:field="*{orderCode}"/>
-	
-	Order Type   : <select th:field="*{orderType}">
-						<option value="">--select--</option>
-						<option value="FIFO">FIFO</option>
-						<option value="LIFO">LIFO</option>
-						<option value="FCFO">FCFO</option>
-						<option value="FEFO">FEFO</option>
-				   </select>
-		
-        Order Accept : 
-    			<input type="checkbox" th:field="*{orderAccept}" value="Multi-Model"/>Multi-Model
-    			<input type="checkbox" th:field="*{orderAccept}" value="Accept Return"/>Accept Return
-    		
-        Description  : <textarea th:field="*{description}"></textarea>
-    
-              <input type="submit" value="Update OrderMethod"/>
 
-</pre>
-	</form>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-white text-center">
+                <h3>WELCOME TO OrderMethod EDIT PAGE</h3>
+            </div>
+
+            <div class="card-body">
+                <form th:action="@{/ordermethod/update}" method="POST" th:object="${ordermethod}">
+
+                    <!-- row-1-->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Order Id</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" th:field="*{id}" readonly="readonly" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <!-- row-2-->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Order Mode</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="radio" th:field="*{orderMode}" value="Sale" />Sale
+                            <input type="radio" th:field="*{orderMode}" value="Purchase" />Purchase
+                        </div>
+                    </div>
+
+                    <!-- row-3-->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Order Code</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="text" th:field="*{orderCode}" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <!-- row-4-->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Order Type</label>
+                        </div>
+                        <div class="col-5">
+                            <select th:field="*{orderType}" class="form-control">
+                                <option value="">--select--</option>
+                                <option value="FIFO">FIFO</option>
+                                <option value="LIFO">LIFO</option>
+                                <option value="FCFO">FCFO</option>
+                                <option value="FEFO">FEFO</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- row-5-->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Order Accept</label>
+                        </div>
+                        <div class="col-5">
+                            <input type="checkbox" th:field="*{orderAccept}" value="Multi-Model" />Multi-Model
+                            <input type="checkbox" th:field="*{orderAccept}" value="Accept Return" />Accept Return
+                        </div>
+                    </div>
+
+                    <!-- row-6-->
+                    <div class="row">
+                        <div class="col-2">
+                            <label>Description</label>
+                        </div>
+                        <div class="col-5">
+                            <textarea th:field="*{description}" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <input type="submit" value="Update OrderMethod" class="btn btn-success"/>
+                </form>
+            </div>
+        </div>
+    </div>
 
 </body>
+
 </html>

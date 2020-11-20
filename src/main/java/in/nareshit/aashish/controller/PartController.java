@@ -25,7 +25,7 @@ public class PartController {
 	private IUomService uomService;
 	
 	//define one private method so we can re-use it
-	//call this private method in Register, Edit pages and save operation also.
+	//call this private method for Register, Edit pages and save operation also.
 	private void addDynamicUiComponents(Model model) {
 		//call Child Service method
 		Map<Integer, String> map = uomService.getUomIdAndModel();

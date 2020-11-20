@@ -102,19 +102,21 @@ public class UomServiceImpl implements IUomService {
 	@Override
 	public Map<Integer, String> getUomIdAndModel() {
 		List<Object[]> list = repo.getUomIdAndModel();
-		/*
+		
 		//LinkedHashMap preserves the insertion order
 		Map<Integer, String> map = new LinkedHashMap<>();
 		//to convert List<Object[]> list into Map format
 		for(Object[] ob:list) {
 			map.put(Integer.valueOf(ob[0].toString()), ob[1].toString());
 		}
-		*/
-		//alternative logic for above commented code
+		
+		//alternative logic for above commented code  
+		/*
 		Map<Integer, String> map =
 				list.stream()
 				.collect(
 						Collectors.toMap(ob->Integer.valueOf(ob.toString()), ob->ob.toString()));
+		*/ 
 		return map;
 	}
 

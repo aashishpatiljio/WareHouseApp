@@ -9,7 +9,7 @@ public interface IPartService {
 	/**
 	 * This method reads form data as model class
 	 * 
-	 * @param uom indicates ModelAttribute
+	 * @param part indicates ModelAttribute
 	 * @return Integer as PK after the save operation
 	 */
 	public Integer savePart(Part part);
@@ -27,15 +27,15 @@ public interface IPartService {
 	public void deletePart(Integer id);
 
 	/**
-	 * This method is used to read @param id as an input and @return Uom object else
-	 * UomNotFoundException
+	 * This method is used to read @param id as an input and 
+	 * @return Part object else gives PartNotFoundException.
 	 */
 	public Part getOnePart(Integer id);
 
 	/**
-	 * This method is used to update Uom based on id (PK)
+	 * This method is used to update Part based on id (PK)
 	 * 
-	 * @param uom is taken as Model attribute
+	 * @param part is taken as Model attribute
 	 */
 	public void updatePart(Part part);
 
