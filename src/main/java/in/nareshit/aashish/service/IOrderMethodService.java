@@ -1,6 +1,7 @@
 package in.nareshit.aashish.service;
 
 import java.util.List;
+import java.util.Map;
 
 import in.nareshit.aashish.model.OrderMethod;
 
@@ -33,6 +34,14 @@ public interface IOrderMethodService {
 	 * @param orderMethod is taken as Model attribute
 	 */
 	public void updateOrderMethod(OrderMethod orderMethod);
+	/**
+	 * This method will be used to fetch the data from database using method
+	 * we declared in repository interface in the form of List<Object[]> type
+	 * and then convert this List<Object[]> into Map<Integer,String>
+	 * @param mode
+	 * @return Map<Integer,String>
+	 */
+	public Map<Integer,String> getOrderMethodIdAndCodeByMode(String mode);
 	
 
 }

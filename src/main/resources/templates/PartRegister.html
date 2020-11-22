@@ -96,6 +96,22 @@
 							<span id="uomError"></span>
 						</div>
 					</div>
+					
+					<!-- row-6 -->
+					<div class="row">
+						<div class="col-2">
+							<label>SALE(OM)</label>
+						</div>
+						<div class="col-5">
+							<select th:field="*{omSale.id}" class="form-control">
+								<option value="">--SELECT--</option>
+								<option th:each="ob:${sales}" th:value="${ob.key}" th:text="${ob.value}"></option>															
+							</select>
+						</div>
+						<div class="col-5">
+							<span id="omSaleError"></span>
+						</div>
+					</div>
 
 					<input type="submit" value="ADD PART" class="btn btn-success">
 

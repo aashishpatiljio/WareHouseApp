@@ -37,4 +37,7 @@ public class Part {
 	@ManyToOne
 	@JoinColumn(name = "uom_id_fk_col")
 	private Uom uom;	//Has-A relation
+	@ManyToOne 
+	@JoinColumn(name = "om_sale_id_fk_col")
+	private OrderMethod omSale;   //HAS-A
 }

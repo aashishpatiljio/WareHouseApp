@@ -16,16 +16,23 @@ public class PartServiceImpl implements IPartService {
 	@Autowired
 	private PartRepository repo;
 	
+	/**
+	 * 
+	 */
 	@Override
 	public Integer savePart(Part part) {
 		return repo.save(part).getId();
 	}
-
+	/**
+	 * 
+	 */
 	@Override
 	public List<Part> getAllParts() {
 		return repo.findAll();
 	}
-
+	/**
+	 * 
+	 */
 	@Override
 	public void deletePart(Integer id) {
 		Part part = repo.findById(id).orElseThrow(
@@ -33,7 +40,9 @@ public class PartServiceImpl implements IPartService {
 				);	
 		repo.delete(part);
 	}
-
+	/**
+	 * 
+	 */
 	@Override
 	public Part getOnePart(Integer id) {
 		Part part = repo.findById(id).orElseThrow(
@@ -41,7 +50,9 @@ public class PartServiceImpl implements IPartService {
 				);	
 		return part;
 	}
-
+	/**
+	 * 
+	 */
 	@Override
 	public void updatePart(Part part) {
 		repo.save(part);
