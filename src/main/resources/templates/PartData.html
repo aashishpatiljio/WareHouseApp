@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="ISO-8859-1">
-    <title>Uom Data</title>
+    <title>Part Data</title>
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
@@ -36,11 +36,15 @@
                     <tr th:each="ob:${list}">
                         <td th:text="${ob.id}"></td>
                         <td th:text="${ob.partCode}"></td>
-                        <td th:text="${ob.uomModel}"></td>
-                        <td th:text="${ob.description}"></td>
+                        <td th:text="${ob.partLen +'L,' +ob.partWid +'W,' +ob.partHght +'H'}"></td>
+                        <td th:text="${ob.partCost}"></td>
+                        <td th:text="${ob.partCurrency}"></td>
+                        <td th:text="${ob.uom.uomModel}"></td>
+                        <td th:text="${ob.omSale.orderCode}"></td>
+                        
                         <td>
-                            <a class="btn btn-danger" th:href="@{/uom/delete?id={data}(data=${ob.id})}">DELETE</a> &nbsp
-                            <a class="btn btn-info" th:href="@{/uom/edit?id={data}(data=${ob.id})}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{/part/delete?id={data}(data=${ob.id})}">DELETE</a> &nbsp
+                            <a class="btn btn-info" th:href="@{/part/edit?id={data}(data=${ob.id})}">Edit</a>
                         </td>
                     </tr>
                 </table>                                
