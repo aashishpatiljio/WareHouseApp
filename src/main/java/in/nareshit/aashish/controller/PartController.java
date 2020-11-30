@@ -36,6 +36,8 @@ public class PartController {
 		model.addAttribute("uoms", map1);
 		Map<Integer, String> map2 = orderMethodService.getOrderMethodIdAndCodeByMode("Sale");
 		model.addAttribute("sales", map2);
+		Map<Integer, String> map3 = orderMethodService.getOrderMethodIdAndCodeByMode("Purchase");
+		model.addAttribute("purchases", map3);
 	}
 	
 	//1. show Part register page

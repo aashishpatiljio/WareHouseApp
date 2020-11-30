@@ -31,6 +31,7 @@
                         <th>CURRENCY</th>
                         <th>UOM</th>
                         <th>SALE(OM)</th>
+                        <th>PURCHASE(OM)</th>
                         <th>OPERATIONS</th>
                     </tr>
                     <tr th:each="ob:${list}">
@@ -41,6 +42,7 @@
                         <td th:text="${ob.partCurrency}"></td>
                         <td th:text="${ob.uom.uomModel}"></td>
                         <td th:text="${ob.omSale.orderCode}"></td>
+                        <td th:text="${ob.omPurchase.orderCode}"></td>
                         
                         <td>
                             <a class="btn btn-danger" th:href="@{/part/delete?id={data}(data=${ob.id})}">DELETE</a> &nbsp

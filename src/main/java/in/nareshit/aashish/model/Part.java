@@ -33,11 +33,18 @@ public class Part {
 	@Column(name = "prt_curr_col")
 	private String partCurrency;
 	
-	//integrations// Association Mappings
+	//integrations// Association Mappings---------
 	@ManyToOne
 	@JoinColumn(name = "uom_id_fk_col")
 	private Uom uom;	//Has-A relation
 	@ManyToOne 
 	@JoinColumn(name = "om_sale_id_fk_col")
 	private OrderMethod omSale;   //HAS-A
+	@ManyToOne
+	@JoinColumn(name = "om_purchase_id_fk_col")
+	private OrderMethod omPurchase;  //HAS-A
+	//----------------------------------------------
+	
+	@Column(name = "prt_description_col")
+	private String description;
 }

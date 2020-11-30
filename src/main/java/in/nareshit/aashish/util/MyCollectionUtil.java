@@ -26,7 +26,6 @@ public interface MyCollectionUtil {
 			map.put(Integer.valueOf(ob[0].toString()), ob[1].toString());
 		}
 		
-		
 		//alternative logic for above commented code 
 		//JDK 1.8- Streams (convert List -> Map)
 		/*
