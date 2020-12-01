@@ -2,20 +2,19 @@ package in.nareshit.aashish.service;
 
 import java.util.List;
 
-import in.nareshit.aashish.model.PurchaseOrder;
+import in.nareshit.aashish.model.SaleOrder;
 
-public interface IPurchaseOrderService {
-	
+public interface ISaleOrderService {
 	/**
 	 * This method reads form data as Model class object.
-	 * @param purchaseOrder indicates ModelAttribute.
+	 * @param saleOrder indicates ModelAttribute.
 	 * @return Integer as Primary Key after save operation.
 	 */
-	public Integer savePurchaseOrder(PurchaseOrder po);
+	public Integer saveSaleOrder(SaleOrder saleOrder);
+
 	/**
 	 * This method fetch the entire table data in the List<T> format.
 	 * @return List<T>
 	 */
-	public List<PurchaseOrder> getAllPurchaseOrders();
-
+	public List<SaleOrder> getAllSaleOrder();
 }

@@ -1,0 +1,38 @@
+package in.nareshit.aashish.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Entity
+@Data
+@Table(name = "sale_order_tab")
+public class SaleOrder {
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "so_id_col")
+	private Integer id;
+	
+	@Column(name = "so_code_col")
+	private String orderCode;
+	
+	@Column(name = "so_ref_num_col")
+	private String refNumber;
+	
+	@Column(name = "so_stock_mode_col")
+	private String stockMode;
+	
+	@Column(name = "so_stck_srce_col")
+	private String stockSource;
+	
+	@Column(name = "so_status_col")
+	private String status;
+	
+	@Column(name = "so_desc_col")
+	private String description;
+}
