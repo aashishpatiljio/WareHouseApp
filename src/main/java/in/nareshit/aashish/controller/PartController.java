@@ -25,6 +25,7 @@ public class PartController {
 	//ParentController----<>IChildService
 	@Autowired
 	private IUomService uomService;
+	//ParentController----<>IChildService
 	@Autowired
 	private IOrderMethodService orderMethodService;
 	

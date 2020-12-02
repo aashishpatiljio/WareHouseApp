@@ -1,6 +1,7 @@
 package in.nareshit.aashish.service;
 
 import java.util.List;
+import java.util.Map;
 
 import in.nareshit.aashish.model.ShipmentType;
 
@@ -44,5 +45,11 @@ public interface IShipmentTypeService {
 	 * @return
 	 */
 	public List<Object[]> getShipmentModeAndCount();
+	/**
+	 * 
+	 * @param enabledShipment
+	 * @return
+	 */
+	public Map<Integer, String> getShipmentIdAndCodeByEnabled(String enabledShipment);
 
 }

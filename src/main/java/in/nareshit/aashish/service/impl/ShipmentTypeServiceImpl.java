@@ -1,6 +1,7 @@
 package in.nareshit.aashish.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import in.nareshit.aashish.exception.ShipmentTypeNotFoundException;
 import in.nareshit.aashish.model.ShipmentType;
 import in.nareshit.aashish.repo.ShipmentTypeRepository;
 import in.nareshit.aashish.service.IShipmentTypeService;
+import in.nareshit.aashish.util.MyCollectionUtil;
 
 @Service
 public class ShipmentTypeServiceImpl implements IShipmentTypeService {
@@ -85,6 +87,13 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 	public List<Object[]> getShipmentModeAndCount() {
 		return repo.getShipmentModeAndCount();		
 	}
+
+	@Override
+	public Map<Integer, String> getShipmentIdAndCodeByEnabled(String enabledShipment) {
+		List<Object[]> list = repo.getShipmentIdAndCodeByEnabled(enabledShipment);
+		Map<Integer, String> map = MyCollectionUtil.convertListToMap(list);
+		return map;
+	} 
 
 
 }
