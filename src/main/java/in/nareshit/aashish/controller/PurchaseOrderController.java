@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import in.nareshit.aashish.model.PurchaseOrder;
 import in.nareshit.aashish.service.IPurchaseOrderService;
 import in.nareshit.aashish.service.IShipmentTypeService;
+import in.nareshit.aashish.service.IWhUserTypeService;
 
 @Controller
 @RequestMapping("/po")
@@ -24,6 +25,8 @@ public class PurchaseOrderController {
 	//ParentController----<>IChildService
 	@Autowired
 	private IShipmentTypeService shipmentService;
+	@Autowired
+	private IWhUserTypeService whuserService;
 	
 	
 	//define one private method so we can re-use it
@@ -31,6 +34,8 @@ public class PurchaseOrderController {
 	private void addDynamicUiComponents(Model model) {
 		Map<Integer, String> map1 = shipmentService.getShipmentIdAndCodeByEnabled("Yes");
 		model.addAttribute("shipmenttypes", map1);
+		Map<Integer, String> map2 = whuserService.getWhUserIdAndCodeByType("Vendor");
+		model.addAttribute("vendors", map2);
 	}
 	
 	//1. show register page

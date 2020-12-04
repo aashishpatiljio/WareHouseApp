@@ -3,7 +3,7 @@
 
 <head>
 <meta charset="ISO-8859-1">
-<title>PurchaseOrder Register</title>
+<title>SaleOrder Register</title>
 <!-- CSS only -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -17,10 +17,10 @@
 	<div class="container">
 		<div class="card">
 			<div class="card-header text-center bg-primary text-white">
-				<h3>WELCOME TO PURCHASE ORDER REGISTER PAGE</h3>
+				<h3>WELCOME TO SALE ORDER REGISTER PAGE</h3>
 			</div>
 			<div class="card-body">
-				<form id="poRegForm" th:action="@{/po/save}" method="POST" th:object="${purchaseOrder}">
+				<form id="soRegForm" th:action="@{/so/save}" method="POST" th:object="${saleOrder}">
 
 					<!-- row-1 -->
 					<div class="row">
@@ -35,37 +35,7 @@
 						</div>
 					</div>
 					
-					<!-- row-2 -->
-					<div class="row">
-						<div class="col-2">
-							<label>SHIPMENT CODE</label>
-						</div>
-						<div class="col-5">
-							<select th:field="*{shipmentType.id}" class="form-control">
-								<option value="">--SELECT--</option>
-								<option th:each="ob:${shipmenttypes}" th:value="${ob.key}" th:text="${ob.value}"></option>
-							</select>
-						</div>
-						<div class="col-5">
-							<span id="shipmentTypeError"></span>
-						</div>
-					</div>
 					
-					<!-- row-3 -->
-					<div class="row">
-						<div class="col-2">
-							<label>User Code(Vendor)</label>
-						</div>
-						<div class="col-5">
-							<select th:field="*{vendor.id}" class="form-control">
-								<option value="">--SELECT--</option>
-								<option th:each="ob:${vendors}" th:value="${ob.key}" th:text="${ob.value}"></option>
-							</select>
-						</div>
-						<div class="col-5">
-							<span id="vendorError"></span>
-						</div>
-					</div>
 
 					<!-- row-4 -->
 					<div class="row">
@@ -83,18 +53,36 @@
 					<!-- row-5 -->
 					<div class="row">
 						<div class="col-2">
-							<label>QUALITY CHECK</label>
+							<label>STOCK MODE</label>
 						</div>
 						<div class="col-5">
-							<input type="radio" th:field="*{qualityCheck}" value="Required"/>Required
-							<input type="radio" th:field="*{qualityCheck}" value="Not Required"/>Not Required
+							<input type="radio" th:field="*{stockMode}" value="Grade"/>Grade
+							<input type="radio" th:field="*{stockMode}" value="Margin"/>Margin
 						</div>
 						<div class="col-5">
-							<span id="qualityCheckError"></span>
+							<span id="stockModeError"></span>
 						</div>
 					</div>
 					
 					<!-- row-6 -->
+					<div class="row">
+						<div class="col-2">
+							<label>STOCK SOURCE</label>
+						</div>
+						<div class="col-5">
+							<select th:field="*{stockSource}" class="form-control">
+								<option value="">--SELECT--</option>
+								<option value="OPEN">OPEN</option>
+								<option value="AVAIL">AVAIL</option>
+								<option value="REFUND">REFUND</option>							
+							</select>
+						</div>
+						<div class="col-5">
+						
+						</div>
+					</div>
+					
+					<!-- row-7 -->
 					<div class="row">
 						<div class="col-2">
 							<label>STATUS</label>
@@ -107,22 +95,20 @@
 						</div>
 					</div>
 
-					<!-- row-7 -->
+					<!-- row-8 -->
 					<div class="row">
 						<div class="col-2">
 							<label>DESCRIPTION</label>
 						</div>
 						<div class="col-5">
-							<textarea th:field="*{description}" class="form-control">
-
-                            </textarea>
+							<textarea th:field="*{description}" class="form-control"></textarea>
 						</div>
 						<div class="col-5">
 							<span id="descriptionError"></span>
 						</div>
 					</div>
 
-					<input type="submit" value="CREATE PURCHASE ORDER" class="btn btn-success">
+					<input type="submit" value="CREATE SALE ORDER" class="btn btn-success">
 
 				</form>
 			</div>

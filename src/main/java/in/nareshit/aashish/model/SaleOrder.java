@@ -27,7 +27,7 @@ public class SaleOrder {
 	@Column(name = "so_stock_mode_col")
 	private String stockMode;
 	
-	@Column(name = "so_stck_srce_col")
+	@Column(name = "so_stock_source_col")
 	private String stockSource;
 	
 	@Column(name = "so_status_col")

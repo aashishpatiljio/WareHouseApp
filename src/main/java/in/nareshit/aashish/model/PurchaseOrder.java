@@ -40,4 +40,8 @@ public class PurchaseOrder {
 	@JoinColumn(name = "ship_id_fk_col")
 	private ShipmentType shipmentType;   //HAS-A
 	
+	@ManyToOne
+	@JoinColumn(name = "wh_user_vendor_id_fk_col")
+	private WhUserType vendor;    //HAS-A
+	
 }
