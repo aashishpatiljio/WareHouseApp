@@ -87,7 +87,11 @@ public class ShipmentTypeServiceImpl implements IShipmentTypeService {
 	public List<Object[]> getShipmentModeAndCount() {
 		return repo.getShipmentModeAndCount();		
 	}
-
+	/**
+	 * It fetches the data from the database using Repository layer method
+	 * in the form of List<Object[]> and convert it into Map<Integer,String>
+	 * in the service layer.
+	 */
 	@Override
 	public Map<Integer, String> getShipmentIdAndCodeByEnabled(String enabledShipment) {
 		List<Object[]> list = repo.getShipmentIdAndCodeByEnabled(enabledShipment);
