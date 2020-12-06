@@ -17,6 +17,12 @@ public interface IPurchaseOrderService {
 	 * @return List<T>
 	 */
 	public List<PurchaseOrder> getAllPurchaseOrders();
+	/**
+	 * This method will fetch the one record/row from the database
+	 * on the basis of @param id is passed from the controller and
+	 * @return the data in the form of PurchaseOrder object.
+	 */
+	public PurchaseOrder getOnePurchaseOrder(Integer id);
 	
 
 }

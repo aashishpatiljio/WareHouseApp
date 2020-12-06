@@ -1,5 +1,6 @@
 package in.nareshit.aashish.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import in.nareshit.aashish.model.PurchaseOrder;
 import in.nareshit.aashish.service.IPurchaseOrderService;
@@ -71,6 +73,26 @@ public class PurchaseOrderController {
 		return "PurchaseOrderRegister";
 	}
 	//3. Display Purchase Orders
+	@GetMapping("/all")
+	public String showAllPurchaseOrderData(Model model) {
+		//call service layer method
+		List<PurchaseOrder> list = service.getAllPurchaseOrders();
+		//send this list data to UI using Model memory 
+		model.addAttribute("list", list);
+		return "PurchaseOrderData";
+	}
+	
+	//4. ---- Methods for Screen-2 i.e. Purchase Order Parts/Details Page ----
+	@GetMapping("/parts")
+	public String showPoPartsPage(
+			@RequestParam Integer id,
+			Model model
+			) {
+		//Get PurchaseOrder by id
+	    PurchaseOrder po = service.getOnePurchaseOrder(id);
+	    model.addAttribute("po", po);
+		return "PurchaseOrderParts";
+	}
 	
 	
 }
