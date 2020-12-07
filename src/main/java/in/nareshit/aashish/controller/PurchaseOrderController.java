@@ -92,7 +92,6 @@ public class PurchaseOrderController {
 	    PurchaseOrder po = service.getOnePurchaseOrder(id);
 	    model.addAttribute("po", po);
 		return "PurchaseOrderParts";
-	}
-	
+	}	
 	
 }
