@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>PurchaseOrderParts</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-center text-white">
+                <h3>Purchase Order Parts PAGE (Screen#2)</h3>
+            </div> <!-- card-header ends-->
+
+            <div class="card-body">         
+                <table class="table table-bordered">
+                    <tr>
+                        <th>ORDER CODE</th>
+                        <th th:text="${po.orderCode}" class="alert alert-secondary"></th>                          
+                        <th>ORDER STATUS</th>
+                        <th th:text="${po.status}" class="alert alert-secondary"></th>
+                    </tr>
+                </table>                                
+            </div>  <!-- card body ends-->
+
+        </div> <!-- card-ends-->
+
+    </div> <!-- container-ends-->
+
+</body>
+
+</html>
