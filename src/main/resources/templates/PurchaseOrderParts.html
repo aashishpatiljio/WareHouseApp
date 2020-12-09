@@ -22,12 +22,41 @@
             <div class="card-body">         
                 <table class="table table-bordered">
                     <tr>
-                        <th>ORDER CODE</th>
-                        <th th:text="${po.orderCode}" class="alert alert-secondary"></th>                          
+                        <th>PO CODE</th>
+                        <th th:text="${po.orderCode}" class="alert alert-secondary text-secondary"></th>                          
                         <th>ORDER STATUS</th>
-                        <th th:text="${po.status}" class="alert alert-secondary"></th>
+                        <th th:text="${po.status}" class="alert alert-secondary text-danger"></th>
                     </tr>
-                </table>                                
+                </table> 
+                
+                <hr/> 
+                
+                <form th:action="@{/po/add}" method="post" th:object="${purchaseDtl}">
+                
+                	<!-- row-1 -->
+					<div class="row">
+						<div class="col-2">
+							<label>CHOOSE PARTS</label>
+						</div>
+						<div class="col-3">
+							<select th:field="*{part.id}" class="form-control">
+								<option value="">--select--</option>
+								<option th:each="ob:${parts}" th:value="${ob.key}" th:text="${ob.value}"></option>								
+							</select>
+						</div>						
+
+						<div class="col-2">
+							<label>QUANTITY</label>
+						</div>
+						<div class="col-3">
+							<input type="text" th:field="*{quantity}" class="form-control" />
+						</div>
+						
+						<div class="col-2">
+							<input type="submit" value="Add" class="btn btn-success">
+						</div>						
+					</div>                	                
+                </form>                               
             </div>  <!-- card body ends-->
 
         </div> <!-- card-ends-->

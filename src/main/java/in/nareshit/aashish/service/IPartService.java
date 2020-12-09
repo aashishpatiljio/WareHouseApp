@@ -1,6 +1,7 @@
 package in.nareshit.aashish.service;
 
 import java.util.List;
+import java.util.Map;
 
 import in.nareshit.aashish.model.Part;
 
@@ -38,5 +39,9 @@ public interface IPartService {
 	 * @param part is taken as Model attribute
 	 */
 	public void updatePart(Part part);
-
+	/**
+	 * 
+	 * @return
+	 */
+	public Map<Integer, String> getPartIdandCode();
 }

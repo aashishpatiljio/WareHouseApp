@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import in.nareshit.aashish.model.PurchaseDtl;
 import in.nareshit.aashish.model.PurchaseOrder;
+import in.nareshit.aashish.service.IPartService;
 import in.nareshit.aashish.service.IPurchaseOrderService;
 import in.nareshit.aashish.service.IShipmentTypeService;
 import in.nareshit.aashish.service.IWhUserTypeService;
@@ -29,8 +31,10 @@ public class PurchaseOrderController {
 	private IShipmentTypeService shipmentService;
 	@Autowired
 	private IWhUserTypeService whuserService;
+	@Autowired
+	private IPartService partService;
 	
-	
+	//for Register Page drop-down
 	//define one private method so we can re-use it
 	//call this private method for Register, Edit pages and save operation also.
 	private void addDynamicUiComponents(Model model) {
@@ -83,6 +87,12 @@ public class PurchaseOrderController {
 	}
 	
 	//4. ---- Methods for Screen-2 i.e. Purchase Order Parts/Details Page ----
+	
+	private void addDynamicUiComponentsForParts(Model model) {
+		Map<Integer, String> map1 = partService.getPartIdandCode();
+		model.addAttribute("parts", map1);
+	}
+	
 	@GetMapping("/parts")
 	public String showPoPartsPage(
 			@RequestParam Integer id,
@@ -91,6 +101,10 @@ public class PurchaseOrderController {
 		//Get PurchaseOrder by id
 	    PurchaseOrder po = service.getOnePurchaseOrder(id);
 	    model.addAttribute("po", po);
+	    //send form backing object
+	    model.addAttribute("purchaseDtl", new PurchaseDtl());	    
+	    //dynamic drop-down
+	    addDynamicUiComponentsForParts(model);
 		return "PurchaseOrderParts";
 	}	
 	
