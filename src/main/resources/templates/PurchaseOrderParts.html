@@ -52,6 +52,11 @@
 							<input type="text" th:field="*{quantity}" class="form-control" />
 						</div>
 						
+						<!-- Hidden input for linking PurchaseDtl with PurchaseOrder -->
+						<input type="hidden" name="order.id" th:value="${po.id}"/>
+					
+						<!-- Hidden Input end -->
+						
 						<div class="col-2">
 							<input type="submit" value="Add" class="btn btn-success">
 						</div>						

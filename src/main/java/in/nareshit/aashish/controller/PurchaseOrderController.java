@@ -95,7 +95,7 @@ public class PurchaseOrderController {
 	
 	@GetMapping("/parts")
 	public String showPoPartsPage(
-			@RequestParam Integer id,
+			@RequestParam Integer id, //PO id
 			Model model
 			) {
 		//Get PurchaseOrder by id
@@ -108,4 +108,18 @@ public class PurchaseOrderController {
 		return "PurchaseOrderParts";
 	}	
 	
+	/**
+	 * onClick Add button in PO Screen#2,
+	 * Read form data as PurchaseDtl,save into Db using
+	 * service layer method and then,
+	 * Redirect to same UI page with /parts?id=<orderId>
+	 */
+	@PostMapping("/add")
+	public String addPart(@ModelAttribute PurchaseDtl purchaseDtl) 
+	{
+		service.savePurchaseDtl(purchaseDtl);
+		//from PurchaseDtl -> get Order(PurchaseOrder) -> from order get Id (order id)
+		return "redirect:parts?id="+purchaseDtl.getOrder().getId(); //PO id
+	}
+		
 }

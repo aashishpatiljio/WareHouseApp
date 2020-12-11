@@ -2,10 +2,12 @@ package in.nareshit.aashish.service;
 
 import java.util.List;
 
+import in.nareshit.aashish.model.PurchaseDtl;
 import in.nareshit.aashish.model.PurchaseOrder;
 
 public interface IPurchaseOrderService {
 	
+	// methods for PO Screen#1
 	/**
 	 * This method reads form data as Model class object.
 	 * @param purchaseOrder indicates ModelAttribute.
@@ -23,6 +25,14 @@ public interface IPurchaseOrderService {
 	 * @return the data in the form of PurchaseOrder object.
 	 */
 	public PurchaseOrder getOnePurchaseOrder(Integer id);
+	
+	// methods for PO Screen#1
+	/**
+	 * This method reads form data as Model class object.
+	 * @param dtl indicates ModelAttribute.
+	 * @return Integer as Primary Key after save operation.
+	 */
+	public Integer savePurchaseDtl(PurchaseDtl dtl);
 	
 
 }

@@ -30,5 +30,10 @@ public class PurchaseDtl {
 	@ManyToOne
 	@JoinColumn(name = "part_id_fk_col")
 	private Part part;   //HAS-A
+	
+	//Many details can be connected to one Purchase Order
+	@ManyToOne
+	@JoinColumn(name = "order_id_fk_col")
+	private PurchaseOrder order;
 
 }
