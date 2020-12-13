@@ -29,7 +29,7 @@ public class Part {
 	@Column(name = "prt_hght_col")
 	private Double partHght;
 	@Column(name = "prt_cost_col")
-	private Double partCost;
+	private Double partCost;  //base cost
 	@Column(name = "prt_curr_col")
 	private String partCurrency;
 	

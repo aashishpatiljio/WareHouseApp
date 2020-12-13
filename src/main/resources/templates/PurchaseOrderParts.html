@@ -19,7 +19,8 @@
                 <h3>Purchase Order Parts PAGE (Screen#2)</h3>
             </div> <!-- card-header ends-->
 
-            <div class="card-body">         
+            <div class="card-body">  
+            	<!-- section#1 starts -->       
                 <table class="table table-bordered">
                     <tr>
                         <th>PO CODE</th>
@@ -28,9 +29,11 @@
                         <th th:text="${po.status}" class="alert alert-secondary text-danger"></th>
                     </tr>
                 </table> 
+                <!-- section#1 ends -->
                 
                 <hr/> 
                 
+                <!-- section#2 starts -->
                 <form th:action="@{/po/add}" method="post" th:object="${purchaseDtl}">
                 
                 	<!-- row-1 -->
@@ -57,11 +60,38 @@
 					
 						<!-- Hidden Input end -->
 						
+						<!-- section#3 starts -->
 						<div class="col-2">
 							<input type="submit" value="Add" class="btn btn-success">
-						</div>						
+						</div>
+						<!-- section#3 ends -->						
 					</div>                	                
-                </form>                               
+                </form> 
+                <!-- section#2 ends -->   
+                
+                <hr/>
+                
+                <!-- section#4 starts (DISPLAY THE ITEMS ADDED) -->
+                <table class="table table-hover">
+                	<tr class="bg-info text-white">
+                		<td>S.No</td>
+                		<td>Item Code</td>
+                		<td>Base Cost</td>
+                		<td>Quantity</td>
+                		<td>Operations</td>
+                	</tr>
+                	<tr th:each="ob,i:${dtlsList}">
+                		<td th:text="${i.count}"></td>
+                		<td th:text="${ob.part.partCode}"></td>
+                		<td th:text="${ob.part.partCost}"></td>
+                		<td th:text="${ob.quantity}"></td> 
+                		<td>
+                			<a href="#" class="btn btn-danger">REMOVE</a>
+                		</td>               		
+                	</tr>                
+                </table>
+                <!-- section#4 ends -->                
+                                           
             </div>  <!-- card body ends-->
 
         </div> <!-- card-ends-->

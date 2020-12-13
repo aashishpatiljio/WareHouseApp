@@ -45,6 +45,12 @@ public class PurchaseOrderController {
 	}
 	
 	//1. show register page
+	/**
+	 * This method work is to show only "PurchaseOrderRegister" register 
+	 * page
+	 * @param model is used to send data from Controller to Ui
+	 * @return
+	 */
 	@GetMapping("/register")
 	public String showRegPage(Model model) {
 		//form backing object
@@ -56,6 +62,13 @@ public class PurchaseOrderController {
 		return "PurchaseOrderRegister";		
 	}
 	//2. save PurchaseOrder onclick submit
+	/**
+	 * onClick of CREATE PURCHASE ORDER button in PurchaseOrderRegister
+	 * page, one record or one object data is saved in the database.
+	 * @param purchaseOrder reads the form data in the form of ModelAttribute.
+	 * @param model is used to send data from Controller to Ui.
+	 * @return the "PurchaseOrderRegister" page
+	 */
 	@PostMapping("/save")
 	public String savePurchaseOrder(
 			@ModelAttribute PurchaseOrder purchaseOrder,
@@ -77,6 +90,12 @@ public class PurchaseOrderController {
 		return "PurchaseOrderRegister";
 	}
 	//3. Display Purchase Orders
+	/**
+	 * This method will fetch all the records present in the database
+	 * related to PurchaseOrder.
+	 * @param model is used to send data from Controller to Ui
+	 * @return "PurchaseOrderData" page
+	 */
 	@GetMapping("/all")
 	public String showAllPurchaseOrderData(Model model) {
 		//call service layer method
@@ -92,19 +111,46 @@ public class PurchaseOrderController {
 		Map<Integer, String> map1 = partService.getPartIdandCode();
 		model.addAttribute("parts", map1);
 	}
-	
+	/**
+	 * This method is showing the output of Screen#2 by fetching one PurchaseOrder
+	 * object by id.
+	 * It is displayed when we click on ADD PARTS button from
+	 * display data page of Screen#1's data page.
+	 * And even after adding new Part or after removing the Part
+	 * same page is loaded.
+	 * @param id reads the value of id from Ui
+	 * @param model is used to send data from Controller to Ui.
+	 * @return the Ui page with name "PurchaseOrderParts".
+	 */
 	@GetMapping("/parts")
 	public String showPoPartsPage(
 			@RequestParam Integer id, //PO id
 			Model model
 			) {
+		//-----section#1-----
 		//Get PurchaseOrder by id
+		/*
+		 * We have id i.e. Order Id, we want to display Order Code and
+		 * Order Status. So we can get one PurchaseOrder object using id
+		 * that contains orderCode and status.
+		 * Then send this fetched PurchaseOrder object to Ui and display
+		 * using thymeleaf code i.e. ${po.orderCode} and ${po.status}. 
+		 */
 	    PurchaseOrder po = service.getOnePurchaseOrder(id);
 	    model.addAttribute("po", po);
+	    
+	    
 	    //send form backing object
-	    model.addAttribute("purchaseDtl", new PurchaseDtl());	    
+	    model.addAttribute("purchaseDtl", new PurchaseDtl());
+	    
+	    //-----section#2-----
 	    //dynamic drop-down
 	    addDynamicUiComponentsForParts(model);
+	    
+	    //-----section#4-----
+	    //show Parts added to Purchase Order based on orderId
+	    List<PurchaseDtl> list = service.getPurchaseDtlsByOrderId(id); //order id
+	    model.addAttribute("dtlsList", list); //send to Ui
 		return "PurchaseOrderParts";
 	}	
 	
@@ -114,6 +160,7 @@ public class PurchaseOrderController {
 	 * service layer method and then,
 	 * Redirect to same UI page with /parts?id=<orderId>
 	 */
+	//-----section#3-----
 	@PostMapping("/add")
 	public String addPart(@ModelAttribute PurchaseDtl purchaseDtl) 
 	{
