@@ -27,7 +27,7 @@ public interface IPurchaseOrderService {
 	public PurchaseOrder getOnePurchaseOrder(Integer id);
 	
 	
-	// METHODS for PO Screen#1
+	// METHODS for PO Screen#2
 	/**
 	 * This method reads form data as Model class object.
 	 * @param dtl indicates ModelAttribute.
@@ -35,11 +35,17 @@ public interface IPurchaseOrderService {
 	 */
 	public Integer savePurchaseDtl(PurchaseDtl dtl);
 	/**
-	 * 
-	 * @param orderId
-	 * @return
+	 * This method will fetch the details or records from the database
+	 * related to PurchaseDtls on the basis of PO id
+	 * @param orderId reads Integer value of orderId from controller
+	 * @return List<PurchaseDtl>
 	 */
 	public List<PurchaseDtl> getPurchaseDtlsByOrderId(Integer orderId);
+	/**
+	 * 
+	 * @param id
+	 */
+	public void removePurchaseDtl(Integer id);
 	
 
 }

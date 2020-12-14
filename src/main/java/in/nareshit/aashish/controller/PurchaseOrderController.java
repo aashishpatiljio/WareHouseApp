@@ -168,5 +168,23 @@ public class PurchaseOrderController {
 		//from PurchaseDtl -> get Order(PurchaseOrder) -> from order get Id (order id)
 		return "redirect:parts?id="+purchaseDtl.getOrder().getId(); //PO id
 	}
+	/**
+	 * On click of Remove button of PurchaseOrder's Screen#2,
+	 * this method is called with two inputs @param dtlId and
+	 * @param orderId.
+	 * It will remove one Part detail using dtlId and then redirect
+	 * to the same page using orderId.
+	 * @return to the same page by redirecting to the path /parts related
+	 * method.
+	 */
+	@GetMapping("/remove")
+	public String removePart(
+			@RequestParam Integer dtlId,
+			@RequestParam Integer orderId
+			) {
+		//call service layer method to delete the purchase detail record by id
+		service.removePurchaseDtl(dtlId);
+		return "redirect:parts?id="+orderId;  //id is PO id
+	}
 		
 }

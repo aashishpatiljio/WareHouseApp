@@ -56,12 +56,19 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 	/**
 	 * This method will fetch the details of Purchase Details (in Screen#2)
 	 * followed by order id using the JOIN query written in PurchaseDtlRepository
-	 * interface in the List<PurchaseDtl> format.
+	 * interface, and it will fetch the data in the List<PurchaseDtl> format.
 	 */
 	@Override
 	public List<PurchaseDtl> getPurchaseDtlsByOrderId(Integer orderId) {
 		List<PurchaseDtl> list = dtlRepo.getPurchaseDtlsByOrderId(orderId);
 		return list;
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public void removePurchaseDtl(Integer id) {
+		dtlRepo.deleteById(id);   //id is dtl id		
 	}
 
 }

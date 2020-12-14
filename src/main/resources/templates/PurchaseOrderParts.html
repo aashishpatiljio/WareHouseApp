@@ -86,7 +86,7 @@
                 		<td th:text="${ob.part.partCost}"></td>
                 		<td th:text="${ob.quantity}"></td> 
                 		<td>
-                			<a href="#" class="btn btn-danger">REMOVE</a>
+                			<a th:href="@{/po/remove?dtlId={id1}&orderId={id2}(id1=${ob.id},id2=${po.id})}" class="btn btn-danger">REMOVE</a>
                 		</td>               		
                 	</tr>                
                 </table>
