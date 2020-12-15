@@ -42,10 +42,21 @@ public interface IPurchaseOrderService {
 	 */
 	public List<PurchaseDtl> getPurchaseDtlsByOrderId(Integer orderId);
 	/**
-	 * 
-	 * @param id
+	 * This method will delete one row/record of Purchase Detail
+	 * @param id is reading the dtl id from Controller.
 	 */
-	public void removePurchaseDtl(Integer id);
-	
-
+	public void removePurchaseDtl(Integer dtlId);
+	/**
+	 * 
+	 * @param orderId
+	 * @param status
+	 */
+	public void updateStatus(Integer orderId, String status);
+	/**
+	 * This method will fetch the total number of counts of
+	 * purchase details.
+	 * @param orderId reads purchase order id from controller
+	 * @return Integer value.
+	 */
+	public Integer getPurchaseDtlsCountByOrderId(Integer orderId);
 }

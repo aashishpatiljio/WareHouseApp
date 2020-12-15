@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import in.nareshit.aashish.constant.OrderStatus;
 import in.nareshit.aashish.model.PurchaseDtl;
 import in.nareshit.aashish.model.PurchaseOrder;
 import in.nareshit.aashish.service.IPartService;
@@ -165,6 +166,11 @@ public class PurchaseOrderController {
 	public String addPart(@ModelAttribute PurchaseDtl purchaseDtl) 
 	{
 		service.savePurchaseDtl(purchaseDtl);
+		
+		Integer orderId = purchaseDtl.getOrder().getId();
+		//update Purchase Order status
+		service.updateStatus(orderId, OrderStatus.PICKING.name());		
+		
 		//from PurchaseDtl -> get Order(PurchaseOrder) -> from order get Id (order id)
 		return "redirect:parts?id="+purchaseDtl.getOrder().getId(); //PO id
 	}
@@ -184,6 +190,10 @@ public class PurchaseOrderController {
 			) {
 		//call service layer method to delete the purchase detail record by id
 		service.removePurchaseDtl(dtlId);
+		//update purchase order status
+		if (service.getPurchaseDtlsCountByOrderId(orderId)==0) {
+			service.updateStatus(orderId, OrderStatus.OPEN.name());
+		}
 		return "redirect:parts?id="+orderId;  //id is PO id
 	}
 		

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import in.nareshit.aashish.exception.PurchaseOrderNotFoundException;
 import in.nareshit.aashish.model.PurchaseDtl;
@@ -64,11 +65,26 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 		return list;
 	}
 	/**
+	 * This method will delete one record from the purchase details table.
+	 */
+	@Override
+	public void removePurchaseDtl(Integer dtlId) {
+		dtlRepo.deleteById(dtlId);   //id is dtl id		
+	}
+	/**
+	 * Here this method is updating the status based on orderId.
+	 */
+	@Override
+	@Transactional
+	public void updateStatus(Integer orderId, String status) {
+		repo.updatePurchaseOrderStatusById(orderId, status);
+	}
+	/**
 	 * 
 	 */
 	@Override
-	public void removePurchaseDtl(Integer id) {
-		dtlRepo.deleteById(id);   //id is dtl id		
+	public Integer getPurchaseDtlsCountByOrderId(Integer orderId) {
+		return dtlRepo.getPurchaseDtlsCountByOrderId(orderId);		
 	}
 
 }
