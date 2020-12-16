@@ -31,9 +31,10 @@
                 </table> 
                 <!-- section#1 ends -->
                 
-                <hr/> 
-                
                 <!-- section#2 starts -->
+                <div th:if="${po.status=='OPEN' || po.status=='PICKING'}">
+                <hr/>                 
+                
                 <form th:action="@{/po/add}" method="post" th:object="${purchaseDtl}">
                 
                 	<!-- row-1 -->
@@ -66,7 +67,9 @@
 						</div>
 						<!-- section#3 ends -->						
 					</div>                	                
-                </form> 
+                </form>
+                 
+                </div>
                 <!-- section#2 ends -->   
                 
                 <hr/>
@@ -78,19 +81,23 @@
                 		<td>Item Code</td>
                 		<td>Base Cost</td>
                 		<td>Quantity</td>
-                		<td>Operations</td>
+                		<td th:if="${po.status=='PICKING'}">Operations</td>
                 	</tr>
                 	<tr th:each="ob,i:${dtlsList}">
                 		<td th:text="${i.count}"></td>
                 		<td th:text="${ob.part.partCode}"></td>
                 		<td th:text="${ob.part.partCost}"></td>
                 		<td th:text="${ob.quantity}"></td> 
-                		<td>
+                		<td th:if="${po.status=='PICKING'}">
                 			<a th:href="@{/po/remove?dtlId={id1}&orderId={id2}(id1=${ob.id},id2=${po.id})}" class="btn btn-danger">REMOVE</a>
                 		</td>               		
                 	</tr>                
                 </table>
-                <!-- section#4 ends -->                
+                <!-- section#4 ends -->  
+                
+                <div class="text-center" th:if="${po.status=='PICKING'}">
+                	<a th:href="@{/po/confirmOrder?orderId={id}(id=${po.id})}" class="btn btn-success">PLACE ORDER</a>              
+                </div>
                                            
             </div>  <!-- card body ends-->
 

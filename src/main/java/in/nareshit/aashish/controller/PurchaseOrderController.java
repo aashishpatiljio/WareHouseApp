@@ -196,5 +196,18 @@ public class PurchaseOrderController {
 		}
 		return "redirect:parts?id="+orderId;  //id is PO id
 	}
+	/**
+	 * Read @param orderId and update status of PO to ORDERED.
+	 * Finally redirect to Screen#2  /parts?id=<orderId>
+	 * @return
+	 */
+	@GetMapping("/confirmOrder")
+	public String placeOrder(
+			@RequestParam Integer orderId
+			) {
+		service.updateStatus(orderId, OrderStatus.ORDERED.name());
+		//back to Screen#2
+		return "redirect:parts?id="+orderId;  //id is PO id
+	}
 		
 }
