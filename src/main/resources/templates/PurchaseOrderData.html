@@ -27,7 +27,7 @@
                         <th>PO STATUS</th>
                         <th>SHP CODE</th>
                         <th>VND CODE</th>
-                        <th>OPERATIONS</th>
+                        <th colspan="2">OPERATIONS</th>
                     </tr>
                     <tr th:each="ob:${list}">
                         <td th:text="${ob.id}"></td>
@@ -37,6 +37,11 @@
                         <td th:text="${ob.vendor.userCode}"></td>
                         <td>
                             <a class="btn btn-info" th:href="@{/po/parts?id={data}(data=${ob.id})}">ADD PARTS</a>
+                        </td>
+                        <td>
+                        	<div th:if="${ob.status=='PICKING' || ob.status=='OPEN'}" class="text-danger"><b>Not Ordered Yet!!!</b></div>
+                            <a th:if="${ob.status=='ORDERED'}" class="btn btn-info" th:href="@{/po/generateInvoice?orderId={data}(data=${ob.id})}">GENERATE INVOICE</a>
+                            <a th:if="${ob.status=='INVOICED'}" class="btn btn-info" th:href="@{/po/printInvoice?orderId={data}(data=${ob.id})}">PRINT INVOICE</a>
                         </td>
                     </tr>
                 </table>                                

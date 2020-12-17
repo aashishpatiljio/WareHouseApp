@@ -2,5 +2,5 @@ package in.nareshit.aashish.constant;
 
 public enum OrderStatus {
 	
-	OPEN, PICKING, ORDERED;
+	OPEN, PICKING, ORDERED, INVOICED, RECEIVED;
 }

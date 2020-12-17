@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.aashish.constant.OrderStatus;
 import in.nareshit.aashish.model.PurchaseDtl;
@@ -19,6 +20,7 @@ import in.nareshit.aashish.service.IPartService;
 import in.nareshit.aashish.service.IPurchaseOrderService;
 import in.nareshit.aashish.service.IShipmentTypeService;
 import in.nareshit.aashish.service.IWhUserTypeService;
+import in.nareshit.aashish.view.VendorInvoicePdfView;
 
 @Controller
 @RequestMapping("/po")
@@ -208,6 +210,35 @@ public class PurchaseOrderController {
 		service.updateStatus(orderId, OrderStatus.ORDERED.name());
 		//back to Screen#2
 		return "redirect:parts?id="+orderId;  //id is PO id
+	}
+	/**
+	 * onClick of Generate Invoice button in Purchase Order Data Page,
+	 * Status is changed from ORDERED to INVOICED 
+	 * @param orderId reads orderId value from UI
+	 * @return to "PurchaseOrderData" page. 
+	 */
+	@GetMapping("/generateInvoice")
+	public String generateInvoice(
+			@RequestParam Integer orderId
+			) {
+		service.updateStatus(orderId, OrderStatus.INVOICED.name());
+		return "redirect:all"; //Screen#1's data page
+	}
+	/**
+	 * onClick of PRINT INVOICE button in PurchaseOrder data page,
+	 * this method will print Vendor Invoice pdf based on @param orderId.
+	 * @return pdf
+	 */
+	@GetMapping("/printInvoice")
+	public ModelAndView showInvoice(
+			@RequestParam Integer orderId
+			) {
+		ModelAndView m = new ModelAndView();
+		m.setView(new VendorInvoicePdfView());
+		
+		m.addObject("po", service.getOnePurchaseOrder(orderId));
+		m.addObject("dtls", service.getPurchaseDtlsByOrderId(orderId));
+		return m;
 	}
 		
 }
