@@ -1,6 +1,7 @@
 package in.nareshit.aashish.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import in.nareshit.aashish.model.PurchaseOrder;
 import in.nareshit.aashish.repo.PurchaseDtlRepository;
 import in.nareshit.aashish.repo.PurchaseOrderRepository;
 import in.nareshit.aashish.service.IPurchaseOrderService;
+import in.nareshit.aashish.util.MyCollectionUtil;
 
 @Service
 public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
@@ -85,6 +87,16 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 	@Override
 	public Integer getPurchaseDtlsCountByOrderId(Integer orderId) {
 		return dtlRepo.getPurchaseDtlsCountByOrderId(orderId);		
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public Map<Integer, String> getPurchaseOrderIdAndCodeByStatus(String status) {
+		List<Object[]> list = repo.getPurchaseOrderIdAndCodeByStatus(status);
+		//converting List<Object[]> data to Map<Integer, String>
+		Map<Integer, String> map = MyCollectionUtil.convertListToMap(list);
+		return map;
 	}
 
 }

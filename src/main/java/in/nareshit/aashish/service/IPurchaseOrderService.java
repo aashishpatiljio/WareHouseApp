@@ -1,6 +1,7 @@
 package in.nareshit.aashish.service;
 
 import java.util.List;
+import java.util.Map;
 
 import in.nareshit.aashish.model.PurchaseDtl;
 import in.nareshit.aashish.model.PurchaseOrder;
@@ -59,4 +60,10 @@ public interface IPurchaseOrderService {
 	 * @return Integer value.
 	 */
 	public Integer getPurchaseDtlsCountByOrderId(Integer orderId);
+	/**
+	 * 
+	 * @param status
+	 * @return
+	 */
+	public Map<Integer, String> getPurchaseOrderIdAndCodeByStatus(String status);
 }
