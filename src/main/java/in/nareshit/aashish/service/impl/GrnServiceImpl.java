@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import in.nareshit.aashish.model.Grn;
+import in.nareshit.aashish.model.GrnDtl;
+import in.nareshit.aashish.repo.GrnDtlRepository;
 import in.nareshit.aashish.repo.GrnRepository;
 import in.nareshit.aashish.service.IGrnService;
 
@@ -14,6 +16,8 @@ public class GrnServiceImpl implements IGrnService {
 
 	@Autowired
 	private GrnRepository repo;
+	@Autowired
+	private GrnDtlRepository grnDtlRepo;
 	
 	/**
 	 * 
@@ -28,6 +32,13 @@ public class GrnServiceImpl implements IGrnService {
 	@Override
 	public List<Grn> getAllGrns() {
 		return repo.findAll();
+	}
+	/**
+	 * 
+	 */
+	@Override
+	public Integer saveGrnDtl(GrnDtl grnDtl) {
+		return grnDtlRepo.save(grnDtl).getId();
 	}
 
 }

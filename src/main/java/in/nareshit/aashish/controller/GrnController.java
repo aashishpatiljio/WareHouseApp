@@ -1,5 +1,6 @@
 package in.nareshit.aashish.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import in.nareshit.aashish.constant.OrderStatus;
 import in.nareshit.aashish.model.Grn;
+import in.nareshit.aashish.model.GrnDtl;
+import in.nareshit.aashish.model.PurchaseDtl;
 import in.nareshit.aashish.service.IGrnService;
 import in.nareshit.aashish.service.IPurchaseOrderService;
 
@@ -24,6 +27,7 @@ public class GrnController {
 	
 	@Autowired
 	private IPurchaseOrderService poService;
+	
 	
 	//define one private method so we can re-use it.
 	//call this method where we need drop-down
@@ -71,7 +75,33 @@ public class GrnController {
 		
 		//call this method when we need dropdown(for integration)
 		addDynamicUiComponents(model);
+		
+		createGrnDtls(grn);
 		return "Grnregister";
+	}
+
+	private void createGrnDtls(Grn grn) {
+		//a#. Read PurchaseOrder Id using Grn linked PO
+		Integer orderId = grn.getPo().getId(); //Po Id
+		//b#. Read all PurchaseDtls data using PurchaseOrder Id
+		List<PurchaseDtl> poDtlsList = poService.getPurchaseDtlsByOrderId(orderId);
+		
+		//c#. Create one model class i.e. GrnDtl (it is already created)
+		
+		for (PurchaseDtl purchaseDtl : poDtlsList) {
+			//d#. Create one GrnDtl object using PurchaseDtl object
+			GrnDtl grnDtl = new GrnDtl();
+			grnDtl.setItemCode(purchaseDtl.getPart().getPartCode());
+			grnDtl.setBaseCost(purchaseDtl.getPart().getPartCost());
+			grnDtl.setQty(purchaseDtl.getQuantity());
+			grnDtl.setItemVal(grnDtl.getBaseCost() * grnDtl.getQty());
+			
+			//e#. Link GrnDtl object to Grn object
+			grnDtl.setGrn(grn);
+			
+			//f#. save GrnDtl object
+			service.saveGrnDtl(grnDtl);
+		}
 	}
 
 }
