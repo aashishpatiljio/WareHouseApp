@@ -119,7 +119,7 @@ public class GrnController {
 	}
 	
 	/**
-	 * 4. show GrnDtlsView (Screen#2) based on GrnId
+	 * 4. show GrnDtlsView (Screen#2) based on GrnId 
 	 * @param grnId reads Grn id from Ui
 	 * @param model is used to send the data from controller to Ui
 	 * @return "GrnDtlsView" page

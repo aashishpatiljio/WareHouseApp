@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import in.nareshit.aashish.model.PurchaseOrder;
 
 public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, Integer> {
-	
+	 
 	/**
 	 * 
 	 * @param orderId

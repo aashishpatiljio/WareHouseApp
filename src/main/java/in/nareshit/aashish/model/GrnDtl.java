@@ -13,12 +13,12 @@ import lombok.Data;
 @Entity
 @Data
 @Table(name = "grn_dtl_tab")
-public class GrnDtl { 
+public class GrnDtl {  
 	
 	@Id
 	@GeneratedValue
 	@Column(name = "grn_dtl_id_col")
-	private Integer id;
+	private Integer id; 
 	
 	@Column(name = "grn_dtl_code_col")
 	private String itemCode;

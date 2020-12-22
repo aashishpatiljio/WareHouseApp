@@ -23,7 +23,7 @@ public interface IGrnService {
 	 * @param id reads id value from Controller
 	 * @return Grn object
 	 */
-	public Grn getOneGrnById(Integer grnId);
+	public Grn getOneGrnById(Integer grnId); 
 	/**
 	 * 
 	 * @param grnDtl

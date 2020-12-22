@@ -17,3 +17,4 @@ public interface GrnDtlRepository extends JpaRepository<GrnDtl, Integer> {
 	public List<GrnDtl> getAllGrnDtlsByGrnId(Integer grnId);
 
 }
+ 
