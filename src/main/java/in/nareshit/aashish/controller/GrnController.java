@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import in.nareshit.aashish.constant.OrderStatus;
 import in.nareshit.aashish.model.Grn;
@@ -79,7 +80,8 @@ public class GrnController {
 		createGrnDtls(grn);
 		return "Grnregister";
 	}
-
+	
+	//on saving of Grn,,,,,, GrnDtls is created
 	private void createGrnDtls(Grn grn) {
 		//a#. Read PurchaseOrder Id using Grn linked PO
 		Integer orderId = grn.getPo().getId(); //Po Id
@@ -87,10 +89,11 @@ public class GrnController {
 		List<PurchaseDtl> poDtlsList = poService.getPurchaseDtlsByOrderId(orderId);
 		
 		//c#. Create one model class i.e. GrnDtl (it is already created)
-		
+		//here we have to set PurchaseDtl data to GrnDtl
 		for (PurchaseDtl purchaseDtl : poDtlsList) {
 			//d#. Create one GrnDtl object using PurchaseDtl object
 			GrnDtl grnDtl = new GrnDtl();
+			
 			grnDtl.setItemCode(purchaseDtl.getPart().getPartCode());
 			grnDtl.setBaseCost(purchaseDtl.getPart().getPartCost());
 			grnDtl.setQty(purchaseDtl.getQuantity());
@@ -103,5 +106,38 @@ public class GrnController {
 			service.saveGrnDtl(grnDtl);
 		}
 	}
-
+	//----------------------------------------------------------------------------	
+	/**
+	 * 3. Show All Grns records
+	 * @return "GrnData" page
+	 */
+	@GetMapping("/all")
+	public String showAllGrns(Model model) {
+		List<Grn> list = service.getAllGrns();
+		model.addAttribute("list", list);
+		return "GrnData";
+	}
+	
+	/**
+	 * 4. show GrnDtlsView (Screen#2) based on GrnId
+	 * @param grnId reads Grn id from Ui
+	 * @param model is used to send the data from controller to Ui
+	 * @return "GrnDtlsView" page
+	 */
+	@GetMapping("/viewParts")
+	public String showGrnDtls(
+			@RequestParam Integer grnId,
+			Model model
+			) {
+		//Grn Object
+		Grn grn = service.getOneGrnById(grnId);
+		model.addAttribute("grn", grn);
+		//Grn Dtls
+		List<GrnDtl> list = service.getAllGrnDtlsByGrnId(grnId);
+		model.addAttribute("list", list);  //sending data to the Ui
+		
+		return "GrnDtlsView";
+	}
+	
+	
 }

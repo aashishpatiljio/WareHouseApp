@@ -19,10 +19,22 @@ public interface IGrnService {
 	 */
 	public List<Grn> getAllGrns();
 	/**
+	 * This method will fetch one record followed by id
+	 * @param id reads id value from Controller
+	 * @return Grn object
+	 */
+	public Grn getOneGrnById(Integer grnId);
+	/**
 	 * 
 	 * @param grnDtl
 	 * @return
 	 */
 	public Integer saveGrnDtl(GrnDtl grnDtl);
+	
+	//for Screen#2	
+	/**
+	 * This method will fetch all Grn Details followed by @param grnId
+	 */
+	public List<GrnDtl> getAllGrnDtlsByGrnId(Integer grnId);
 
 }

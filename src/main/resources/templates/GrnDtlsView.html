@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Grn Details</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-center text-white">
+                <h3>GRN DETAILS PAGE!!!</h3>
+            </div> <!-- card-header ends-->
+
+            <div class="card-body">
+            	<table class="table table-hover">
+                    <tr>
+                        <th>GRN CODE</th>
+                        <th th:text="${grn.code}"></th>
+                  	
+                        <th>ORDER CODE</th>
+                        <th th:text="${grn.po.orderCode}"></th>
+                  	</tr>
+                </table>
+            
+            	</hr>
+            
+                <table class="table table-hover">
+                    <tr class="bg-success text-white">
+                        <th>ITEM CODE</th>
+                        <th>BASE COST</th>
+                        <th>QUANTITY</th>
+                        <th>ITEM VALUE</th>
+                        <th>OPERATIONS</th>
+                    </tr>
+                    <tr th:each="ob:${list}">
+                        <td th:text="${ob.itemCode}"></td>
+                        <td th:text="${ob.baseCost}"></td>
+                        <td th:text="${ob.qty}"></td>
+                        <td th:text="${ob.itemVal}"></td>
+                        <td>
+                            <a class="btn btn-info" th:href="@{/grn/viewParts?grnId={data}(data=${ob.id})}">ACCEPT</a>
+                            <a class="btn btn-danger" th:href="@{/grn/viewParts?grnId={data}(data=${ob.id})}">REJECT</a> 
+                            
+                        </td>
+                    </tr>
+                </table>                                
+            </div>  <!-- card body ends-->
+            
+        </div> <!-- card-ends-->
+
+    </div> <!-- container-ends-->
+
+</body>
+
+</html>

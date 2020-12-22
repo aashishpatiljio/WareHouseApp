@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Grn Data</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-center text-white">
+                <h3>GRN DATA PAGE!!!</h3>
+            </div> <!-- card-header ends-->
+
+            <div class="card-body">
+                <table class="table table-hover">
+                    <tr class="bg-success text-white">
+                        <th>ID</th>
+                        <th>GRN CODE</th>
+                        <th>GRN TYPE</th>
+                        <th>ORDER CODE</th>
+                        <th>DESCRIPTION</th>
+                        <th>OPERATIONS</th>
+                    </tr>
+                    <tr th:each="ob:${list}">
+                        <td th:text="${ob.id}"></td>
+                        <td th:text="${ob.code}"></td>
+                        <td th:text="${ob.type}"></td>
+                        <td th:text="${ob.po.orderCode}"></td>
+                        <td th:text="${ob.description}"></td>
+                        <td>
+                            <a class="btn btn-danger" th:href="@{/grn/viewParts?grnId={data}(data=${ob.id})}">VIEW PARTS</a> 
+                        </td>
+                    </tr>
+                </table>                                
+            </div>  <!-- card body ends-->
+
+            <div class="card-footer bg-info text-white text-center" th:if="${message != null}">
+                <span th:text="${message}"></span>
+            </div>  <!-- card-footer ends -->
+
+        </div> <!-- card-ends-->
+
+    </div> <!-- container-ends-->
+
+</body>
+
+</html>
