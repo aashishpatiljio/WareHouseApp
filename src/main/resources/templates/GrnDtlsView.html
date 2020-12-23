@@ -23,10 +23,10 @@
             	<table class="table table-hover">
                     <tr>
                         <th>GRN CODE</th>
-                        <th th:text="${grn.code}"></th>
+                        <th th:text="${grn.code}" class="alert alert-secondary text-danger"></th>
                   	
                         <th>ORDER CODE</th>
-                        <th th:text="${grn.po.orderCode}"></th>
+                        <th th:text="${grn.po.orderCode}" class="alert alert-secondary text-danger"></th>
                   	</tr>
                 </table>
             
@@ -46,9 +46,19 @@
                         <td th:text="${ob.qty}"></td>
                         <td th:text="${ob.itemVal}"></td>
                         <td>
-                            <a class="btn btn-info" th:href="@{/grn/viewParts?grnId={data}(data=${ob.id})}">ACCEPT</a>
-                            <a class="btn btn-danger" th:href="@{/grn/viewParts?grnId={data}(data=${ob.id})}">REJECT</a> 
-                            
+                        <div th:if="${ob.status == null}">
+                            <a class="btn btn-info" th:href="@{/grn/updateStatus?grnId={grnId}&grnDtlId={dtlId}&grnDtlStatus=ACCEPTED(grnId=${grn.id},dtlId=${ob.id})}">ACCEPT</a>
+                            | <a class="btn btn-danger" th:href="@{/grn/updateStatus?grnId={grnId}&grnDtlId={dtlId}&grnDtlStatus=REJECTED(grnId=${grn.id},dtlId=${ob.id})}">REJECT</a> 
+                        </div>
+
+                        <div th:if="${ob.status == 'ACCEPTED'}">
+                        	<span th:text="${ob.status}" class="text-primary"></span>
+                        </div>
+                        
+                        <div th:if="${ob.status == 'REJECTED'}">
+                        	<span th:text="${ob.status}" class="text-danger"></span>
+                        </div>
+                        
                         </td>
                     </tr>
                 </table>                                

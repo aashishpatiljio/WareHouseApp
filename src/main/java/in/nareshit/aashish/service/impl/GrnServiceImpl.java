@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import in.nareshit.aashish.model.Grn;
 import in.nareshit.aashish.model.GrnDtl;
@@ -53,6 +54,14 @@ public class GrnServiceImpl implements IGrnService {
 	@Override
 	public Grn getOneGrnById(Integer grnId) {
 		return repo.findById(grnId).get();
+	}
+	/**
+	 * 
+	 */
+	@Transactional
+	@Override
+	public Integer updateGrnDtlStatus(Integer grnDtlId, String grnDtlStatus) {
+		return grnDtlRepo.updateGrnDtlStatus(grnDtlId, grnDtlStatus);		
 	}
 
 }

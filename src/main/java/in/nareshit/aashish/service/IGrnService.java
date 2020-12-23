@@ -36,5 +36,12 @@ public interface IGrnService {
 	 * This method will fetch all Grn Details followed by @param grnId
 	 */
 	public List<GrnDtl> getAllGrnDtlsByGrnId(Integer grnId);
+	/**
+	 * To update the GrnDtl status by grnDtlId.
+	 * @param grnDtlId reads the GrnDtl id from Controller.
+	 * @param grnDtlStatus reads the GrnDtl id from Controller.
+	 * @return Integer
+	 */
+	public Integer updateGrnDtlStatus(Integer grnDtlId, String grnDtlStatus);
 
 }

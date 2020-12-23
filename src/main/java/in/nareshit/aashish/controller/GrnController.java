@@ -138,6 +138,22 @@ public class GrnController {
 		
 		return "GrnDtlsView";
 	}
-	
+	/**
+	 * 5. Update GrnDtl Status.
+	 * 
+	 * @param grnId reads Grn Id from UI
+	 * @param grnDtlId reads GrnDtl Id from UI
+	 * @param grnDtlStatus reads GrnDtl status from UI
+	 * @return "GrnDtlsView" page
+	 */
+	@GetMapping("/updateStatus")
+	public String updateGrnDtlStatus(
+			@RequestParam Integer grnId,
+			@RequestParam Integer grnDtlId,
+			@RequestParam String grnDtlStatus
+			) {
+		service.updateGrnDtlStatus(grnDtlId, grnDtlStatus);
+		return "redirect:viewParts?grnId="+grnId;
+	}
 	
 }

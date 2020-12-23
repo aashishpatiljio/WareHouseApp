@@ -29,6 +29,9 @@ public class GrnDtl {
 	@Column(name = "grn_dtl_itemval_col")
 	private Double itemVal;
 	
+	@Column(name = "grn_dtl_status_col")
+	private String status;
+	
 	//Integration// Association mapping
 	//Many GrnDtl are connected to one Grn
 	//Linking GrnDtl's with Grn
