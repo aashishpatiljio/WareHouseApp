@@ -36,8 +36,8 @@
                         <td th:text="${ob.uomModel}"></td>
                         <td th:text="${ob.description}"></td>
                         <td>
-                            <a class="btn btn-danger" th:href="@{/uom/delete?id={data}(data=${ob.id})}">DELETE</a> &nbsp
-                            <a class="btn btn-info" th:href="@{/uom/edit?id={data}(data=${ob.id})}">Edit</a>
+                            <a class="btn btn-outline-danger" th:href="@{/uom/delete?id={data}(data=${ob.id})}"><img th:src="@{/images/delete.png}" width="40" height="40"/></a> &nbsp
+                            <a class="btn btn-outline-success" th:href="@{/uom/edit?id={data}(data=${ob.id})}"><img th:src="@{/images/edit.png}" width="40" height="40"/></a>
                         </td>
                     </tr>
                 </table>                                
