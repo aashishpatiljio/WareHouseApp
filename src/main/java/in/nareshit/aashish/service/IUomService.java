@@ -3,6 +3,9 @@ package in.nareshit.aashish.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import in.nareshit.aashish.model.Uom;
 
 public interface IUomService {
@@ -40,11 +43,19 @@ public interface IUomService {
 	public void updateUom(Uom uom);
 
 	/**
-	 * 
-	 * @param uomModel
-	 * @return
+	 * This method is called by Ajax call for Register page check
+	 * @return boolean value
 	 */
 	public boolean isUomModelExist(String uomModel);
+	
+	/**
+	 * This method is called by Ajax call for Edit page check
+	 * @param uomModel reads value from the controller
+	 * @param id
+	 * @return
+	 */
+	public boolean isUomModelExistForEdit(String uomModel, Integer id);
+	
 	/**
 	 * 
 	 * @return
@@ -58,5 +69,12 @@ public interface IUomService {
 	 * @return
 	 */
 	public Map<Integer, String> getUomIdAndModel();
+	
+	/**
+	 * 
+	 * @param page
+	 * @return
+	 */
+	public Page<Uom> getAllUoms(Pageable pageable);
 
 }

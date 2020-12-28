@@ -6,10 +6,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import in.nareshit.aashish.exception.UomNotFoundException;
-import in.nareshit.aashish.model.Uom;
 import in.nareshit.aashish.model.Uom;
 import in.nareshit.aashish.repo.UomRepository;
 import in.nareshit.aashish.service.IUomService;
@@ -90,14 +91,23 @@ public class UomServiceImpl implements IUomService {
 		 */
 	}
 	/**
-	 * 
+	 * @see in.nareshit.aashish.service.IUomService 
+	 */
+	@Override
+	public boolean isUomModelExistForEdit(String uomModel, Integer id) {
+		return repo.getUomModelCountForNotId(uomModel, id) > 0 ? true : false;
+		//return repo.getUomModelCountForNotId(uomModel, id) > 0;
+	}
+	/**
+	 * @see in.nareshit.aashish.service.IUomService
 	 */
 	@Override
 	public List<Object[]> getUomTypeAndCount() {
 		return repo.getUomTypeAndCount();
 	}
 	/**
-	 * This method fetch UOM ID and UOM Model in Map format
+	 * This method fetch UOM ID and UOM Model in Map format.
+	 * @see in.nareshit.aashish.service.IUomService
 	 */
 	@Override
 	public Map<Integer, String> getUomIdAndModel() {
@@ -119,5 +129,17 @@ public class UomServiceImpl implements IUomService {
 		*/ 
 		return map;
 	}
+	
+	/**
+	 * @see in.nareshit.aashish.service.IUomService
+	 */
+	@Override
+	public Page<Uom> getAllUoms(Pageable pageable) {
+		Page<Uom> page = repo.findAll(pageable);
+		return page;
+		
+		//return repo.findAll(pageable);
+	}
+
 
 }

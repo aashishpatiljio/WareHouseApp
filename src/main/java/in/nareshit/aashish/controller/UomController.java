@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -74,10 +77,26 @@ public class UomController {
 	 * @return the page i.e. UomData
 	 */
 	@GetMapping("/all")
-	public String showAllUoms(Model model) {
+	public String showAllUoms(
+			Model model,
+			@PageableDefault(page = 0, size = 3) Pageable pageable			
+			
+			) {
+		
 		//call to Service layer method
+		//old code (before the implementation of pagination concept)
+		/*
 		List<Uom> list = service.getAllUoms();
 		model.addAttribute("list", list);
+		*/
+		
+		//new code
+		//call service layer method
+		Page<Uom> page = service.getAllUoms(pageable);
+		//getContent() returns List<T> data exist in current page
+		model.addAttribute("list", page.getContent());
+		//to pass the pagination information 
+		model.addAttribute("page", page);
 		return "UomData";		
 	}
 	/**
@@ -195,11 +214,19 @@ public class UomController {
 	 * @return the message i.e. message.
 	 */
 	@GetMapping("/validate")
-	public @ResponseBody String validateModel(@RequestParam String model) {	
+	public @ResponseBody String validateModel(@RequestParam String model,@RequestParam Integer id) {
 		
 		String message = "";
 		
-		if(service.isUomModelExist(model)) {
+		////if id not exist then request came from Register page
+		if(id == 0 && service.isUomModelExist(model)) { 
+			message = new StringBuffer().append("Uom Model '").append(model)
+					.append("' already exist").toString();
+			
+		} 
+		//another if block
+		//if id exist then request came from Edit page
+		if (id != 0 && service.isUomModelExistForEdit(model, id)) {
 			message = new StringBuffer().append("Uom Model '").append(model)
 					.append("' already exist").toString();
 		}
