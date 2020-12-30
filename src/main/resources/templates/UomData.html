@@ -55,8 +55,8 @@
 					<a class="page-link" th:href="@{/uom/all(page=${page.number-1})}">Previous</a>
 				</li>
 
-				<th:block th:each="i:${#numbers.sequence(0,page.totalPages-1)}">
-					<li class="page-item"><a class="page-link" th:href="@{/uom/all(page=${i})}">[[${i+1}]]</a></li>
+				<th:block th:each="i,ac:${#numbers.sequence(0,page.totalPages-1)}">
+					<li th:class="${ac.index==page.number ? 'page-item active' : 'page-item'}"><a class="page-link" th:href="@{/uom/all(page=${i})}">[[${i+1}]]</a></li>
 				</th:block>				
 				
 				<li th:if="${page.hasNext()}" class="page-item">

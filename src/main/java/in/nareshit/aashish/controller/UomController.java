@@ -113,6 +113,7 @@ public class UomController {
 	@GetMapping("/delete")
 	public String deleteUom(
 			@RequestParam Integer id,
+			@PageableDefault(page = 0, size = 3) Pageable pageable,
 			Model model
 			) {
 		//call service layer method
@@ -122,9 +123,18 @@ public class UomController {
 				.append(id).append("' Deleted").toString();
 		//send details to UI
 		model.addAttribute("message", message);
-		//model.addAttribute("list", service.getAllUoms());
+		/*
 		List<Uom> list = service.getAllUoms();
 		model.addAttribute("list", list);
+		*/
+		
+		//new code
+		//call service layer method
+		Page<Uom> page = service.getAllUoms(pageable);
+		//getContent() returns List<T> data exist in current page
+		model.addAttribute("list", page.getContent());
+		//to pass the pagination information 
+		model.addAttribute("page", page);
 		return "UomData";		
 	}
 	/**
@@ -156,13 +166,24 @@ public class UomController {
 	@PostMapping("/update")
 	public String updateUom(
 			@ModelAttribute Uom uom,
+			@PageableDefault(page = 0, size = 3) Pageable pageable,
 			Model model
 			) {
 		//calling of service layer method
 		service.updateUom(uom);
 		//send details to UI
 		model.addAttribute("message", "Uom with '"+uom.getId()+"' Updated" );
+		/*
 		model.addAttribute("list", service.getAllUoms());
+		*/
+		
+		//new code
+		//call service layer method
+		Page<Uom> page = service.getAllUoms(pageable);
+		//getContent() returns List<T> data exist in current page
+		model.addAttribute("list", page.getContent());
+		//to pass the pagination information 
+		model.addAttribute("page", page);
 		return "UomData";
 	}
 	/**
