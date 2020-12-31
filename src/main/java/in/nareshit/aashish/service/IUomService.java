@@ -76,5 +76,12 @@ public interface IUomService {
 	 * @return
 	 */
 	public Page<Uom> getAllUoms(Pageable pageable);
+	/**
+	 * 
+	 * @param uomModel
+	 * @param pageable
+	 * @return
+	 */
+	public Page<Uom> findByUomModelContaining(String uomModel, Pageable pageable);
 
 }

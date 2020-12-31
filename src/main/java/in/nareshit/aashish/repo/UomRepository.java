@@ -2,6 +2,8 @@ package in.nareshit.aashish.repo;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,6 +17,7 @@ public interface UomRepository extends JpaRepository<Uom, Integer> {
 	@Query("SELECT COUNT(uomModel) FROM Uom WHERE uomModel=:uomModel")
 	Integer getUomModelCount(String uomModel);
 	
+	// This method is for Edit page
 	/**
 	 * This method is for AJAX Call. It will count the given uomModel value
 	 * by comparing with all other records present in the database table except
@@ -42,5 +45,17 @@ public interface UomRepository extends JpaRepository<Uom, Integer> {
 	 */
 	@Query("SELECT id,uomModel FROM Uom")
 	List<Object[]> getUomIdAndModel();
+	
+	/**
+	 * This method will fetch the data by uomModel.
+	 * For findby methods common return return types is List<T>,
+	 * but if we want Page<T> output then pass the parameter of
+	 * type Pageable
+	 * @param uomModel reads Uom Model from service layer
+	 * @param pageable reads Pageable object from service layer
+	 * @return Page<Uom>
+	 */
+	//findBy+VariableName+Word Containing(Datatype variableName, Pageable pageable)
+	Page<Uom> findByUomModelContaining(String uomModel, Pageable pageable);	
 
 }

@@ -140,6 +140,14 @@ public class UomServiceImpl implements IUomService {
 		
 		//return repo.findAll(pageable);
 	}
+	/**
+	 * 
+	 */
+	@Override
+	public Page<Uom> findByUomModelContaining(String uomModel, Pageable pageable) {
+		Page<Uom> page = repo.findByUomModelContaining(uomModel, pageable);
+		return page;
+	}
 
 
 }

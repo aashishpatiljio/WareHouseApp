@@ -3,6 +3,9 @@ package in.nareshit.aashish.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import in.nareshit.aashish.model.ShipmentType;
 
 public interface IShipmentTypeService {
@@ -51,5 +54,11 @@ public interface IShipmentTypeService {
 	 * @return
 	 */
 	public Map<Integer, String> getShipmentIdAndCodeByEnabled(String enabledShipment);
+	/**
+	 * 
+	 * @param pageable
+	 * @return
+	 */
+	public Page<ShipmentType> getAllShipmentTypes(Pageable pageable);
 
 }

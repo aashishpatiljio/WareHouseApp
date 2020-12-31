@@ -79,7 +79,8 @@ public class UomController {
 	@GetMapping("/all")
 	public String showAllUoms(
 			Model model,
-			@PageableDefault(page = 0, size = 3) Pageable pageable			
+			@PageableDefault(page = 0, size = 3) Pageable pageable,
+			@RequestParam(value = "uomModel", required = false, defaultValue = "") String uomModel
 			
 			) {
 		
@@ -89,10 +90,14 @@ public class UomController {
 		List<Uom> list = service.getAllUoms();
 		model.addAttribute("list", list);
 		*/
-		
 		//new code
-		//call service layer method
-		Page<Uom> page = service.getAllUoms(pageable);
+		Page<Uom> page = null;
+		if ("".equals(uomModel)) { //if no search input then fetch all
+			page = service.getAllUoms(pageable);		
+		} else {
+			//if specific search input exist then get matching data only
+			page = service.findByUomModelContaining(uomModel, pageable);
+		}		
 		//getContent() returns List<T> data exist in current page
 		model.addAttribute("list", page.getContent());
 		//to pass the pagination information 
@@ -123,6 +128,7 @@ public class UomController {
 				.append(id).append("' Deleted").toString();
 		//send details to UI
 		model.addAttribute("message", message);
+		//old code (before the implementation of pagination concept)
 		/*
 		List<Uom> list = service.getAllUoms();
 		model.addAttribute("list", list);

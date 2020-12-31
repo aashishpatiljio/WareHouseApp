@@ -5,6 +5,9 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import in.nareshit.aashish.model.ShipmentType;
+import in.nareshit.aashish.model.Uom;
 import in.nareshit.aashish.service.IShipmentTypeService;
 import in.nareshit.aashish.util.ShipmentTypeUtil;
 import in.nareshit.aashish.view.ShipmentTypeExcelView;
@@ -73,9 +77,24 @@ public class ShipmentTypeController {
 	 * @return the page i.e. ShipmentTypeData
 	 */
 	@GetMapping("/all")
-	public String showAllShipmentTypes(Model model) {
+	public String showAllShipmentTypes(
+			Model model,
+			@PageableDefault(page = 0, size = 3) Pageable pageable
+			) {
+		//call to Service layer method
+		//old code (before the implementation of pagination concept)
+		/*
 		List<ShipmentType> list = service.getAllShipmentTypes();
 		model.addAttribute("list", list);
+		*/
+		
+		//new code
+		//call service layer method
+		Page<ShipmentType> page = service.getAllShipmentTypes(pageable);
+		//getContent() returns List<T> data exist in current page
+		model.addAttribute("list", page.getContent());
+		//to pass the pagination information 
+		model.addAttribute("page", page);
 		return "ShipmentTypeData";
 	}
 	/**
@@ -92,7 +111,8 @@ public class ShipmentTypeController {
 	@GetMapping("/delete")
 	public String deleteShipmentType(
 			@RequestParam Integer id,
-			Model model
+			Model model,
+			@PageableDefault(page = 0, size = 3) Pageable pageable
 			) {
 		//call service layer method
 		service.deleteShipmentType(id);
@@ -101,7 +121,18 @@ public class ShipmentTypeController {
 				      .append(id).append("' Deleted").toString();
 		//sending data to UI
 		model.addAttribute("message", message);
+		//old code (before the implementation of pagination concept)
+		/*
 		model.addAttribute("list", service.getAllShipmentTypes());
+		*/
+		
+		//new code
+		//call service layer method
+		Page<ShipmentType> page = service.getAllShipmentTypes(pageable);
+		//getContent() returns List<T> data exist in current page
+		model.addAttribute("list", page.getContent());
+		//to pass the pagination information 
+		model.addAttribute("page", page);
 		return "ShipmentTypeData";
 	}
 	/**
@@ -136,13 +167,25 @@ public class ShipmentTypeController {
 	@PostMapping("/update")
 	public String updateShipmentType(
 			@ModelAttribute ShipmentType shipmentType,
-			Model model
+			Model model,
+			@PageableDefault(page = 0, size = 3) Pageable pageable
 			) {
 		//call service layer method
 		service.updateShipmentType(shipmentType);
 		//send details to UI
 		model.addAttribute("message", "ShipmentType with '"+shipmentType.getId()+"' Updated");
+		//old code (before the implementation of pagination concept)
+		/*
 		model.addAttribute("list", service.getAllShipmentTypes());
+		*/
+		
+		//new code
+		//call service layer method
+		Page<ShipmentType> page = service.getAllShipmentTypes(pageable);
+		//getContent() returns List<T> data exist in current page
+		model.addAttribute("list", page.getContent());
+		//to pass the pagination information 
+		model.addAttribute("page", page);
 		return "ShipmentTypeData";
 	}
 	/**

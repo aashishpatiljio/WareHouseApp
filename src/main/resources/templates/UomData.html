@@ -20,6 +20,20 @@
             <div class="card-body">
             <a th:href="@{/uom/excel}" class="btn btn-warning">EXCEL EXPORT</a>
             <a th:href="@{/uom/pdf}" class="btn btn-warning">PDF EXPORT</a>
+             
+             <hr/>
+             
+             <form action="all" method="get">
+             	<div class="row">
+             		<div class="col-4">
+		             	<input type="text" name="uomModel" class="form-control" placeholder="Enter Uom Model"/>
+             		</div>
+             		<div class="col-4">
+		             	<input type="submit" value="Search" class="btn btn-info"/>
+             		</div>
+             	</div>
+             </form>
+   			<hr/>           
                 <table class="table table-hover">
                     <tr class="bg-success text-white">
                         <th>ID</th>
