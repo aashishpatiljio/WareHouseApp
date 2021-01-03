@@ -43,7 +43,7 @@ public class PurchaseOrderServiceImpl implements IPurchaseOrderService {
 	@Override
 	public PurchaseOrder getOnePurchaseOrder(Integer id) {
 		PurchaseOrder po = repo.findById(id).orElseThrow(
-				()->new PurchaseOrderNotFoundException("Purchase Order '"+id+"' Not Exist")
+				()->new PurchaseOrderNotFoundException("Purchase Order with '"+id+"' Not Exist")
 				);
 		return po;
 	}

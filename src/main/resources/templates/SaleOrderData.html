@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>SaleOrder Data</title>
+</head>
+
+<body>
+
+	<div th:insert="fragments/CommonUi :: userhead"></div>
+	<div th:insert="fragments/CommonUi :: usermenu"></div>
+	
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-center text-white">
+                <h3>Sale Order Data Page!!!</h3>
+            </div> <!-- card-header ends-->
+
+            <div class="card-body">
+                <table class="table table-hover">
+                    <tr class="bg-success text-white">
+                        <th>ID</th>
+                        <th>SO CODE</th>
+                        <th>SHP CODE</th>
+                        <th>WhUSER CODE</th>
+                        <th>SO STATUS</th>
+                        <th colspan="2">OPERATIONS</th>
+                    </tr>
+                    <tr th:each="ob:${list}">
+                        <td th:text="${ob.id}"></td>
+                        <td th:text="${ob.orderCode}"></td>
+                        <td th:text="${ob.shipmentType.shipmentCode}"></td>
+                        <td th:text="${ob.customer.userCode}"></td>
+                        <td th:text="${ob.status}"></td>
+                        <td>
+                            <a class="btn btn-info" th:href="@{/so/parts?id={data}(data=${ob.id})}">ADD PARTS</a>
+                        </td>
+                    </tr>
+                </table>                                
+            </div>  <!-- card body ends-->
+
+            <div class="card-footer bg-info text-white text-center" th:if="${message != null}">
+                <span th:text="${message}"></span>
+            </div>  <!-- card-footer ends -->
+
+        </div> <!-- card-ends-->
+
+    </div> <!-- container-ends-->
+
+</body>
+
+</html>

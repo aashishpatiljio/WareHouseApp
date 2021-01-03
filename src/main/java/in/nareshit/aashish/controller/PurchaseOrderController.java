@@ -52,7 +52,7 @@ public class PurchaseOrderController {
 	 * This method work is to show only "PurchaseOrderRegister" register 
 	 * page
 	 * @param model is used to send data from Controller to Ui
-	 * @return
+	 * @return PurchaseOrderRegister page
 	 */
 	@GetMapping("/register")
 	public String showRegPage(Model model) {

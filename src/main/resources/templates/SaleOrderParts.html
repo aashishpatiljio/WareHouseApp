@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>SaleOrderParts</title>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-center text-white">
+                <h3>Sale Order Parts PAGE (Screen#2)</h3>
+            </div> <!-- card-header ends-->
+
+            <div class="card-body">  
+            	<!-- section#1 starts -->       
+                <table class="table table-bordered">
+                    <tr>	
+                        <th>SO CODE</th>
+                        <th th:text="${so.orderCode}" class="alert alert-secondary text-secondary"></th>                          
+                        <th>ORDER STATUS</th>
+                        <th th:text="${so.status}" class="alert alert-secondary text-danger"></th>
+                    </tr>
+                </table> 
+                <!-- section#1 ends -->
+                
+                <!-- section#2 starts -->
+                <form th:action="@{/so/add}" method="POST" th:object="${saleDtl}">
+                	<!-- row-1 -->
+                	<div class="row">
+                		<div class="col-2">
+                			<label>CHOOSE PARTS</label>
+                		</div>
+                		<div class="col-3">
+                			<select th:field="*{part.id}" class="form-control">
+                				<option value="">--select--</option>
+                				<option th:each="ob:${parts}" th:value="${ob.key}" th:text="${ob.value}"></option>
+                			</select>
+                		</div>
+                		
+                		<div class="col-2">
+							<label>QUANTITY</label>
+						</div>
+						<div class="col-3">
+							<input type="text" th:field="*{quantity}" class="form-control" />
+						</div>
+						
+						<!-- Hidden input for linking SaleDtl with SaleOrder -->
+						<input type="hidden" name="order.id" th:value="${so.id}"/>
+						
+						<!-- Hidden Input end -->
+						
+						<!-- section#3 starts -->
+						<div class="col-2">
+							<input type="submit" value="Add" class="btn btn-success">
+						</div>
+						<!-- section#3 ends -->	
+                	</div>
+                </form>
+                <!-- section#2 ends -->
+                
+                <hr/>
+                <!-- section#4 starts (DISPLAY THE ITEMS ADDED) -->
+                <table class="table table-hover">
+                	<tr class="bg-info text-white">
+                		<td>S.No</td>
+                		<td>Item</td>
+                		<td>Base Cost</td>
+                		<td>Quantity</td>
+                		<td>Operations</td>
+                	</tr>
+                	<tr th:each="ob:${dtlsList}">
+                		<td th:text="${ob.id}"></td>
+                		<td th:text="${ob.part.partCode}"></td>
+                		<td th:text="${ob.part.partCost}"></td>
+                		<td th:text="${ob.quantity}"></td>
+                		<td>
+                			<a th:href="@{/so/remove?dtlId={id1}&orderId={id2}(id1=${ob.id},id2=${so.id})}" class="btn btn-danger">REMOVE</a>
+                		</td>
+                	</tr>
+                </table>
+                <!-- section#4 ends -->
+                
+                
+                                           
+            </div>  <!-- card body ends-->
+
+        </div> <!-- card-ends-->
+
+    </div> <!-- container-ends-->
+
+</body>
+
+</html>

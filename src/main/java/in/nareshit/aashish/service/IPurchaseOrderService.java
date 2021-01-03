@@ -44,7 +44,7 @@ public interface IPurchaseOrderService {
 	public List<PurchaseDtl> getPurchaseDtlsByOrderId(Integer orderId);
 	/**
 	 * This method will delete one row/record of Purchase Detail
-	 * @param id is reading the dtl id from Controller.
+	 * @param dtlId is reading the dtl id from Controller.
 	 */
 	public void removePurchaseDtl(Integer dtlId);
 	/**
