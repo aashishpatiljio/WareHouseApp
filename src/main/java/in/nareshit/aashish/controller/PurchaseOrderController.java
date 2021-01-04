@@ -201,7 +201,7 @@ public class PurchaseOrderController {
 	/**
 	 * Read @param orderId and update status of PO to ORDERED.
 	 * Finally redirect to Screen#2  /parts?id=<orderId>
-	 * @return
+	 * @return back to Screen#2
 	 */
 	@GetMapping("/confirmOrder")
 	public String placeOrder(

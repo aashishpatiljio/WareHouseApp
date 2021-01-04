@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import in.nareshit.aashish.exception.SaleOrderNotFoundException;
 import in.nareshit.aashish.model.SaleDtl;
@@ -65,6 +66,21 @@ public class SaleOrderServiceImpl implements ISaleOrderService {
 	@Override
 	public void removeSaleDtl(Integer dtlId) {
 		dtlRepo.deleteById(dtlId);  //id is dtl id
+	}
+	/**
+	 * @see in.nareshit.aashish.service.ISaleOrderService
+	 */
+	@Override
+	@Transactional
+	public void updateStatus(Integer orderId, String status) {
+		repo.updateSaleOrderStatusById(orderId, status);		
+	}
+	/**
+	 * @see in.nareshit.aashish.service.ISaleOrderService
+	 */
+	@Override
+	public Integer getSaleDtlsCountByOrderId(Integer orderId) {
+		return dtlRepo.getSaleDtlsCountByOrderId(orderId);
 	}
 
 }

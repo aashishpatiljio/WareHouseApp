@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import in.nareshit.aashish.constant.OrderStatus;
 import in.nareshit.aashish.model.SaleDtl;
 import in.nareshit.aashish.model.SaleOrder;
 import in.nareshit.aashish.service.IPartService;
@@ -54,7 +55,7 @@ public class SaleOrderController {
 	public String showRegisterPage(Model model) {
 		// form backing object
 		SaleOrder so = new SaleOrder();
-		so.setStatus("SALE-OPEN");
+		so.setStatus("OPEN");
 		model.addAttribute("saleOrder", so);
 		//where exactly we want drop-down, call this method
 		addDynamicUiComponents(model);
@@ -82,7 +83,7 @@ public class SaleOrderController {
 		model.addAttribute("message", message);
 		// form backing object
 		SaleOrder so = new SaleOrder();
-		so.setStatus("SALE-OPEN");
+		so.setStatus("OPEN");
 		model.addAttribute("saleOrder", so);
 		//where exactly we want drop-down, call this method
 		addDynamicUiComponents(model);
@@ -162,8 +163,11 @@ public class SaleOrderController {
 	@PostMapping("/add")
 	public String addPart(@ModelAttribute SaleDtl saleDtl) {
 		service.saveSaleDtl(saleDtl);
-		
-		return "redirect:parts?id="+saleDtl.getOrder().getId();
+		Integer orderId = saleDtl.getOrder().getId();
+		//update Sale Order status
+		service.updateStatus(orderId, OrderStatus.READY.name());
+		//from SaleDtl -> get Order(SaleOrder) -> from order get Id (order id)
+ 		return "redirect:parts?id="+saleDtl.getOrder().getId();
 	}
 	/**
 	 * On click of Remove button of SaleOrder's Screen#2,
@@ -182,7 +186,24 @@ public class SaleOrderController {
 		//call service layer method to delete the sale detail record by dtlId
 		service.removeSaleDtl(dtlId);
 		
-		return "redirect:parts?id="+orderId;
+		//update purchase order status
+		if(service.getSaleDtlsCountByOrderId(orderId)==0) {
+			service.updateStatus(orderId, OrderStatus.OPEN.name());
+		}
+		return "redirect:parts?id="+orderId;  //id is SO id
+	}
+	/**
+	 * Read @param orderId and update status of SO to CONFIRM.
+	 * Finally redirect to Screen#2  /parts?id=<orderId>
+	 * @return back to Screen#2
+	 */
+	@GetMapping("/confirmOrder")
+	public String placeOrder(
+			@RequestParam Integer orderId
+			) {
+		service.updateStatus(orderId, OrderStatus.CONFIRM.name());
+		//back to Screen#2
+		return "redirect:parts?id="+orderId;   //id is SO id		
 	}
 	
 }

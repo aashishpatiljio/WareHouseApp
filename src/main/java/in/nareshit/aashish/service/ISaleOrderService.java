@@ -44,4 +44,18 @@ public interface ISaleOrderService {
 	 * @param dtlId is reading the dtl id from Controller.
 	 */
 	public void removeSaleDtl(Integer dtlId);
+	/**
+	 * This method reads @param orderId and @param status from 
+	 * controller and communicates with repository and update the
+	 * status of Sale Order followed by the defined query.
+	 */
+	public void updateStatus(Integer orderId, String status);
+	
+	/**
+	 * This method will fetch the total number of counts of
+	 * sale details.
+	 * @param orderId reads sale order id from controller
+	 * @return Integer value.
+	 */
+	public Integer getSaleDtlsCountByOrderId(Integer orderId);
 }

@@ -48,9 +48,9 @@ public interface IPurchaseOrderService {
 	 */
 	public void removePurchaseDtl(Integer dtlId);
 	/**
-	 * 
-	 * @param orderId
-	 * @param status
+	 * This method reads @param orderId and @param status from 
+	 * controller and communicates with repository and update the
+	 * status of Purchase Order followed by the defined query.
 	 */
 	public void updateStatus(Integer orderId, String status);
 	/**
