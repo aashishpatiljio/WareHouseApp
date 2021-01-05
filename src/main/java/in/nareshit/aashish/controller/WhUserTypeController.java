@@ -23,7 +23,7 @@ public class WhUserTypeController {
 	@Autowired
 	private IWhUserTypeService service;
 	@Autowired
-	private EmailUtil util;
+	private EmailUtil emailUtil;
 
 	/**
 	 * 1. show register page on enter /register URL (GET)
@@ -51,9 +51,36 @@ public class WhUserTypeController {
 				.append(id).append("' Saved").toString();
 		
 		//on save successful then below logic executed to send an email--
+		/*
+		 * Below multi-threading concept is implemented for concurrent 
+		 * execution of specific lines of logic/code with rest of the code.
+		 * We have used below Anonymous Inner Class also.
+		 */
+		
 		if(id!=null && id>0) {
-			util.sendEmail(whUserType.getUserEmail(), "Welcome WhUSer", "HELLO: "+whUserType.getUserCode());
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					emailUtil.sendEmail(whUserType.getUserEmail(), "Welcome WhUSer", "HELLO: "+whUserType.getUserCode());
+				}
+			}).start();
+			
 		}
+		/*
+		 * The below commented code is a alternative for above multi-threaded 
+		 * code. The difference is only here that we have used Lambda Expression 
+		 * here and in above code we have used Anonymous Inner class.
+		 */
+		/*
+		if(id!=null && id>0) {
+			new Thread(
+					()->{	
+						emailUtil.sendEmail(whUserType.getUserEmail(), "Welcome WhUSer", "HELLO: "+whUserType.getUserCode());
+					}
+					);
+		}
+		*/
 		//sending message data to UI
 		model.addAttribute("message", message);
 		//Form backing object
