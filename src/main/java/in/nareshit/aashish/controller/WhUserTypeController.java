@@ -96,7 +96,7 @@ public class WhUserTypeController {
 	 */
 	@GetMapping("/all")
 	public String showAllWhUserTypes(Model model) {
-		//call to the Service layer method
+		//call to the Service layer method.
 		List<WhUserType> list = service.getAllWhUserTypes();
 		model.addAttribute("list", list);
 		return "WhUserTypeData";
