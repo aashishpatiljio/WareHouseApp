@@ -18,10 +18,18 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.springframework.stereotype.Component;
 
+import in.nareshit.aashish.model.Uom;
+
 @Component
 public class UomUtil {
 
 	// 1. create Pie Chart
+	/**
+	 * This we have taken to generate pie chart
+	 * @param path path from the controller
+	 * @param data reads the data in the form of List<Object[]> from
+	 * the controller.
+	 */
 	public void generatePieChart(String path, List<Object[]> data) {
 		
 		// a. create DataSet for Pie-Chart and add data to it.
@@ -49,6 +57,12 @@ public class UomUtil {
 	}
 
 	// 2. create Bar Chart
+	/**
+	 * This we have taken to generate Bar Chart
+	 * @param path path from the controller
+	 * @param data reads the data in the form of List<Object[]> from
+	 * the controller.
+	 */
 	public void generateBarChart(String path, List<Object[]> data) {
 		// a. create DataSet for Bar-Chart and add data to it.
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -71,4 +85,21 @@ public class UomUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This method will copy the data received from 
+	 * client i.e @param uom to the object which is to be
+	 * saved into the database i.e. @param dbUom
+	 */
+	public void copyNonNullValues(Uom dbUom, Uom uom) {
+		if(uom.getUomType()!=null)
+			dbUom.setUomType(uom.getUomType());
+		if(uom.getUomModel()!=null)
+			dbUom.setUomModel(uom.getUomModel());
+		if(uom.getDescription()!=null)
+			dbUom.setDescription(uom.getDescription());
+	}
+	
+	
+	
 }
