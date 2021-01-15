@@ -5,6 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +25,7 @@ public class PartRestController {
 	private IPartService service;
 	
 	//1. save Part data
+	@PostMapping("/save")
 	public ResponseEntity<String> savePart(
 			@RequestBody Part part
 			){
@@ -40,6 +44,25 @@ public class PartRestController {
 			e.printStackTrace();
 		}
 		log.info("ABOUT TO EXIT FROM SAVE METHOD");
+		return resp;
+	}
+	
+	//2. Fetch Part data by id.
+	@GetMapping("/one/{id}")
+	public ResponseEntity<?> getOnePart(
+			@PathVariable Integer id
+			){
+		ResponseEntity<?> resp = null;
+		try {
+			Part part = service.getOnePart(id);
+			//resp = new ResponseEntity<Part>(part, HttpStatus.OK);
+			resp = ResponseEntity.ok(part);;
+		} catch (Exception e) {
+			String message = new StringBuffer().append("Part with id '")
+					.append(id).append("' not exist").toString();
+			resp = new ResponseEntity<String>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+			e.printStackTrace();
+		}		
 		return resp;
 	}
 }
