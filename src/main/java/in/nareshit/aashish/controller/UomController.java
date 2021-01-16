@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -121,13 +122,19 @@ public class UomController {
 			@PageableDefault(page = 0, size = 3) Pageable pageable,
 			Model model
 			) {
-		//call service layer method
-		service.deleteUom(id);
-		//creating message to send to UI after the deletion of a record
-		String message = new StringBuffer().append("Uom '")
-				.append(id).append("' Deleted").toString();
-		//send details to UI
-		model.addAttribute("message", message);
+		try {
+			//call service layer method
+			service.deleteUom(id);
+			//creating message to send to UI after the deletion of a record
+			String message = new StringBuffer().append("Uom '")
+					.append(id).append("' Deleted").toString();
+			//send details to UI
+			model.addAttribute("message", message);
+			
+		} catch (DataIntegrityViolationException dive) {
+			model.addAttribute("message", "Uom with id '"+id+"' not deleted, may be it is used in other entity");
+			dive.printStackTrace();
+		}
 		//old code (before the implementation of pagination concept)
 		/*
 		List<Uom> list = service.getAllUoms();

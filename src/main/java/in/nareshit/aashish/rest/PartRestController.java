@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import in.nareshit.aashish.exception.PartNotFoundException;
 import in.nareshit.aashish.model.Part;
 import in.nareshit.aashish.service.IPartService;
 
@@ -57,6 +58,8 @@ public class PartRestController {
 			Part part = service.getOnePart(id);
 			//resp = new ResponseEntity<Part>(part, HttpStatus.OK);
 			resp = ResponseEntity.ok(part);;
+		} catch (PartNotFoundException pnfe) {   
+			throw pnfe;
 		} catch (Exception e) {
 			String message = new StringBuffer().append("Part with id '")
 					.append(id).append("' not exist").toString();

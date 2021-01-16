@@ -3,6 +3,7 @@ package in.nareshit.aashish.rest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -118,9 +119,11 @@ public class UomRestController {
 			String message = new StringBuffer().append("Uom with id '")
 					.append(id).append("' deleted successfully").toString();
 			resp = new ResponseEntity<String>(message, HttpStatus.OK);
-		}catch (UomNotFoundException unfe) {
+		} catch (UomNotFoundException unfe) {
 			throw unfe;
-		}catch (Exception e) {
+		} catch (DataIntegrityViolationException dive) {
+			throw new DataIntegrityViolationException("Cannot delete Uom with id '"+id+"' ,may be it is to be used by one of the module");
+		} catch (Exception e) {
 			String message = new StringBuffer().append("Unable to delete Uom with id= '")
 					.append(id).append("' ").toString();
 			resp = new ResponseEntity<String>(message, HttpStatus.INTERNAL_SERVER_ERROR);
