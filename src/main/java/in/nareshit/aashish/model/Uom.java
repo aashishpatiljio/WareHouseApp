@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import lombok.Data;
+import lombok.Data; 
 
 @Data
 @Entity

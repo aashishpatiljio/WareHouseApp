@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>User Data</title>
+</head>
+
+<body>
+	
+	<div th:insert="fragments/CommonUi :: userhead"></div>
+	<div th:insert="fragments/CommonUi :: usermenu"></div>
+	
+    <div class="container">
+        <div class="card">
+            <div class="card-header bg-primary text-center text-white">
+                <h3>USER DATA PAGE!!!</h3>
+            </div> <!-- card-header ends-->
+
+            <div class="card-body">
+                
+                <table class="table table-hover">
+                    <tr class="bg-success text-white">
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th>EMAIL</th>
+                        <th>ROLES</th>
+                        <th>OPERATIONS</th>
+                    </tr>
+                    <tr th:each="ob:${list}">
+                        <td th:text="${ob.id}"></td>
+                        <td th:text="${ob.name}"></td>
+                        <td th:text="${ob.email}"></td>
+                        <td th:text="${ob.roles}"></td>
+                        <td>Activate/In-Activate</td>
+                    </tr>
+                </table>                                
+            </div>  <!-- card body ends-->
+
+            <div class="card-footer bg-info text-white text-center" th:if="${message != null}">
+                <span th:text="${message}"></span>
+            </div>  <!-- card-footer ends -->
+
+        </div> <!-- card-ends-->
+
+    </div> <!-- container-ends-->
+
+</body>
+
+</html>
