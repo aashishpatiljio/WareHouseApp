@@ -39,6 +39,7 @@ public class User {
 	@CollectionTable(name = "roles_tab", joinColumns = @JoinColumn(name = "uid"))
 	@Column(name = "roles")
 	private List<String> roles;
+	
 	@Column(name = "uactive")
 	private boolean active;
 

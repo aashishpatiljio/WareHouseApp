@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import in.nareshit.aashish.model.User;
 import in.nareshit.aashish.repo.UserRepository;
@@ -25,6 +26,12 @@ public class UserServiceImpl implements IUserService {
 	public List<User> getAllUsers() {
 		List<User> list = repo.findAll();
 		return list;
+	}
+
+	@Override
+	@Transactional
+	public void modifyStatus(Integer id, boolean active) {
+		repo.updateStatus(id, active);		
 	}
 	
 	

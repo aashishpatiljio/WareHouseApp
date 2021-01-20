@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import in.nareshit.aashish.model.User;
 import in.nareshit.aashish.service.IUserService;
@@ -45,6 +46,23 @@ public class UserController {
 		List<User> list = service.getAllUsers();
 		model.addAttribute("list", list);
 		return "UserData";
+	}
+	
+	//4. activate User
+	@GetMapping("/activate")
+	public String activateUser(
+			@RequestParam Integer uid
+			) {
+		service.modifyStatus(uid, Boolean.TRUE);
+		return "redirect:all";
+	}
+	//5. inactivate User
+	@GetMapping("/inactivate")
+	public String inActivateUser(
+			@RequestParam Integer uid
+			) {
+		service.modifyStatus(uid, Boolean.FALSE);
+		return "redirect:all";
 	}
 
 }

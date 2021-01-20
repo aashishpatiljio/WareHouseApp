@@ -25,6 +25,7 @@
                         <th>NAME</th>
                         <th>EMAIL</th>
                         <th>ROLES</th>
+                        <th>STATUS</th>
                         <th>OPERATIONS</th>
                     </tr>
                     <tr th:each="ob:${list}">
@@ -32,7 +33,18 @@
                         <td th:text="${ob.name}"></td>
                         <td th:text="${ob.email}"></td>
                         <td th:text="${ob.roles}"></td>
-                        <td>Activate/In-Activate</td>
+                        <td>
+                        	<div th:if="${!ob.active}">In-Active</div>
+                        	<div th:if="${ob.active}">Activated</div>
+                        </td>
+                        <td>
+                        	<div th:if="${!ob.active}">
+                        		<a class="btn btn-info"th:href="@{/user/activate?uid={id}(id=${ob.id})}">ACTIVATE</a>
+                        	</div>
+                        	<div th:if="${ob.active}">
+                        		<a class="btn btn-warning" th:href="@{/user/inactivate?uid={id}(id=${ob.id})}">INACTIVATE</a>
+                        	</div>                        
+                        </td>
                     </tr>
                 </table>                                
             </div>  <!-- card body ends-->

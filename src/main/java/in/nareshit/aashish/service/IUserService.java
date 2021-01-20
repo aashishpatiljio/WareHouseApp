@@ -8,6 +8,6 @@ public interface IUserService {
 	
 	public Integer saveUser(User user);
 	public List<User> getAllUsers();
-	
+	public void modifyStatus(Integer id, boolean active);
 
 }
