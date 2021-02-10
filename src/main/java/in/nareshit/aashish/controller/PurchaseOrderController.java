@@ -121,9 +121,9 @@ public class PurchaseOrderController {
 	 * display data page of Screen#1's data page.
 	 * And even after adding new Part or after removing the Part
 	 * same page is loaded.
-	 * @param id reads the value of id from Ui
-	 * @param model is used to send data from Controller to Ui.
-	 * @return the Ui page with name "PurchaseOrderParts".
+	 * @param id reads the value of id from UI
+	 * @param model is used to send data from Controller to UI.
+	 * @return the UI page with name "PurchaseOrderParts".
 	 */
 	@GetMapping("/parts")
 	public String showPoPartsPage(
@@ -136,7 +136,7 @@ public class PurchaseOrderController {
 		 * We have id i.e. Order Id, we want to display Order Code and
 		 * Order Status. So we can get one PurchaseOrder object using id
 		 * that contains orderCode and status.
-		 * Then send this fetched PurchaseOrder object to Ui and display
+		 * Then send this fetched PurchaseOrder object to UI and display
 		 * using thymeleaf code i.e. ${po.orderCode} and ${po.status}. 
 		 */
 	    PurchaseOrder po = service.getOnePurchaseOrder(id);
