@@ -39,7 +39,7 @@
                         </td>
                         <td>
                         	<div th:if="${!ob.active}">
-                        		<a class="btn btn-info"th:href="@{/user/activate?uid={id}(id=${ob.id})}">ACTIVATE</a>
+                        		<a class="btn btn-info" th:href="@{/user/activate?uid={id}(id=${ob.id})}">ACTIVATE</a>
                         	</div>
                         	<div th:if="${ob.active}">
                         		<a class="btn btn-warning" th:href="@{/user/inactivate?uid={id}(id=${ob.id})}">INACTIVATE</a>

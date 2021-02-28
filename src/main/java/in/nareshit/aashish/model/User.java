@@ -40,6 +40,9 @@ public class User {
 	@Column(name = "roles")
 	private List<String> roles;
 	
+	/**
+	 * To activate or in-activate the user
+	 */
 	@Column(name = "uactive")
 	private boolean active;
 

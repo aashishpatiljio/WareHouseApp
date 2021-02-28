@@ -53,7 +53,7 @@ public class UserController {
 	public String activateUser(
 			@RequestParam Integer uid
 			) {
-		service.modifyStatus(uid, Boolean.TRUE);
+		service.modifyStatus(uid, true);
 		return "redirect:all";
 	}
 	//5. inactivate User
@@ -61,7 +61,7 @@ public class UserController {
 	public String inActivateUser(
 			@RequestParam Integer uid
 			) {
-		service.modifyStatus(uid, Boolean.FALSE);
+		service.modifyStatus(uid, false);
 		return "redirect:all";
 	}
 
