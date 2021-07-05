@@ -30,7 +30,7 @@ public class GrnController {
 	private IPurchaseOrderService poService;
 	
 	
-	//define one private method so we can re-use it.
+	//define one private method so we can re-use it..
 	//call this method where we need drop-down
 	//call this private method for Register, Edit pages and save operation also.
 	private void addDynamicUiComponents(Model model) {
