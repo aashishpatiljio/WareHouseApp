@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WareHouseAppApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		SpringApplication.run(WareHouseAppApplication.class, args); 
 	}
 

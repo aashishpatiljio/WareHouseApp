@@ -48,7 +48,7 @@
                         <td>
                         <div th:if="${ob.status == null}">
                             <a class="btn btn-info" th:href="@{/grn/updateStatus?grnId={grnId}&grnDtlId={dtlId}&grnDtlStatus=ACCEPTED(grnId=${grn.id},dtlId=${ob.id})}">ACCEPT</a>
-                            | <a class="btn btn-danger" th:href="@{/grn/updateStatus?grnId={grnId}&grnDtlId={dtlId}&grnDtlStatus=REJECTED(grnId=${grn.id},dtlId=${ob.id})}">REJECT</a> 
+                            <a class="btn btn-danger" th:href="@{/grn/updateStatus?grnId={grnId}&grnDtlId={dtlId}&grnDtlStatus=REJECTED(grnId=${grn.id},dtlId=${ob.id})}">REJECT</a> 
                         </div>
 
                         <div th:if="${ob.status == 'ACCEPTED'}">
